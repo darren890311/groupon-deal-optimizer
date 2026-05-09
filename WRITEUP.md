@@ -4,17 +4,15 @@
 
 ## What I built
 
-A Python pipeline that turns 20 Groupon deal URLs into 20 evidence-backed optimization proposals. Five stages, wired through DuckDB so any stage can be re-run independently:
+A Python pipeline turning 20 Groupon URLs into 20 evidence-backed optimization proposals. Five stages, wired through DuckDB so any stage can be re-run independently:
 
-1. **Scrape** — Playwright (Chromium, realistic UA, lazy-load scrolls) → cached HTML in `data/raw_html/`
-2. **Parse** — BeautifulSoup + JSON-LD `ProductGroup` / `HealthAndBeautyBusiness` / `BreadcrumbList` extraction → structured audit dict (title, all pricing variants, ratings, reviews, FAQs, address, breadcrumbs, trust + urgency signals)
-3. **Research** — Claude (Sonnet 4.6) generates 5–7 targeted Tavily queries per deal across four categories (competitor pricing, reputation, category benchmarks, content gaps); Tavily returns sourced snippets
-4. **Theme extraction** — Claude (Sonnet 4.6) condenses review snippets into recurring positive/negative themes with verbatim quotes
+1. **Scrape** — Playwright (Chromium, desktop + mobile UA) → cached HTML
+2. **Parse** — BeautifulSoup + JSON-LD (`ProductGroup`, `HealthAndBeautyBusiness`, `BreadcrumbList`, `FAQPage`) → structured audit
+3. **Research** — Claude (Sonnet 4.6) generates 5–7 targeted Tavily queries per deal (competitor pricing, reputation, category benchmarks, content gaps)
+4. **Theme extraction** — Claude (Sonnet 4.6) extracts recurring review themes with verbatim quotes
 5. **Synthesis** — Claude (Opus 4.7, adaptive thinking, `effort: high`) writes the proposal as a structured Pydantic object grounded in audit + research
 
-AI is used as judgment, not just summarization. Claude decides what to search for, judges which review themes matter, and writes evidence-cited recommendations. The synthesis system prompt (~5KB rubric defining what "good" looks like) is marked with `cache_control: ephemeral`, so the prefix is reused across all 20 deals — cache reads of 3,047 input tokens on 17 of 18 subsequent calls, ~85% input-cost reduction. Total spend for the 20-deal run: ~$3, zero errors.
-
-Outputs per deal: `audit.json + audit.md`, `research.json + research.md`, `proposal.json + proposal.md` in `output/<slug>/`. All structured data also persists in `data/groupon.duckdb` — e.g., `SELECT field, COUNT(*) FROM recommendations GROUP BY field` shows which page sections need most work across the portfolio.
+AI is used as judgment, not summarization: Claude decides what to search for, judges which review themes matter, and writes evidence-cited recommendations. The ~5KB synthesis system prompt is marked with `cache_control: ephemeral`, so the prefix is reused across all 20 deals — verified ~85% input-cost reduction (3,047 cached tokens on 17 of 18 calls). Total spend: ~$3, zero errors. Per-deal outputs (`audit`, `research`, `proposal` × JSON + Markdown) land in `output/<slug>/`; all structured data also persists in `data/groupon.duckdb`.
 
 ## What I'd improve with more time
 
