@@ -1,0 +1,98 @@
+{
+  "url": "https://www.groupon.com/deals/booze-n-brains-2",
+  "title": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off",
+  "subtitle": "Booze 'n' Brains 3.1 (13+ reviews)",
+  "merchant_name": "Booze 'n' Brains",
+  "category": "Local > Things To Do > Fun & Leisure",
+  "breadcrumbs": [
+    "Local",
+    "Things To Do",
+    "Fun & Leisure"
+  ],
+  "city": null,
+  "region": null,
+  "address": null,
+  "description": "Mobile-Based Interactive Fun from Booze 'n' Brains! Get ready for a series of engaging games and activities that involve puzzle solving, creativity boosts, photo ops, trivia questions, riddles, silly antics and more! Some challenges are timed and you’ll be ranked against other teams at the end of the night. Think you can top the leaderboard? There are two versions available: the \"Anywhere\" game that can be played anywhere with WiFi or cellular service and the \"Local\" game at specific locations with questions tailored to the venue. Discover a new way to enjoy your local watering hole!What we offerThis deal includes options for playing Booze 'n' Brains interactive drinking games anywhere there is WiFi or cellular service. The 3-pack option offers three chances to enjoy these engaging activities. These games combine puzzles, trivia, riddles, and photo challenges to make any outing exciting.3-PACK: One Booze 'n' Brains Interactive Drinking Game - Anywhere Version: Enjoy a fun-filled game that can be played anywhere with WiFi or cellular serviceOne Booze 'n' Brains Interactive Drinking Game - Anywhere Version: Play this interactive game from any location with an internet connectionWhy you should grab the offerBooze 'n' Brains stands out by transforming ordinary nights into extraordinary adventures through their creative and engaging mobile-based drinking games. Whether at home or out on the town, these activities provide endless fun with puzzles to solve and silly games to play. With options to play anywhere or at specific local venues tailored to enhance your experience based on location-specific questions, there's always something new to discover. Perfect for group outings or just spicing up your regular hangout spots – dive into a world where every moment is packed with entertainment!",
+  "highlights": [
+    "3-PACK: One Booze 'n' Brains Interactive Drinking Game - Anywhere Version: Enjoy a fun-filled game that can be played anywhere with WiFi or cellular service",
+    "One Booze 'n' Brains Interactive Drinking Game - Anywhere Version: Play this interactive game from any location with an internet connection"
+  ],
+  "fine_print": "Valid only for option purchased.",
+  "prices": [
+    {
+      "label": "Interactive Drinking Game for One Group (any size): Anywhere Version",
+      "original_price": 11.24,
+      "deal_price": 8.79,
+      "discount_pct": 21.8
+    },
+    {
+      "label": "3-PACK: One Booze 'n' Brains Interactive Drinking Game - Anywhere Version",
+      "original_price": 25.47,
+      "deal_price": 25.47,
+      "discount_pct": null
+    }
+  ],
+  "rating": 3.08,
+  "review_count": 13,
+  "bought_label": "1,000+ bought",
+  "reviews": [
+    {
+      "rating": 5.0,
+      "quote": "Great fun. Easy to use.",
+      "author": "Jennifer",
+      "date": "2021-11-19T15:20:41.145Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "we played this with a group of friends and had a great time. a lot of the stuff was silly but it had a few tricky puzzles and questions in there too. recommend this for people who arent too competitive and are more about having a laugh",
+      "author": "Alan",
+      "date": "2020-03-04T18:27:17.051Z"
+    },
+    {
+      "rating": 1.0,
+      "quote": "Update to my previous post: Groupon won’t issue a refund. This only gets one star since you have to choose one. Even zero stars is too generous. It is negative stars. This stupid cheap game is far worse than a million free apps you can download instead.",
+      "author": "Cindra",
+      "date": "2024-04-27T14:32:21.646Z"
+    },
+    {
+      "rating": 1.0,
+      "quote": "I couldn’t even figure out how to play the games they looked pretty dumb. It was for my boyfriends birthday, and we were both very disappointed.",
+      "author": "Ashley",
+      "date": "2023-11-10T17:52:51.017Z"
+    },
+    {
+      "rating": 1.0,
+      "quote": "I mean it was kinda stupid. It was something that kept us occupied being that it was late and the bars were closed but felt like we got scammed. Thought it would be more fun and challenging. Definitely not for a group under 4. My bf and I tried to play and we skipped half the questions. Don’t waste your money. You can find a better game online for free.",
+      "author": "Tanya",
+      "date": "2020-02-20T08:19:39.154Z"
+    }
+  ],
+  "faqs": [],
+  "image_count": 48,
+  "seo": {
+    "meta_title": "Booze 'n' Brains - From $8.49 | Groupon",
+    "meta_description": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off",
+    "h1": [
+      "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off"
+    ],
+    "h2": [
+      "Interactive Drinking Game for One Group (any size): Anywhere Version",
+      "3-PACK: One Booze 'n' Brains Interactive Drinking Game - Anywhere Version",
+      "Need To Know Info",
+      "About Booze 'n' Brains",
+      "Customer Reviews",
+      "Explore more",
+      "Similar deals",
+      "Recommended deals"
+    ]
+  },
+  "urgency_signals": [
+    "limited time"
+  ],
+  "trust_signals": {
+    "has_rating": true,
+    "has_review_count": true,
+    "has_bought_label": true,
+    "has_guarantee_text": false
+  }
+}

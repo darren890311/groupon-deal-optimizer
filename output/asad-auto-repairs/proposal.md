@@ -1,0 +1,149 @@
+# Optimization Proposal
+
+## Executive summary
+This page has an integrity problem and a positioning problem. The title promises 'Up to 30% Off' but both SKUs are actually only 10% off ($81 → $72.90) — and at $72.90, this isn't even competitive with SSS Auto Repair's $79 full synthetic in Chicago or category benchmarks ($65–$125). Worse, the deal completely buries the merchant's strongest asset: Yelp shows Asad Auto Repairs is a 5.0-rated specialist in BMW, Audi, MB, and exotics (Lamborghini, Ferrari, Porsche), yet the page reads like a generic Jiffy Lube clone. The two SKUs are priced identically with no differentiation, highlights are literally placeholder text ('Need To Know Info', 'Where To Redeem'), and fine print is empty — driving the existing complaint that advertised inspections weren't performed. Fix the discount math, reposition around European/exotic specialization, and stand up real highlights/fine print before pushing more traffic to this page.
+
+## Competitive positioning
+At $72.90 for a full synthetic oil change, this deal is at parity with — not below — Chicago market rates: SSS Auto Repair charges $79, Reddit users cite $45–$90 for DIY/Walmart-tier shops, and the category average sits at $65–$125. There is no price-based reason for a Chicago driver to choose this Groupon over booking direct or walking into Valvoline. The defensible angle is expertise, not price: Yelp documents engine rebuilds on Huracan, Aventador SVJ, and Porsche GT4, with a reviewer calling Asad 'honest, ethical, fair' and 'really knows cars, especially technically advanced cars like BMW, Audi, and MB's.' The page should reframe this as 'a dealership-grade oil change at an independent-shop price, from a shop trusted with six-figure exotics' — that's a story no Jiffy Lube can tell. Discounting deeper without that reframe will only erode merchant margin.
+
+## Recommendations
+### 1. [title] (priority 1)
+**Current:** Quality Oil Change - Up to 30% Off
+
+**Proposed:** Full Synthetic Oil Change at European & Exotic Car Specialist - $72.90
+
+**Why:** The current title claims 'Up to 30% Off' but both listed SKUs are priced at $72.90 from $81 — a 10% discount. This is misleading on its face and a refund/chargeback risk. It also wastes the merchant's strongest differentiator: Yelp documents this shop performing engine rebuilds on Lamborghini Huracan, Aventador SVJ, and Porsche GT4, with reviewers specifically praising expertise on 'BMW, Audi, and MB's.' Leading with 'European & Exotic Car Specialist' converts a commodity oil change into a defensible premium positioning.
+
+**Evidence:** Audit prices: original_price 81.0, deal_price 72.90, discount_pct 10.0 (on both SKUs). Yelp: 'Asad Auto Repairs - Twin Turbo Huracan', 'Aventador S rebuild', 'LP610 Lamborghini Huracan'. Yelp review: 'Asad is a fair and decent man who really knows cars, especially technically advanced cars like BMW, Audi, and MB's.'
+
+**Expected impact:** Eliminates the misleading-discount risk and lifts CTR by giving the listing a unique angle vs. generic Jiffy Lube/Valvoline Groupons in the same category.
+
+### 2. [pricing_display] (priority 1)
+**Current:** Two SKUs both priced $81 → $72.90 (10% off); H1 claims 'Up to 30% Off'
+
+**Proposed:** SKU 1: Full Synthetic Oil Change — $72.90 (was $81, 10% off). SKU 2: Full Synthetic Oil Change + Multi-Point Inspection — keep at $72.90 only if inspection is genuinely included at no upcharge; otherwise reprice SKU 2 at ~$89 (was $110) to create a real good/better ladder. Either way, change the headline savings claim to match the actual max discount on the page.
+
+**Why:** Two identically-priced SKUs where one includes a free multi-point inspection makes no commercial sense and signals the inspection is fictional — which is exactly what an existing reviewer alleges happened to them. A real good/better ladder also lifts AOV. And the 'Up to 30% Off' headline must match the math on the page.
+
+**Evidence:** Audit: both SKUs original_price 81.0, deal_price 72.90. Existing 3-star review: 'It says tire rotation and full inspection included. I did not see them rotate my tires or do any inspection of my vehicle... Please adhere to what you advertise.'
+
+**Expected impact:** Removes the false-advertising risk driving 3-star reviews, and a real upsell tier should lift average order value 10–20%.
+
+### 3. [highlights] (priority 1)
+**Current:** ['Need To Know Info', 'Where To Redeem']
+
+**Proposed:** • Up to 5 quarts of premium full synthetic oil + new OEM-grade filter
+• Service performed by a shop trusted with BMW, Audi, Mercedes-Benz, and exotic engine rebuilds (5.0★ on Yelp)
+• Multi-point inspection: brakes, fluids, belts, battery, tire tread, lights (SKU 2)
+• Typically completed in under 45 minutes — back on the road same visit
+• Honest, no-upsell shop: 'fair, honest, ethical' per Yelp reviewers
+
+**Why:** The current 'highlights' are literally section labels, not benefits. Customers cannot tell what they're buying. Each proposed bullet maps to either a category norm (oil quantity, filter), a documented merchant strength (exotic-car expertise, honesty), or a recurring page promise (speed).
+
+**Evidence:** Audit highlights array: ['Need To Know Info', 'Where To Redeem']. Competitor SSS Auto: 'New oil filter; 17-point inspection; Oil life reset; 6-month/5,000-mile warranty... Up to 5 quarts.' Yelp quote: 'honest, ethical, fair and stands' behind his work. Description claims 'quick' service.
+
+**Expected impact:** Highlights are the most-scanned element on a deal page; replacing placeholder text with concrete benefits should materially lift add-to-cart rate.
+
+### 4. [fine_print] (priority 1)
+**Current:** "" (empty)
+
+**Proposed:** Valid for most cars, light trucks, and SUVs up to 5 quarts of full synthetic oil. Additional quarts, specialty filters, and oil disposal fees may apply. Excludes Maserati and exotic vehicles (Lamborghini, Ferrari, McLaren, etc.) — contact shop directly for exotic service pricing. Multi-point inspection (SKU 2) includes brakes, fluids, belts, battery, tires, and lights; written report provided on request. Appointment recommended; walk-ins accommodated when bays are open. Voucher valid for [X] months from purchase. One per visit, may buy multiple as gifts.
+
+**Why:** Empty fine print is a refund driver. The LivingSocial version of this same merchant's deal explicitly excludes 'Maserati and exotic cars' — that exclusion needs to appear here too, or owners of those vehicles will buy and demand refunds. The 'written report on request' clause directly addresses the existing complaint that the inspection wasn't visibly performed.
+
+**Evidence:** Audit fine_print: ''. LivingSocial listing: deal explicitly excludes 'Maserati and exotic cars' from oil change vouchers. Existing review: 'I did not see them rotate my tires or do any inspection of my vehicle.'
+
+**Expected impact:** Reduces post-purchase disputes, refund requests, and 1–3 star reviews tied to mismatched expectations.
+
+### 5. [seo_meta_title] (priority 2)
+**Current:** Asad Auto Repairs - From $81 - Chicago | Groupon
+
+**Proposed:** Full Synthetic Oil Change from $72.90 — Asad Auto Repairs, Chicago | Groupon
+
+**Why:** The current meta title leads with the ORIGINAL price ($81), not the deal price — actively suppressing CTR from Google. It also omits the service ('oil change') so the title doesn't match what searchers are typing.
+
+**Evidence:** Audit seo.meta_title: 'Asad Auto Repairs - From $81 - Chicago | Groupon'. Audit prices: deal_price 72.90. Tavily category research shows users search 'oil change price Chicago full synthetic' — current meta title contains none of those terms.
+
+**Expected impact:** Improves organic CTR from Google search results for 'oil change Chicago' queries.
+
+### 6. [seo_meta_description] (priority 2)
+**Current:** Quality Oil Change - Up to 30% Off
+
+**Proposed:** Full synthetic oil change in Chicago from $72.90 at Asad Auto Repairs (5.0★ on Yelp) — a trusted European & exotic car specialist on South Kedzie. Multi-point inspection option available. Book on Groupon.
+
+**Why:** Current meta description is a duplicate of the H1 with a discount claim that doesn't match the actual price math. Replacement uses the merchant's real Yelp rating and the differentiation angle.
+
+**Evidence:** Audit seo.meta_description equals H1. Yelp listings: 'Asad Auto Repairs (5/5)' across multiple aggregator pages.
+
+**Expected impact:** Lifts SERP CTR by surfacing both price and a credible trust signal in the snippet.
+
+### 7. [trust_signals] (priority 2)
+**Current:** On-page: 3.5★ (4 reviews), '1 bought', no guarantee text
+
+**Proposed:** Add a 'Trusted by exotic car owners' badge with three Yelp photo thumbnails (Huracan, Aventador, Porsche GT4) and the line: 'Yelp 5.0★ — "honest, ethical, fair" (verified Yelp review).' Add a 'Satisfaction guaranteed: free re-service if any item on your multi-point inspection wasn't completed' badge below the price.
+
+**Why:** On-page social proof is weak (3.5 stars, 4 reviews, 1 bought) and undersells the merchant. Yelp shows 5.0 across 8+ reviews with photo evidence of premium-tier work. The re-service guarantee directly counters the page's existing 3-star complaint and removes a documented purchase objection.
+
+**Evidence:** Audit trust_signals.has_guarantee_text: false. Audit rating 3.5, review_count 4. Research: 'Asad Auto Repairs. 5.0 (8 reviews)' and '5/5' across multiple Yelp aggregator pages, with photos including 'Aventador SVJ in for an Engine rebuild' and 'Porsche GT4'. Existing 3-star review: 'I did not see them rotate my tires or do any inspection... Please adhere to what you advertise.'
+
+**Expected impact:** Counteracts the weak Groupon-side review count by importing credible external proof; the guarantee directly reduces purchase hesitation.
+
+### 8. [images] (priority 3)
+**Current:** 58 images on page (mostly stock/interior per audit context)
+
+**Proposed:** Lead with 3 images in this order: (1) a clean shot of the actual service bay with a technician performing an oil change, (2) one of the Yelp exotic-car photos (Huracan or Aventador on the lift) with a caption 'The same shop drivers trust with six-figure exotics handles your oil change,' (3) a close-up of the premium synthetic oil bottles and OEM filters used. Cap total at ~12; 58 is too many and dilutes the lead.
+
+**Why:** 58 images is image-stuffing that hurts mobile load and dilutes the visual hook. The exotic-car photos are the merchant's single most-credible visual differentiator vs. every other oil-change Groupon in Chicago and aren't being leveraged.
+
+**Evidence:** Audit image_count: 58. Yelp photo titles: 'Twin Turbo Huracan', 'Huracan Tecnica V10 Engine rebuild', 'Aventador S rebuild', 'Aventador SVJ in for an Engine rebuild', 'LP610 Lamborghini Huracan'.
+
+**Expected impact:** Faster mobile load and a stronger first-impression visual story; reinforces the premium-specialist positioning end-to-end.
+
+### 9. [missing_content] (priority 3)
+**Current:** No information on appointment policy, vehicle eligibility, oil quantity, what's actually inspected, or service duration
+
+**Proposed:** Add a 'What to expect' section: '• Bring your voucher and vehicle registration. • Service typically takes 30–45 minutes. • Includes up to 5 quarts of full synthetic; additional quarts billed at shop rate. • SKU 2 multi-point inspection covers: brakes, tires, belts, hoses, battery, fluids, lights, wipers — written checklist provided. • Walk-ins welcome but appointments preferred. • Located at 8100 S Kedzie Ave with on-site parking.'
+
+**Why:** None of this is on the page, but every one of these is a pre-purchase question for an oil-change customer. The 'written checklist' specifically addresses the existing review complaint about an unseen inspection.
+
+**Evidence:** Audit description has no mention of duration, oil quantity, appointment policy, or inspection contents. Tavily multi-point inspection research: 'A Chevrolet Multi-Point Inspection is a full checkup of your car, truck, or SUV. It is often done at the same time as your oil change.' Existing review on page about not seeing inspection performed.
+
+**Expected impact:** Reduces pre-purchase abandonment and post-purchase disputes by setting clear expectations.
+
+### 10. [competitive_positioning] (priority 3)
+**Current:** Page reads as a generic oil change with no comparison to alternatives
+
+**Proposed:** Add a one-line comparator block: 'Dealer full synthetic oil change in Chicago: $110+ (McGrath Lexus). Independent specialist with European/exotic credentials: $72.90 here. Save dealership money without the chain-shop experience.'
+
+**Why:** At $72.90, this deal isn't cheap vs. quick-lube chains — it's competitive vs. dealers. Reframing the comparison set from 'Jiffy Lube' to 'dealer service department' is the only way the price reads as a deal.
+
+**Evidence:** McGrath Lexus of Chicago: '7-Quart Synthetic Oil Change · PRICE: $110.01.' SSS Auto Repair Chicago: 'Full Synthetic Oil Change. $79.' Reddit: '~$45 for 6qts Valvoline full synthetic' DIY. Audit deal_price: $72.90.
+
+**Expected impact:** Reframes value perception so the modest 10% Groupon discount stops being the primary purchase trigger.
+
+### 11. [seo_headings] (priority 4)
+**Current:** H2 list contains duplicates: 'What We Offer' and 'Why You Should Grab This Offer' each appear twice
+
+**Proposed:** De-dupe and restructure H2s as: 'What's Included', 'Why Asad Auto Repairs', 'European & Exotic Specialization', 'What to Expect at Your Visit', 'Fine Print & Eligibility', 'Where to Redeem', 'Customer Reviews'.
+
+**Why:** Duplicate H2s confuse Google and look like a CMS template bug to users. The replacements map to the search intents customers actually have.
+
+**Evidence:** Audit seo.h2 array contains 'What We Offer' twice and 'Why You Should Grab This Offer' twice.
+
+**Expected impact:** Cleaner page structure for SEO and a less templated feel for users.
+
+### 12. [urgency] (priority 4)
+**Current:** 'limited time'
+
+**Proposed:** Replace generic 'limited time' with a truthful inventory or social-proof line only if data supports it: e.g., 'Only 1 bought so far — be among the first to try this deal' OR remove urgency entirely until volume justifies it.
+
+**Why:** Generic 'limited time' on a deal with '1 bought' is not credible and risks platform-wide trust erosion. Better to be honest or silent than to cry wolf.
+
+**Evidence:** Audit urgency_signals: ['limited time']. Audit bought_label: '1 bought'.
+
+**Expected impact:** Protects platform credibility; small direct conversion impact.
+
+## Open questions for the merchant / ops
+- Is the multi-point inspection actually performed and documented today, or is it nominal? The existing 3-star review says it wasn't done — we need merchant confirmation before we promise a 'written checklist on request.'
+- Does the merchant want to honor this deal on European luxury vehicles (BMW, Audi, MB) or exclude them along with exotics? The LivingSocial version excludes exotics; the Groupon page is silent. Positioning depends on this answer.
+- Can we get a small price spread between the two SKUs (e.g., $72.90 / $89) so the inspection upsell is real, or is the merchant locked into identical pricing?

@@ -1,0 +1,119 @@
+{
+  "executive_summary": "This page is a face-value ticket listing dressed up as a deal — all four ticket tiers show identical original_price and deal_price (no discount), yet the page still flags 'limited time' urgency, which is misleading and a refund/dispute risk. The biggest conversion levers are not price cuts but (1) fixing the empty highlights and fine_print sections, which currently just echo section headers ('Need To Know Info', 'Where To Redeem'), (2) reframing value against Universal Hollywood ($109+) and Paramount ($69+) so $79 reads as the mid-priced, guide-led, behind-the-scenes option, and (3) preempting the two dominant negative review themes — perceived value and 'moving like cattle' pacing — by surfacing what's actually included (3-hour total experience, 1-hour expert guide, real working backlot). Age restriction (5+, with 5–17 requiring an adult) is completely missing from the page and is a known purchase blocker for families.",
+  "competitive_positioning": "Against direct alternatives, $79 for the WB Studio Tour sits between Paramount's $69 walking tour and Universal Studios Hollywood's $109+ theme-park admission — and unlike Universal, WB is a real working backlot with a guided experience. The page should explicitly own the 'authentic working studio, expert-guided, 100+ years of film history' lane rather than competing on price. Booking direct on wbstudiotour.com is the same price, so Groupon's edge here is discoverability, bundling with nearby LA deals, and the 4.79★ social proof from 441+ Groupon buyers — none of which the current page leverages. Because there is no actual discount, every recommendation below assumes the job is to convert undecided shoppers comparing LA studio tours, not to sell on savings.",
+  "recommendations": [
+    {
+      "field": "highlights",
+      "current_value": "['Need To Know Info', 'Where To Redeem']",
+      "proposed_value": "• 1-hour guided tour led by an expert WB Studio Tour Guide, plus 2 hours self-guided exploration (3 hours total)\n• Walk real working backlots where 100+ years of films and TV shows have been made\n• Step inside iconic indoor stage rooms — repeatedly called out by reviewers as the highlight\n• Available in English, Spanish, or French — pick your language at checkout\n• Upgrade option: TCM Classic Films Tour adds the Property Department, Rose Garden, and golden-age film clips (3.5 hours total)\n• 4.79★ from 441+ Groupon buyers; 810+ already booked",
+      "rationale": "The current 'highlights' are literally section header labels, not benefits. The description buried in prose contains all the actual selling points (duration, languages, TCM extras) and Yelp reviewers single out 'Inside of a Stage Room' and the guides as the best parts — none of which surface above the fold.",
+      "evidence": "Audit: highlights = ['Need To Know Info', 'Where To Redeem']; description mentions '3 hours total (1-hour tour with guide + 2 hours self-guided)'. Yelp: 'Inside of a Stage Room' called out as a highlight; 'tour guide was friendly, knowledgeable, and genuinely entertaining.'",
+      "priority": 1,
+      "expected_impact": "Largest single conversion lever — moves the page from a ticket-listing layout to a benefit-led deal page and gives undecided shoppers reasons to click buy."
+    },
+    {
+      "field": "fine_print",
+      "current_value": "\"\" (empty)",
+      "proposed_value": "• Valid for tour date selected at checkout; reservations required\n• Ages 5+ only — children under 5 are not permitted on any tour\n• Guests ages 5–17 must be accompanied by an adult 18 or older\n• Plan for ~3 hours on site (TCM tour: ~3.5 hours), including post-tour Stage 48 exhibit, gift shop, and dining\n• Tour operates rain or shine; comfortable walking shoes recommended\n• Wheelchair-accessible carts available free of charge — request at booking\n• Photo ID required at check-in; arrive 30 minutes before tour time\n• Not valid with other offers; see merchant site for full terms",
+      "rationale": "Empty fine print on a $68–$99 timed-entry ticket is a refund magnet. The 'ages 5+ / under-18 needs an adult' rule is hard policy from wbstudiotour.com and a documented purchase blocker for families. Accessibility info is also a real shopper question per the search results.",
+      "evidence": "Audit: fine_print = ''. wbstudiotour.com Terms: 'Children (under 5 years of age) are not permitted on the Tour. All minors, ages 5 – 17, must be accompanied by a person aged 18 years or over.' wbstudiotour.com Special Assistance: 'Our carts support most wheelchair types... We loan wheelchairs free of charge.'",
+      "priority": 1,
+      "expected_impact": "Reduces post-purchase refund/dispute volume and removes the #1 family-buyer hesitation (can my kid go?)."
+    },
+    {
+      "field": "urgency",
+      "current_value": "['limited time']",
+      "proposed_value": "Remove the 'limited time' badge. Replace with a truthful scarcity cue tied to inventory: 'Tour times sell out — book at least 3 days ahead' or '810+ booked on Groupon' (already true).",
+      "rationale": "All four ticket tiers have original_price == deal_price (no discount). Calling this 'limited time' on a face-value ticket is misleading and erodes trust if a shopper price-checks against wbstudiotour.com. The 810+ bought label is real social proof and a more honest urgency substitute.",
+      "evidence": "Audit: prices show $79=$79, $78=$78, $68=$68, $99=$99 with discount_pct=null on all four; bought_label = '810+ bought'.",
+      "priority": 1,
+      "expected_impact": "Protects brand trust and avoids regulatory/PR risk on deceptive urgency; honest scarcity still drives booking."
+    },
+    {
+      "field": "title",
+      "current_value": "\"Experience Hollywood's Backlot Magic with Warner Bros. Studio Tour Hollywood\"",
+      "proposed_value": "\"Warner Bros. Studio Tour Hollywood: 3-Hour Guided Backlot Tour in Burbank — From $68\"",
+      "rationale": "The current title is pure marketing prose: no price anchor, no duration, no location, no 'guided' signal. The proposed version mirrors what shoppers compare on (price floor, duration, format, city) and what the SEO meta_title already does well ('From $78 - Burbank').",
+      "evidence": "Audit: seo.meta_title = 'Warner Bros. Studio Tour Hollywood - From $78 - Burbank | Groupon' uses the From-$X-Burbank pattern; H1 does not. Lowest tier is actually $68 (French).",
+      "priority": 2,
+      "expected_impact": "Improves both category-page CTR and organic SEO by aligning H1 with high-intent search terms."
+    },
+    {
+      "field": "competitive_positioning",
+      "current_value": "N/A — page makes no comparison to alternatives",
+      "proposed_value": "Add a short 'Why this tour' callout near the top: 'Universal Studios Hollywood admission starts at $109+ and Paramount's tour starts at $69 — Warner Bros. is the real working backlot, with an expert guide and 100+ years of film history, from $68.'",
+      "rationale": "Shoppers in LA actively triangulate between WB, Universal, and Paramount. The page never names the alternatives, so it cedes the comparison to Google. Universal at $109+ and Paramount at $69 (both verified in research) make $68–$79 read as a fair middle.",
+      "evidence": "Viator: 'General 1-day admission tickets for Universal Studios Hollywood start at US$109 for adults.' US News on Paramount: 'guided tour, which start at $69 per person.'",
+      "priority": 2,
+      "expected_impact": "Converts comparison shoppers who would otherwise leave to price-check; reframes value without discounting."
+    },
+    {
+      "field": "missing_content",
+      "current_value": "No 'what to expect' / 'who it's for' section on the page",
+      "proposed_value": "Add a 'What to Expect' module with: arrival/check-in (30 min early, photo ID), tour flow (1-hour guided cart tour → 2-hour self-guided Stage 48 + shops + dining), what you'll see (real soundstages, backlot streets, prop & costume areas), age policy (5+, under 18 with adult), and accessibility (free wheelchair-accessible carts on request). Place above Customer Reviews.",
+      "rationale": "Reviewers consistently describe the experience structure ('2 hours worth a guide'), the Stage 48/indoor stage room highlight, and the cattle-line pain. Setting expectations on pacing and content directly counters the dominant negative theme of the experience feeling 'rushed' or 'expensive for what it is.'",
+      "evidence": "Yelp: 'most of the time was spent waiting in long lines'; 'moving like cattle to see a very limited number of sets'; '1-hour tour with guide + 2 hours self-guided' (audit description).",
+      "priority": 2,
+      "expected_impact": "Reduces post-purchase disappointment (the root cause of the 4.3 Yelp rating vs. 4.79 Groupon rating) and improves family-purchase confidence."
+    },
+    {
+      "field": "pricing_display",
+      "current_value": "Four separate H2 tiers each showing original_price = deal_price (e.g., $79 / $79), no discount %",
+      "proposed_value": "Collapse into a single 'From $68' anchor with a tier selector. Below the price, surface: 'Same price as wbstudiotour.com — book through Groupon for 4.79★ Groupon-buyer reviews and bundle with nearby LA deals.' Drop the 'was/now' framing entirely since there is no discount.",
+      "rationale": "Showing $79 → $79 four times signals 'no deal here' to a Groupon shopper trained to scan for discount %. Owning the 'authorized reseller, same price, better trust layer' framing is more honest and converts better than fake savings.",
+      "evidence": "Audit: all four prices have original_price == deal_price and discount_pct = null; rating 4.79 with 441+ reviews; bought_label '810+ bought'.",
+      "priority": 2,
+      "expected_impact": "Stops bounce from shoppers who scan for a discount and see none; reframes Groupon's value-add."
+    },
+    {
+      "field": "images",
+      "current_value": "image_count = 62; mix not specified, no captions surfaced",
+      "proposed_value": "Curate the gallery to lead with: (1) a guide on a tour cart with guests on the backlot, (2) inside an indoor stage/soundstage (the most-praised review element), (3) the Stage 48 self-guided area, (4) the iconic backlot street, (5) the Central Perk / Friends set if licensable, (6) a family group on the tour. Add a one-line caption to each. Push generic exterior/lobby shots to the end.",
+      "rationale": "62 images is plenty; the issue is sequencing. Yelp specifically calls out 'Inside of a Stage Room' as the standout, and 'real Hollywood backlots' is the YouTube reviewer hook. Lead images should match.",
+      "evidence": "Audit: image_count=62. Yelp: 'Inside of a Stage Room. Marissa...'; YouTube review: 'walking through real Hollywood backlots to seeing iconic...'",
+      "priority": 3,
+      "expected_impact": "Lifts gallery engagement and time-on-page; mobile shoppers often decide on first 3 images."
+    },
+    {
+      "field": "trust_signals",
+      "current_value": "has_rating=true (4.79), has_review_count=true (441+), has_bought_label=true (810+), has_guarantee_text=false",
+      "proposed_value": "Add a 'Groupon Guarantee' line under the buy button: 'If your tour is canceled by the merchant or you can't redeem, we'll make it right.' Also add a small 'Authorized reseller — same price as wbstudiotour.com' badge to neutralize the 'is this legit?' hesitation common on third-party ticket pages.",
+      "rationale": "The page has strong organic trust signals (4.79★, 441+ reviews, 810+ bought) but no guarantee — a known gap on timed-entry experience tickets where shoppers worry about no-shows or schedule conflicts.",
+      "evidence": "Audit: trust_signals.has_guarantee_text = false. Reddit/TripAdvisor threads in research show repeated 'is it worth it / will I actually get in' anxiety.",
+      "priority": 3,
+      "expected_impact": "Reduces purchase hesitation on a non-discounted, timed-entry product."
+    },
+    {
+      "field": "seo_meta_description",
+      "current_value": "\"Experience Hollywood's Backlot Magic with Warner Bros. Studio Tour Hollywood\"",
+      "proposed_value": "\"Book the Warner Bros. Studio Tour Hollywood from $68. 3-hour guided backlot tour in Burbank — English, Spanish, or French. 4.79★ from 441+ Groupon buyers.\"",
+      "rationale": "Current meta description is a duplicate of the H1 with no price, duration, language, or social proof — all of which are high-CTR SERP signals for tour searches.",
+      "evidence": "Audit: seo.meta_description duplicates H1 verbatim; meta_title already uses 'From $78 - Burbank' pattern proving the team values that frame.",
+      "priority": 3,
+      "expected_impact": "Improves organic SERP CTR for 'Warner Bros studio tour' and 'Hollywood studio tour' queries."
+    },
+    {
+      "field": "seo_headings",
+      "current_value": "H2s include four near-identical 'Studio Tour for One (Language)' headings plus 'Need To Know Info' and 'Where To Redeem'",
+      "proposed_value": "Consolidate the four language tiers under a single H2 'Choose Your Tour' and add benefit-rich H2s: 'What's Included on the Tour', 'Ages & Accessibility', 'How Warner Bros. Compares to Universal & Paramount'. Keep 'Frequently Asked Questions' and expand it.",
+      "rationale": "Four language-variant H2s dilute keyword relevance and create a fragmented page outline. New H2s map to actual shopper questions surfaced in the research (age, accessibility, comparison).",
+      "evidence": "Audit: seo.h2 lists four 'Studio Tour for One (X Language)' headings plus 'Need To Know Info'/'Where To Redeem' as content sections.",
+      "priority": 4,
+      "expected_impact": "Cleaner outline for SEO crawlers and on-page scanability."
+    },
+    {
+      "field": "missing_content",
+      "current_value": "No FAQ content visible (the H2 'Frequently Asked Questions' exists but no Q&A surfaced in the audit)",
+      "proposed_value": "Populate FAQ with: 'Is this the same price as booking direct?' (Yes), 'Can I bring my kids?' (5+, under 18 with adult), 'How long is the tour?' (3 hrs / 3.5 hrs TCM), 'Is it wheelchair accessible?' (Yes, free accessible carts), 'Where do I park?' (confirm with ops), 'What's the difference between this and Universal?' (working backlot vs. theme park).",
+      "rationale": "FAQ H2 exists in the page outline but the audit shows no FAQ content scraped — likely empty or weak. These six questions cover every dominant theme from the research.",
+      "evidence": "Audit: seo.h2 includes 'Frequently Asked Questions' but no FAQ text appears in description or highlights.",
+      "priority": 4,
+      "expected_impact": "Captures long-tail SEO and answers pre-purchase questions inline, reducing bounce to wbstudiotour.com."
+    }
+  ],
+  "open_questions": [
+    "Is parking free, paid, or validated for Groupon ticket holders? Yelp/TripAdvisor shoppers ask but the merchant page is unclear — needed for fine_print and FAQ.",
+    "Does Groupon have any negotiated upside here (early access, behind-the-scenes extra, bundling with another LA deal) that would let the page offer more than face-value parity with wbstudiotour.com?",
+    "Why is the French-language tour priced $11 lower than English ($68 vs. $79)? If this is a legitimate ongoing differential, lead with 'From $68'; if it's a data error, fix before the title/meta changes go live."
+  ]
+}

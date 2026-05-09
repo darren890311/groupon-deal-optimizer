@@ -1,0 +1,149 @@
+# Optimization Proposal
+
+## Executive summary
+This page has a credibility problem before it has a conversion problem. The H1 and meta description claim 'up to 45% off' but the only two SKUs on the page are both 20% off — a discrepancy that will drive refund requests and erode trust. The title and description awkwardly merge Wilke Automotive with generic Marathon Gas / ENERGY STAR corporate boilerplate that has nothing to do with the actual oil change service, while the 'highlights' section is just two placeholder labels ('Need To Know Info', 'Where To Redeem') instead of benefit bullets. The single highest-leverage fix is rewriting the title, highlights, and description to match what's actually being sold (a $31.16 conventional oil change + 29-point inspection at a trusted local shop), and to surface the synthetic-oil upcharge in fine print so customers don't get the same surprise the Yelp reviewer did. Pricing-wise, $31.16 for conventional is competitive but not a steal vs. Midas ($29.99 synthetic blend) and Firestone ($29.99 standard) — so the page must sell trust and the 29-point inspection, not just price.
+
+## Competitive positioning
+Wilke's $31.16 conventional oil change is roughly at-market vs. Arlington Heights chain alternatives (Midas $29.99 synthetic blend with rotation, Firestone $29.99 standard, Jiffy Lube ~$50–60). On price alone, Groupon does not win. Where Wilke wins is trust: Yelp reviewers explicitly say "It is so hard to find a trustworthy mechanic but we have" and "the fairest price was Wilke Automotive" — the kind of independent-shop language chain competitors can't credibly claim. The page should reframe the offer as 'independent, trusted local mechanic at chain-shop prices, with a 29-point inspection included' rather than competing on headline discount. The 20% discount is also below Groupon oil-change category norms (24–44% in comparable markets), so leaning harder on the inspection value and the trust narrative is more defensible than chasing a deeper markdown.
+
+## Recommendations
+### 1. [title] (priority 1)
+**Current:** Explore Wilke Automotive And Marathon Gas for oil change options up to 45% off, featuring comprehensive inspections.
+
+**Proposed:** Conventional Oil Change with 29-Point Inspection at Wilke Automotive (20% Off) — Arlington Heights
+
+**Why:** The current title makes three errors: (1) it claims 'up to 45% off' but both live SKUs are 20% off, which is a refund/chargeback risk; (2) it bolts on 'Marathon Gas' which confuses what's being sold (a local mechanic's oil change, not gas station services); (3) it leads with 'Explore' — a verb that does nothing for SEO or CTR. The proposed title leads with the actual service, the actual discount, and the city.
+
+**Evidence:** Audit shows prices: $38.95→$31.16 (20%) and $79.99→$63.99 (20%). Title and meta_description both claim 'up to 45% off'.
+
+**Expected impact:** Eliminates a misleading-claim refund driver, improves CTR from category and SEO pages by leading with the concrete service and price.
+
+### 2. [highlights] (priority 1)
+**Current:** ['Need To Know Info', 'Where To Redeem']
+
+**Proposed:** • Conventional oil & filter change using quality-grade oil
+• 29-point vehicle inspection (brakes, fluids, tires, lights, battery) included at no extra cost
+• Locally-owned independent shop — 4.5★ across 348+ reviews, 1,000+ Groupons sold
+• Optional wheel alignment add-on available for $63.99 (reg. $79.99)
+• Note: deal covers conventional oil only — synthetic upgrade available in-shop for an additional fee
+
+**Why:** The current 'highlights' are section labels, not benefits — the customer learns nothing about what they're buying. Reddit threads on multi-point inspections show buyers actively wonder what's actually checked, so spelling out the 29 points by category is high-value. The synthetic-oil note directly addresses a real customer pain (see fine_print rec).
+
+**Evidence:** Audit shows highlights = ['Need To Know Info','Where To Redeem']. Reddit (r/MechanicAdvice): 'In general, it include fluid levels, tires, batteries, lights, brakes, etc. If they don't have a written report, don't believe they inspected'. Yelp review: 'the groupon price was for regular oil and my car uses synthetic. So there wa[s a surprise charge]'.
+
+**Expected impact:** Converts the most-scanned section of the page from empty placeholders into actual purchase reasons; reduces post-purchase 'I didn't know it was conventional only' disputes.
+
+### 3. [fine_print] (priority 1)
+**Current:** Limit 3 per person. Must use promotional value in 1 visit. Valid only for option purchased.
+
+**Proposed:** Limit 3 per person. Must use in 1 visit. Valid only for option purchased. Conventional oil only — if your vehicle requires synthetic or synthetic blend, an in-shop upgrade fee applies (ask at check-in for the exact amount). Includes up to 5 quarts of oil; additional quarts billed at standard rate. Appointment recommended; walk-ins subject to bay availability. Tax and shop supplies not included.
+
+**Why:** A 5-star Yelp review still flags the synthetic surprise: 'the groupon price was for regular oil and my car uses synthetic. So there wa[s extra charge]'. Vague fine print on oil-type, quart limits, and appointments is the #1 driver of oil-change Groupon disputes. Locking these terms down up front protects margin and CSAT.
+
+**Evidence:** Reviews_sample quote (5★): 'The only thing I failed to realize was that the groupon price was for regular oil and my car uses synthetic. So there wa[s]...'. Same review also notes: 'there was no air conditioned waiting room and I had to sit out side' — appointment behavior matters.
+
+**Expected impact:** Reduces refund/chargeback rate from synthetic-upgrade surprises and waiting-time complaints, the two specific friction points named by actual reviewers.
+
+### 4. [pricing_display] (priority 1)
+**Current:** $38.95 → $31.16 (20% off); $79.99 → $63.99 (20% off). H1 and meta both claim 'up to 45% off'.
+
+**Proposed:** Remove 'up to 45% off' everywhere on the page. Display: '20% off — $31.16 (reg. $38.95). 29-point inspection included.' If a 45% tier exists, add it as a third SKU (e.g., a multi-pack); otherwise the claim must come down.
+
+**Why:** The 45% claim does not match either live SKU. This is a Truth-in-Advertising risk and a near-certain refund driver when buyers read the cart total. Fix it at the source rather than papering over it.
+
+**Evidence:** Audit prices array: both SKUs show discount_pct = 20.0. seo.meta_title shows 'From $38.95' (no discount), seo.meta_description and h1 both claim 'up to 45% off'.
+
+**Expected impact:** Eliminates legal/compliance risk and post-purchase 'I was promised 45%' complaints.
+
+### 5. [missing_content] (priority 2)
+**Current:** N/A — no synthetic option, no service duration, no appointment policy, no waiting-area description.
+
+**Proposed:** Add a 'What to expect' block: 'Service typically takes 30–45 minutes. Appointments recommended — call (XXX) XXX-XXXX or book online. Two service bays; outdoor seating only (no air-conditioned waiting room). Most makes/models accepted; ask about diesel and European vehicles.'
+
+**Why:** The Yelp reviewer who waited and sat outside still gave 5 stars because expectations were eventually met — but a buyer who didn't expect outdoor-only seating in summer would not. Setting expectations on the page converts a potential 1-star into a 5-star.
+
+**Evidence:** Reviews_sample (5★): 'there was no air conditioned waiting room and I had to sit out side'. Reviews_sample (5★): 'They honored the estimate and when they said it would be completed, it was!'
+
+**Expected impact:** Improves post-redemption review scores and reduces 'I didn't know' complaints by pre-qualifying buyers.
+
+### 6. [description] (priority 2)
+**Current:** References 'the nation's largest refining system', 'ENERGY STAR® Partner of the Year', 'diverse brand portfolio... thousands of locations' — generic Marathon Petroleum corporate copy.
+
+**Proposed:** 'Wilke Automotive is an independent, locally-owned shop on North Wilke Road in Arlington Heights. The team — including Syed, who customers call out by name in reviews — has built a reputation as a trustworthy alternative to the big chains. This Groupon covers a conventional oil and filter change plus a 29-point inspection covering brakes, tires, fluids, battery, lights, belts, and hoses, so you leave knowing exactly what your car needs (and what it doesn't). Optional wheel alignment available as a separate add-on.'
+
+**Why:** The current description reads like it was generated for a Marathon Petroleum corporate page, not a 2-bay independent shop in Arlington Heights. It actively undermines the merchant's real differentiator: being a small, trusted local mechanic. The proposed copy uses the exact language reviewers use ('trustworthy', 'fair price', 'Syed').
+
+**Evidence:** Yelp: 'It is so hard to find a trustworthy mechanic but we have.' MapQuest: 'the fairest price was Wilke Automotive! Thanks Syed for great experience'. Yelp (repeat customer): 'I have been here for an oil change the past 4 times... great service at good prices. Will always come here.'
+
+**Expected impact:** Reframes the value prop from a confusing gas-station story into the trust narrative that's actually selling the shop in real reviews.
+
+### 7. [trust_signals] (priority 2)
+**Current:** Has 4.47★, 348+ reviews, '1,000+ bought'. No guarantee text.
+
+**Proposed:** Add a pull-quote module above the fold: '"It is so hard to find a trustworthy mechanic but we have." — Yelp reviewer'. Add a badge: 'Repeat customers: 4 of 5 reviewers in our sample have returned more than once.' Add a 'No-surprise pricing' promise: 'If we find anything during the 29-point inspection, you'll get a written estimate before any additional work begins.'
+
+**Why:** The audit confirms no guarantee text. For an independent auto shop competing against chains, the #1 buyer fear is upsell/scam, not price. Quoting the trust language directly from Yelp neutralizes that fear better than any generic badge.
+
+**Evidence:** trust_signals.has_guarantee_text = false. Yelp pull quotes available verbatim. Review (5★): 'They honored the estimate and when they said it would be completed, it was!'
+
+**Expected impact:** Lifts conversion among the cautious-buyer segment that's choosing between Wilke and a national chain.
+
+### 8. [seo_meta_title] (priority 2)
+**Current:** Wilke Automotive - From $38.95 - Arlington Heights | Groupon
+
+**Proposed:** Oil Change + 29-Point Inspection $31.16 — Wilke Automotive, Arlington Heights | Groupon
+
+**Why:** The current meta title leads with the regular price ($38.95) instead of the deal price ($31.16), which is the opposite of what should appear in SERPs. It also omits the service ('oil change') — the literal query users are searching.
+
+**Evidence:** competitor_pricing query results show users search 'oil change price Arlington Heights IL'. Audit meta_title leads with 'From $38.95'.
+
+**Expected impact:** Improves SERP CTR by matching query intent ('oil change Arlington Heights') and showing the deal price.
+
+### 9. [seo_meta_description] (priority 2)
+**Current:** Explore Wilke Automotive And Marathon Gas for oil change options up to 45% off, featuring comprehensive inspections.
+
+**Proposed:** Conventional oil change + 29-point inspection for $31.16 (reg. $38.95) at Wilke Automotive in Arlington Heights. 4.5★, 348+ reviews, 1,000+ sold. Wheel alignment add-on available.
+
+**Why:** Removes the inaccurate '45% off' claim, drops the misleading Marathon Gas reference, and front-loads the price, service, location, and social proof in 155 characters.
+
+**Evidence:** Audit prices show actual discount = 20%, not 45%. Audit shows 4.47★ / 348 reviews / 1,000+ bought.
+
+**Expected impact:** Improves SERP CTR and removes a compliance-risk claim from indexed copy.
+
+### 10. [competitive_positioning] (priority 3)
+**Current:** Page does not reference any competitor or alternative.
+
+**Proposed:** Add a comparison line in the description or a small 'Why Wilke vs. the chains?' module: 'Chain quick-lubes in Arlington Heights run $29.99–$69.99 for similar services, but most don't include a 29-point inspection or a written estimate. Wilke is independent — Yelp reviewers consistently call out fair pricing and trust over volume-shop pressure.'
+
+**Why:** At $31.16, Wilke is competitive but not the cheapest option in zip code 60005. Midas charges $29.99 for synthetic blend with tire rotation; Firestone $29.99 for standard. The page must sell the inspection and trust, not undercut on price.
+
+**Evidence:** Midas (Arlington Heights, 1150 E Rand): '$29.99 Synthetic Blend... With Tire Rotation & Digital Vehicle Inspection'. Firestone Arlington Heights: '$29.99. Standard Oil Change. Includes New Oil Filter'. Yelp on Wilke: 'fairest price was Wilke Automotive'.
+
+**Expected impact:** Reduces price-shopping abandonment by giving buyers a reason to choose Wilke that isn't pure cost.
+
+### 11. [images] (priority 3)
+**Current:** 49 images on the page (count only; content not visible in audit).
+
+**Proposed:** Audit the 49 images and ensure the first 3 carousel slots show: (1) the actual storefront at 3 N Wilke Rd (curb appeal / 'I can find this place'), (2) a mechanic working on a vehicle in one of the two bays (the service in progress), (3) a sample 29-point inspection report or checklist (proves the inspection is real and written, addressing the Reddit-documented buyer skepticism).
+
+**Why:** Reddit threads on multi-point inspections explicitly say 'If they don't have a written report, don't believe they inspected'. Showing a sample report converts skeptics. 49 images is more than enough — the question is what's in slots 1–3.
+
+**Evidence:** Reddit (r/MechanicAdvice): 'If they don't have a written report, don't believe they inspected'. Audit: image_count = 49.
+
+**Expected impact:** Lifts conversion among inspection-skeptical buyers and reduces 'is this a real shop' bounces.
+
+### 12. [urgency] (priority 4)
+**Current:** 'limited time' (generic).
+
+**Proposed:** Replace with a truthful inventory-based signal only if the data supports it, e.g., 'Over 1,000 bought — most-purchased oil change deal in Arlington Heights this month.' Otherwise, remove the generic 'limited time' phrase.
+
+**Why:** Generic 'limited time' on an evergreen oil-change deal is noise and trains buyers to ignore urgency cues. The '1,000+ bought' figure is real and stronger.
+
+**Evidence:** Audit: urgency_signals = ['limited time']; bought_label = '1,000+ bought'.
+
+**Expected impact:** Marginal — replaces meaningless urgency with a credible social-proof framing.
+
+## Open questions for the merchant / ops
+- Is there actually a 45%-off SKU we're not surfacing (e.g., a multi-pack), or is the 'up to 45% off' claim simply wrong and needs to be removed everywhere?
+- Does Wilke offer a synthetic or synthetic-blend Groupon SKU we could add? Without one, we're losing every customer whose vehicle requires synthetic — and the Yelp surprise-charge issue will keep recurring.
+- Can the merchant confirm the exact synthetic-oil upgrade fee charged in-shop so we can publish it in the fine print rather than telling customers to 'ask at check-in'?

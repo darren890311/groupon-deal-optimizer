@@ -1,0 +1,137 @@
+{
+  "url": "https://www.groupon.com/deals/mermaid-beauty-3-8?redemptionLocationId=45289292-0007-b8c9-02a4-01862945f449",
+  "title": "Experience Mermaid Beauty's exclusive haircut and color options with up to 50% off, featuring private suite services.",
+  "subtitle": "Mermaid Beauty 12 West 48th Street, New York 4.9 (217+ reviews)",
+  "merchant_name": "Mermaid Beauty",
+  "category": "Local > Beauty & Spas > Salons > Hair Salons",
+  "breadcrumbs": [
+    "Local",
+    "Beauty & Spas",
+    "Salons",
+    "Hair Salons"
+  ],
+  "city": null,
+  "region": null,
+  "address": null,
+  "description": "What we offerChoose from various haircut options combined with either full color or root touchups. Each package includes styling to suit your preference, from straight to loose curls. Enjoy the added benefit of deep conditioning treatments that nourish your hair while you receive personalized service in an intimate setting.Haircut with Single Process Root Touchup and Blowout/Style: Includes haircut, root touchup color and styled blowout.Haircut with Single-Process Color and Blowout/Style: Offers haircut combined with all-over single-process color and styled finish.Root Touchup Single Process, Deep Conditioning and Blowout: Provides root touchup along with deep conditioning treatment and styled blowout.Single Process, Deep Conditioning and Blowout/Style: Involves all-over single-process coloring followed by deep conditioning treatment.Book at:&nbsp;https://www.mermaidbeautynyc1.com/Additional Rates are listed online&nbsp;",
+  "highlights": [
+    "Root touchup color",
+    "Deep conditioning treatment",
+    "Blowout/style"
+  ],
+  "fine_print": "Not valid with other offers or promotions. Limit 1 per visit. Limit 1 per person.",
+  "prices": [
+    {
+      "label": "Root Touchup Single Process, Deep Conditioning and Blowout, Style",
+      "original_price": 92.07,
+      "deal_price": 82.86,
+      "discount_pct": 10.0
+    },
+    {
+      "label": "Haircut with Single Process Root Touchup and Blowout/Style",
+      "original_price": 122.76,
+      "deal_price": 110.48,
+      "discount_pct": 10.0
+    },
+    {
+      "label": "Haircut with Single-Process Color and Blowout/Style",
+      "original_price": 167.4,
+      "deal_price": 148.8,
+      "discount_pct": 11.1
+    },
+    {
+      "label": "Single Process, Deep Conditioning and Blowout/Style",
+      "original_price": 139.5,
+      "deal_price": 125.55,
+      "discount_pct": 10.0
+    }
+  ],
+  "rating": 4.86,
+  "review_count": 217,
+  "bought_label": null,
+  "reviews": [
+    {
+      "rating": 5.0,
+      "quote": "Ten stars\nReally talented and amazing professional artist",
+      "author": "Catherine",
+      "date": "2026-04-20T23:57:58.802Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "My experience with Viktoria was great. She was so helpful scheduling my appointment and listened closely to what I wanted  regarding the cut— and did a super job. I’m always nervous about  trying a new stylist, but was so pleased. I recommend Viktoria  highly, and plan to return!  Wonderful when a Groupon introduces you to someone you’ll want to continue seeing!",
+      "author": "Cynthia",
+      "date": "2026-03-25T18:58:22.180Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Viktoria was amazing!! She is super nice, the space was so cute and the haircut and blow dry was PERFECT. Just what I wanted. :)",
+      "author": "Cynthia",
+      "date": "2026-02-17T16:41:53.017Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Excellent skills and services!!",
+      "author": "Guest",
+      "date": "2026-01-18T05:32:31.795Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Victoria was so great she listened to my long hair goals and gave me great instructions as well as inspo to get there and my shape up is Fab",
+      "author": "Elise",
+      "date": "2026-01-14T23:14:47.476Z"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What service options are available through the Transform Your Look with Haircut and Color Options deal at Mermaid Beauty?",
+      "answer": "There are four options available: a Root Touchup Single Process with Deep Conditioning, Blowout, and Style; a Haircut with Single Process Root Touchup and Blowout/Style; a Haircut with Single-Process Color and Blowout/Style; and a Single Process with Deep Conditioning and Blowout/Style."
+    },
+    {
+      "question": "Where is Mermaid Beauty located in New York, NY?",
+      "answer": "Mermaid Beauty is located at 12 West 48th Street, New York, NY 10036."
+    },
+    {
+      "question": "Does the Transform Your Look with Haircut and Color Options deal include a blowout or style finish?",
+      "answer": "All four available options include a blowout or style as part of the service, ensuring a finished look regardless of which option is selected."
+    },
+    {
+      "question": "Which options at Mermaid Beauty include a haircut?",
+      "answer": "Two of the four options include a haircut: the Haircut with Single Process Root Touchup and Blowout/Style, and the Haircut with Single-Process Color and Blowout/Style."
+    },
+    {
+      "question": "Is deep conditioning included in any of the Transform Your Look with Haircut and Color Options services?",
+      "answer": "Deep conditioning is included in two of the available options: the Root Touchup Single Process with Deep Conditioning, Blowout, and Style, and the Single Process with Deep Conditioning and Blowout/Style."
+    }
+  ],
+  "image_count": 65,
+  "seo": {
+    "meta_title": "Mermaid Beauty - From $92.07 - New York | Groupon",
+    "meta_description": "Experience Mermaid Beauty's exclusive haircut and color options with up to 50% off, featuring private suite services.",
+    "h1": [
+      "Experience Mermaid Beauty's exclusive haircut and color options with up to 50% off, featuring private suite services."
+    ],
+    "h2": [
+      "Amenities",
+      "Need To Know Info",
+      "Frequently Asked Questions",
+      "About Mermaid Beauty",
+      "Where To Redeem",
+      "Customer Photos & Videos",
+      "Customer Reviews",
+      "Explore more",
+      "Nearby deals",
+      "Related deals",
+      "Similar deals",
+      "Recommended deals"
+    ]
+  },
+  "urgency_signals": [
+    "limited time"
+  ],
+  "trust_signals": {
+    "has_rating": true,
+    "has_review_count": true,
+    "has_bought_label": false,
+    "has_guarantee_text": false
+  }
+}

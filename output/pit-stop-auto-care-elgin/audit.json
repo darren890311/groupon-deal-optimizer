@@ -1,0 +1,107 @@
+{
+  "url": "https://www.groupon.com/deals/pit-stop-auto-care-elgin?redemptionLocationId=0fea3776-0008-bc07-e77c-0182358959b0",
+  "title": "Up to 15% Off on Oil Change at Pit Stop Auto Care - Carpentersville",
+  "subtitle": "Pit Stop Auto Care - Elgin 939 Summit Street, Elgin + 2 locations 4.5 (181+ reviews)",
+  "merchant_name": "Pit Stop Auto Care - Elgin",
+  "category": "Local > Oil Change & Maintenance > Auto Repair & Maintenance > Oil Change",
+  "breadcrumbs": [
+    "Local",
+    "Oil Change & Maintenance",
+    "Auto Repair & Maintenance",
+    "Oil Change"
+  ],
+  "city": "Elgin",
+  "region": "IL",
+  "address": "939 Summit Street, Elgin",
+  "description": "\nService restrictions: valid for up to 5 quarts of oil and a standard filter. 0w-16 and European oils are available for an additional fee. Valid at the listed location only (Elgin)\n\nFAQs\n\nHow often should I change my oil?: It depends on your individual car. A safe bet is to refer to the mileage on the windshield sticker from your last oil inspection and change it regularly.\nWhat kind of oil should I use?: It all depends on your individual vehicle. Check your owner's manual or call the auto repair center before purchasing your voucher to make sure you get the right type.\n\n",
+  "highlights": [
+    "Need To Know Info",
+    "Where To Redeem"
+  ],
+  "fine_print": "Valid only for option purchased.",
+  "prices": [
+    {
+      "label": "Conventional Oil Change (Up to Five Quarts)",
+      "original_price": 27.99,
+      "deal_price": 25.47,
+      "discount_pct": 9.0
+    },
+    {
+      "label": "Synthetic Blend OR High Mileage Oil Change (Up to Five Quarts)",
+      "original_price": 40.99,
+      "deal_price": 37.3,
+      "discount_pct": 9.0
+    },
+    {
+      "label": "Synthetic Oil Change (Up to Five Quarts)",
+      "original_price": 59.99,
+      "deal_price": 54.59,
+      "discount_pct": 9.0
+    }
+  ],
+  "rating": 4.55,
+  "review_count": 181,
+  "bought_label": "450+ bought",
+  "reviews": [
+    {
+      "rating": 5.0,
+      "quote": "They were very friendly and very kind. They told me some stuff that was gonna go on and they did not pressure me to buy anything.",
+      "author": "patricia",
+      "date": "2026-05-05T19:41:08.155Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Always professional and very helpful.  Went in for an oil change and they were nice enough to bring an issue i was having with my battery to my attention.",
+      "author": "Kimberly",
+      "date": "2026-04-30T23:13:52.966Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Great people",
+      "author": "Bob",
+      "date": "2026-04-15T18:35:22.047Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Very quick",
+      "author": "peter",
+      "date": "2026-04-10T23:42:47.580Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "The staff was nice and courteous.",
+      "author": "TJ",
+      "date": "2026-03-01T20:27:29.794Z"
+    }
+  ],
+  "faqs": [],
+  "image_count": 42,
+  "seo": {
+    "meta_title": "Pit Stop Auto Care - Elgin - From $27.99 | Groupon",
+    "meta_description": "Up to 15% Off on Oil Change at Pit Stop Auto Care - Carpentersville",
+    "h1": [
+      "Up to 15% Off on Oil Change at Pit Stop Auto Care - Carpentersville"
+    ],
+    "h2": [
+      "Conventional Oil Change (Up to Five Quarts)",
+      "Synthetic Blend OR High Mileage Oil Change (Up to Five Quarts)",
+      "Synthetic Oil Change (Up to Five Quarts)",
+      "Need To Know Info",
+      "About Pit Stop Auto Care - Elgin",
+      "Where To Redeem",
+      "Customer Reviews",
+      "Explore more",
+      "Similar deals",
+      "Recommended deals"
+    ]
+  },
+  "urgency_signals": [
+    "limited time"
+  ],
+  "trust_signals": {
+    "has_rating": true,
+    "has_review_count": true,
+    "has_bought_label": true,
+    "has_guarantee_text": false
+  }
+}

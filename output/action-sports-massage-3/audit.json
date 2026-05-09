@@ -1,0 +1,119 @@
+{
+  "url": "https://www.groupon.com/deals/action-sports-massage-3?redemptionLocationId=030b87fa-000a-bb1f-154b-019580f4a68a",
+  "title": "Unwind with a 60-or 90-Minute Custom Massage (Up to 19% Off)",
+  "subtitle": "Action Sports Massage 2040 Westlake Avenue North, Seattle 4.7 (436+ reviews)",
+  "merchant_name": "Action Sports Massage",
+  "category": "Local > Beauty & Spas > Massage > Custom Massage",
+  "breadcrumbs": [
+    "Local",
+    "Beauty & Spas",
+    "Massage",
+    "Custom Massage"
+  ],
+  "city": "Seattle",
+  "region": "WA",
+  "address": "2040 Westlake Avenue North, Seattle",
+  "description": "Looking for relief from muscle tension or stress? A custom massage might just be what you need. At Action Sports Massage, every session is crafted to address individual needs, ensuring that whether you're dealing with soreness or just need some downtime, you're covered. With years of experience and positive client feedback backing them up, this service promises care that's as personal as it is professional. This offer is not good on Mondays.What We Offer60-or 90-Minute MassageMassage therapist's name and license: Terrance J Roy - MA 00023233Why You Should Grab This OfferThis offer stands out because it combines expertise in sports-related injuries with personalized care that meets individual needs. Each client receives a unique injury assessment that ensures the treatment plan addresses their specific concerns effectively. The massages are crafted by Tucker Roy himself using signature techniques that deliver consistent quality every time. Clients not only enjoy physical benefits but also gain insights into their condition and recovery process, fostering long-term wellness. Set in the historic China Harbor building in Seattle, the location adds charm to an already enriching experience.&nbsp;This offer is not good on Mondays.",
+  "highlights": [
+    "Custom massage",
+    "Injury assessment",
+    "Not valid on Mondays"
+  ],
+  "fine_print": "Valid only for option purchased. Limit 1 per person. All goods or services must be used by the same person.",
+  "prices": [
+    {
+      "label": "60 min Massage",
+      "original_price": 87.99,
+      "deal_price": 80.07,
+      "discount_pct": 9.0
+    },
+    {
+      "label": "90 min Massage",
+      "original_price": 120.99,
+      "deal_price": 110.1,
+      "discount_pct": 9.0
+    }
+  ],
+  "rating": 4.67,
+  "review_count": 436,
+  "bought_label": null,
+  "reviews": [
+    {
+      "rating": 5.0,
+      "quote": "Excellent experience. Tucker did a great job identifying problem areas and applying the right amount of pressure. He even gave valuable tips on how to stretch to avoid stiffness. Higly recommend to anyone who is dealing with pain.",
+      "author": "neel",
+      "date": "2025-12-12T06:40:57.679Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Best view for a massage in the city. Tucker is personable, experienced and can deliver that deep tissue work that you’re looking for.",
+      "author": "Patricia",
+      "date": "2025-11-20T19:33:27.416Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Tucker is absolutely wonderful! Extremely professional, and certainly knows his stuff. I felt very comfortable, and the deep tissue massage was better than I could've hoped! I had MONTHS of tension built up in my muscles, and he used a perfect amount of pressure to work through all of my knots. Highly recommend!",
+      "author": "Megan",
+      "date": "2023-05-02T21:24:29.591Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Very professional and knowledgeable. My body feels like new. Gave me actionable and simple tips on how to maintain my body better after endurance and trail runs. Plenty of street parking nearby.",
+      "author": "Abhinav",
+      "date": "2023-04-04T18:48:55.445Z"
+    },
+    {
+      "rating": 5.0,
+      "quote": "Troy was incredible.  Very professional, knowledgeable and skilled.  I went in hoping to prevent a huge flare up in my lumbar spine and he knew exactly how to approach my injury to help me.  One of the best massages I’ve ever received.  Will definitely go back to him.",
+      "author": "Caz",
+      "date": "2023-04-04T04:55:05.806Z"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Where is Action Sports Massage located in Seattle, WA?",
+      "answer": "Action Sports Massage is located in the Westlake neighborhood of Seattle, WA, at 2040 Westlake Avenue North, 98109."
+    },
+    {
+      "question": "What style of massage is used during the custom massage session?",
+      "answer": "The massage is performed in a deep tissue style, with pressure adjusted based on client feedback during the session."
+    },
+    {
+      "question": "What can clients expect after their Feel Renewed custom massage at Action Sports Massage?",
+      "answer": "Following the session, the therapist provides post-session tips or advice on body maintenance, stretching, or injury prevention. Multiple reviewers also reported relief from pain or muscle tension as a result of the massage."
+    }
+  ],
+  "image_count": 60,
+  "seo": {
+    "meta_title": "Action Sports Massage - From $87.99 - Seattle | Groupon",
+    "meta_description": "Unwind with a 60-or 90-Minute Custom Massage (Up to 19% Off)",
+    "h1": [
+      "Unwind with a 60-or 90-Minute Custom Massage (Up to 19% Off)"
+    ],
+    "h2": [
+      "What We Offer",
+      "Why You Should Grab This Offer",
+      "What We Offer",
+      "Why You Should Grab This Offer",
+      "Need To Know Info",
+      "Frequently Asked Questions",
+      "About Action Sports Massage",
+      "Where To Redeem",
+      "Customer Reviews",
+      "Explore more",
+      "Nearby deals",
+      "Related deals",
+      "Similar deals",
+      "Recommended deals"
+    ]
+  },
+  "urgency_signals": [
+    "limited time"
+  ],
+  "trust_signals": {
+    "has_rating": true,
+    "has_review_count": true,
+    "has_bought_label": false,
+    "has_guarantee_text": false
+  }
+}
