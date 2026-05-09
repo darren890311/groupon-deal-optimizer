@@ -33,4 +33,6 @@ How often the deal pages contradict themselves — and how invisible those issue
 
 These three are not outliers. A SQL query against the audit table shows 19 of 20 deals in this sample have the same title-vs-displayed-discount mismatch — auto repair, hair color, massage, salon, and ticketed-attraction categories are all affected. The pattern looks like merchant- or template-set "anchor" prices that no longer match the rendered price tiers, multiplied across thousands of live deals.
 
+Cross-platform parity is also weaker than expected: scraping each deal once on desktop and once with a mobile UA showed 7 of 20 deals with material differences — most strikingly **main-massage-spa**, where the mobile render carries a "selling fast" urgency badge that the desktop render does not. Whether that's intentional A/B testing or template drift, the same shopper checking the page from two devices sees two different urgency stories.
+
 These integrity issues are the single highest-leverage thing the system caught. They're page-by-page invisible to a human reviewer at scale, but trivially flagged once pricing structure lands in a column and you compare it to the H1. Most "optimization" advice talks about copy and imagery; the actual money on these 20 deals is in fixing what's already broken.
