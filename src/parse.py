@@ -280,15 +280,29 @@ def parse_audit(html: str, url: str) -> dict[str, Any]:
 
     body_lower = body_text.lower()
     urgency_signals = [
-        kw for kw in ["selling fast", "limited time", "almost gone", "ends soon", "only a few left", "limited supply"]
+        kw for kw in [
+            "selling fast", "limited time", "almost gone", "ends soon",
+            "only a few left", "limited supply", "today only", "hurry",
+        ]
         if kw in body_lower
     ]
+    quantity_left_mentions = [
+        m.group(1) or m.group(2)
+        for m in re.finditer(r"only\s+(\d+)\s+(?:left|remaining)|(\d+)\s+left\b", body_lower)
+    ]
+    has_countdown_widget = bool(soup.find(attrs={"class": re.compile(r"countdown|timer", re.I)})) or \
+        bool(soup.find(attrs={"data-countdown": True}))
+
     trust_signals = {
         "has_rating": rating is not None,
         "has_review_count": review_count is not None,
         "has_bought_label": bought_label is not None,
         "has_guarantee_text": "groupon guarantee" in body_lower or "money back" in body_lower,
     }
+
+    alt_text_coverage, alt_text_sample = _extract_alt_text(soup)
+    script_counts = _count_scripts(soup)
+    schema_types = _list_schema_types(blocks)
 
     return {
         "url": url,
@@ -310,6 +324,10 @@ def parse_audit(html: str, url: str) -> dict[str, Any]:
         "reviews": reviews_out,
         "faqs": faqs,
         "image_count": image_count,
+        "alt_text_coverage": alt_text_coverage,
+        "alt_text_sample": alt_text_sample,
+        "script_counts": script_counts,
+        "schema_types": schema_types,
         "seo": {
             "meta_title": meta_title,
             "meta_description": meta_desc,
@@ -317,6 +335,8 @@ def parse_audit(html: str, url: str) -> dict[str, Any]:
             "h2": h2s,
         },
         "urgency_signals": urgency_signals,
+        "has_countdown_widget": has_countdown_widget,
+        "quantity_left_mentions": quantity_left_mentions,
         "trust_signals": trust_signals,
     }
 
@@ -361,6 +381,105 @@ def _is_content_list(ul) -> bool:
             return False
         parent = parent.parent
     return True
+
+
+def _extract_alt_text(soup: BeautifulSoup, sample_n: int = 20) -> tuple[dict, list[dict]]:
+    imgs = soup.find_all("img")
+    real = [img for img in imgs if img.get("src") or img.get("data-src")]
+    with_alt = [img for img in real if (img.get("alt") or "").strip()]
+    sample = []
+    for img in with_alt[:sample_n]:
+        src = img.get("src") or img.get("data-src") or ""
+        alt = (img.get("alt") or "").strip()
+        sample.append({"src": src[:240], "alt": alt[:240]})
+    coverage = {
+        "total_images": len(real),
+        "with_alt_text": len(with_alt),
+        "coverage_pct": round(100 * len(with_alt) / len(real), 1) if real else 0.0,
+    }
+    return coverage, sample
+
+
+def _count_scripts(soup: BeautifulSoup) -> dict[str, int]:
+    scripts = soup.find_all("script")
+    return {
+        "total": len(scripts),
+        "external": sum(1 for s in scripts if s.get("src")),
+        "inline": sum(1 for s in scripts if not s.get("src")),
+        "json_ld": sum(1 for s in scripts if s.get("type") == "application/ld+json"),
+    }
+
+
+def _list_schema_types(blocks: list[dict[str, Any]]) -> list[str]:
+    types: list[str] = []
+    for b in blocks:
+        t = b.get("@type")
+        if isinstance(t, list):
+            types.extend(str(x) for x in t)
+        elif t:
+            types.append(str(t))
+    seen: set[str] = set()
+    out: list[str] = []
+    for t in types:
+        if t not in seen:
+            seen.add(t)
+            out.append(t)
+    return out
+
+
+def compare_mobile_desktop(
+    desktop: dict[str, Any],
+    mobile: dict[str, Any],
+    *,
+    desktop_html_bytes: int | None = None,
+    mobile_html_bytes: int | None = None,
+) -> dict[str, Any]:
+    diffs: list[str] = []
+    if desktop.get("title") != mobile.get("title"):
+        diffs.append(f"Title differs: desktop={desktop.get('title')!r} vs mobile={mobile.get('title')!r}")
+
+    d_prices = len(desktop.get("prices") or [])
+    m_prices = len(mobile.get("prices") or [])
+    if d_prices != m_prices:
+        diffs.append(f"Price tier count differs: desktop={d_prices} vs mobile={m_prices}")
+
+    d_imgs = desktop.get("image_count") or 0
+    m_imgs = mobile.get("image_count") or 0
+    if abs(d_imgs - m_imgs) > 5:
+        diffs.append(f"Image count differs: desktop={d_imgs} vs mobile={m_imgs}")
+
+    d_hl = len(desktop.get("highlights") or [])
+    m_hl = len(mobile.get("highlights") or [])
+    if d_hl != m_hl:
+        diffs.append(f"Highlights count differs: desktop={d_hl} vs mobile={m_hl}")
+
+    d_h1 = (desktop.get("seo") or {}).get("h1") or []
+    m_h1 = (mobile.get("seo") or {}).get("h1") or []
+    if d_h1 != m_h1:
+        diffs.append(f"H1 differs: desktop={d_h1} vs mobile={m_h1}")
+
+    d_urg = set(desktop.get("urgency_signals") or [])
+    m_urg = set(mobile.get("urgency_signals") or [])
+    if d_urg != m_urg:
+        diffs.append(f"Urgency signals differ: desktop={sorted(d_urg)} vs mobile={sorted(m_urg)}")
+
+    d_scripts = (desktop.get("script_counts") or {}).get("total") or 0
+    m_scripts = (mobile.get("script_counts") or {}).get("total") or 0
+
+    return {
+        "tested": True,
+        "desktop_html_bytes": desktop_html_bytes,
+        "mobile_html_bytes": mobile_html_bytes,
+        "desktop_image_count": d_imgs,
+        "mobile_image_count": m_imgs,
+        "desktop_price_tiers": d_prices,
+        "mobile_price_tiers": m_prices,
+        "desktop_highlights_count": d_hl,
+        "mobile_highlights_count": m_hl,
+        "desktop_script_count": d_scripts,
+        "mobile_script_count": m_scripts,
+        "differences": diffs,
+    }
 
 
 def _extract_fine_print(soup: BeautifulSoup) -> str | None:

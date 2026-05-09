@@ -52,6 +52,106 @@
   ],
   "faqs": [],
   "image_count": 58,
+  "alt_text_coverage": {
+    "total_images": 58,
+    "with_alt_text": 44,
+    "coverage_pct": 75.9
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/6JPaLTh2od8Dim4eLgzY5M/ru-4000x1868/v1/t2001x1212.webp",
+      "alt": "Quality Oil Change - Up to 30% Off - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-87.7027179,41.7457989,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIge",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/sRBhS1YUqxKGFNoU6o6YGT/IMAGE_Valvoline-Instant-Oil-Change-Kansas-City_MO-700x420/v1/t2001x1212.jpg",
+      "alt": "Valvoline Instant Oil Change (Up to 19% Off) - 33 Locations"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Np8y7REuk94jPJiYnemkJb/xn-936x562/v1/t2001x1212.jpg",
+      "alt": "$20 or $45 Voucher Towards food & Drink or Four Dinner Boxes For 4!"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/fydZ7EgGhgRHYepshJRUyEuPZGQ/fy-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Four Ultimate Car Washes at Circle K, Multiple Locations"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/KvfKADeGAAehbVkGCKbsvH/3X-1200x720/v1/t2001x1212.jpg",
+      "alt": "Up to $75 to spend on soul food and more at Oh My Goodness Soul Eatery"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/vASwr6ZipM8Q4mo9uKa6/H5-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Relaxing & Hygienic Brazilian Wax Experience"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/4Q2twQyouJmXsZPNeeNBdkhiWFMH/4Q-2026x1216/v1/t2001x1212.jpg",
+      "alt": "Up to 36% Off on Men's Facial at Deborahable skincare LLC"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3GUYn7zddq4UNSDn6BX3TVY94AgA/3G-5000x3031/v1/t2001x1212.jpg",
+      "alt": "Grab a $25 Krispy Kreme eGift Card for Sweet Treats"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Kk5mYUiRuTX4ijvHX7GKa5/3H-1000x600/v1/t2001x1212.jpg",
+      "alt": "Relax and Refresh: Face Massage Plus Lash Lift"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/sRBhS1YUqxKGFNoU6o6YGT/IMAGE_Valvoline-Instant-Oil-Change-Kansas-City_MO-700x420/v1/t2001x1212.jpg",
+      "alt": "Valvoline Instant Oil Change (Up to 19% Off) - 33 Locations"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/fydZ7EgGhgRHYepshJRUyEuPZGQ/fy-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Four Ultimate Car Washes at Circle K, Multiple Locations"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/WuaQnUx7rki5iF4QtKBbZh/2b-800x597/v1/t2700x1800.jpg",
+      "alt": "Parking at Holiday Inn Chicago Midway Airport Lot MDW"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/3qb6NmK8yjv1JFWjLpSdYEWrNWpJ/3q-800x600/v1/t2700x1800.jpg",
+      "alt": "Convenient Airport Parking at MDW from $18 per day"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/R72MnpdHcE1KFCVznoeV53/fg-1440x1800/v1/t2800x1696.jpg",
+      "alt": "Signature Winter Interior Detail for Sedan/SUV and Truck"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Np8y7REuk94jPJiYnemkJb/xn-936x562/v1/t2001x1212.jpg",
+      "alt": "$20 or $45 Voucher Towards food & Drink or Four Dinner Boxes For 4!"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/KvfKADeGAAehbVkGCKbsvH/3X-1200x720/v1/t2001x1212.jpg",
+      "alt": "Up to $75 to spend on soul food and more at Oh My Goodness Soul Eatery"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3GUYn7zddq4UNSDn6BX3TVY94AgA/3G-5000x3031/v1/t2001x1212.jpg",
+      "alt": "Grab a $25 Krispy Kreme eGift Card for Sweet Treats"
+    }
+  ],
+  "script_counts": {
+    "total": 236,
+    "external": 190,
+    "inline": 46,
+    "json_ld": 5
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "AutoRepair",
+    "ProductGroup",
+    "BreadcrumbList"
+  ],
   "seo": {
     "meta_title": "Asad Auto Repairs - From $81 - Chicago | Groupon",
     "meta_description": "Quality Oil Change - Up to 30% Off",
@@ -77,12 +177,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1699970,
+    "mobile_html_bytes": 1675211,
+    "desktop_image_count": 58,
+    "mobile_image_count": 58,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 236,
+    "mobile_script_count": 244,
+    "differences": []
   }
 }

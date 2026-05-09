@@ -104,6 +104,107 @@
     }
   ],
   "image_count": 62,
+  "alt_text_coverage": {
+    "total_images": 62,
+    "with_alt_text": 53,
+    "coverage_pct": 85.5
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/2RNzaEin8mDZEbFYBbBTnA46XZz2/2R-2048x1229/v1/t2001x1212.webp",
+      "alt": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/GaXDJz5fhdTZVR4Q9y4Z5N/26-2048x1228/v1/c108x72.webp",
+      "alt": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/S6W1f3x4M3xzwWWoKdxri5wN8m2/S6-2048x1230/v1/c108x72.webp",
+      "alt": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/7pmCh7s9ZJuNhKNodF7uHp/3p-2047x1228/v1/c108x72.webp",
+      "alt": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 4"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/42ZdVtCLVrzXNuG9dL93KzdbyPdk/42-2048x1229/v1/c108x72.webp",
+      "alt": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 5"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3tNbxU1Rk7Vbh3zUMvLBAXme6tR5/3t-2048x1228/v1/c108x72.webp",
+      "alt": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 6"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/32dQ39quaR5SmBH6axi2xqa3T5U4/32-2048x1230/v1/c108x72.webp",
+      "alt": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 7"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-118.3355685,34.1516245,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIg",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/WkzHEJDsk6pUJGhRQJYKEN/Gx-1500x900/v1/t2001x1212.jpg",
+      "alt": "Warner Bros. Studio Tour + 3 Attractions with Los Angeles CityPASS"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2EX6xkpN83tnQF7s9rPkRM8Y5b5P/2E-1800x1200/v1/t1800x1200.jpg",
+      "alt": "Up to 50% Off- LA Top Attractions"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5xKkDWfLGxXVUSqeFRffq1/2M-1800x1200/v1/t1800x1200.jpg",
+      "alt": "Up to 50% Off- LA Top Attractions - Including Universal Studios"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/nAk86ckySzLg9nqavYocKphJgB9/nA-700x420/v1/t2001x1212.jpg",
+      "alt": "Brazilian / Bikini Waxing at Self And Care Skin Studio"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/8fGPWQnYhHup2dpiMP5F/Zs-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Up to 55% Off on Facial at Self And Care Skin Studio"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/3eRp7iQzGfcLduykkjAaJsXUdJ5s/3e-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Revitalize Your Eyes with Eyelid Surgery Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/j8EdYkyUJ3omkXim6iCC/e7-2125x1413/v1/t1800x1200.jpg",
+      "alt": "High intensity focused electromagnetic treatment: 1, 2, or 4 Sessions"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/kyL93bBpMQBgkGV8dcvK/Uo-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Discover Genesis Comprehensive Medical Group's Glutathione Injections for Detoxification with Up to 45% Off"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/WkzHEJDsk6pUJGhRQJYKEN/Gx-1500x900/v1/t2001x1212.jpg",
+      "alt": "Warner Bros. Studio Tour + 3 Attractions with Los Angeles CityPASS"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2EX6xkpN83tnQF7s9rPkRM8Y5b5P/2E-1800x1200/v1/t1800x1200.jpg",
+      "alt": "Up to 50% Off- LA Top Attractions"
+    }
+  ],
+  "script_counts": {
+    "total": 218,
+    "external": 171,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "Museum",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Warner Bros. Studio Tour Hollywood - From $78 - Burbank | Groupon",
     "meta_description": "Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood",
@@ -131,10 +232,28 @@
   "urgency_signals": [
     "limited time"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1864632,
+    "mobile_html_bytes": 1856487,
+    "desktop_image_count": 62,
+    "mobile_image_count": 79,
+    "desktop_price_tiers": 4,
+    "mobile_price_tiers": 4,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 218,
+    "mobile_script_count": 242,
+    "differences": [
+      "Image count differs: desktop=62 vs mobile=79"
+    ]
   }
 }

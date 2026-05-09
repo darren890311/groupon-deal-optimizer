@@ -77,6 +77,106 @@
   ],
   "faqs": [],
   "image_count": 91,
+  "alt_text_coverage": {
+    "total_images": 91,
+    "with_alt_text": 70,
+    "coverage_pct": 76.9
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/H3tUSy2RvKtNt1gnkHoD4q/uE-2048x1229/v1/t2001x1212.webp",
+      "alt": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/37tYzQYMhDupSGXK7Ppfw3/39-1500x900/v1/c108x72.webp",
+      "alt": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/72dzbq2imrUk2UjD7SAVnn/VD-1500x900/v1/c108x72.webp",
+      "alt": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/LcDX7Dtg5ufpgGG8Keikxz/3c-1500x900/v1/c108x72.webp",
+      "alt": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 4"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Qh9P4WGeEtRvuMR1VzGDPo/3C-1500x900/v1/c108x72.webp",
+      "alt": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 5"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/AUoG2P3hBH1MEurA7z3iEg/2J-2048x1229/v1/c108x72.webp",
+      "alt": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 6"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/CL2gBsxfmeEacghoD5rPHL/vM-2048x1229/v1/c108x72.webp",
+      "alt": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 7"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/4YgzH3Csf5WxLLjeijjsvN4zrkyx/icon-fire-54x54-54x54/v1/t100x100",
+      "alt": "Selling Fast Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/4YgzH3Csf5WxLLjeijjsvN4zrkyx/icon-fire-54x54-54x54/v1/t100x100",
+      "alt": "Selling Fast Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/sparta/4TeHFri6ygThLRwzDYi9sZvUrDQb/4T-32x32.webp/v1/t100x100",
+      "alt": "Takes Reservations"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/4LedxMXiqDwcY2fEMUHuMUDsXsAu/t620x376/4L-1500x900.jpg",
+      "alt": "Child"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/2bSybLitFYbsFp9TZh6fr9Xf1BSP/t620x376/2b-1500x900.jpg",
+      "alt": "Adult"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/9VKd7ycW5NsvmvMHMWPFjw/t200x200/3d-512x512.jpg",
+      "alt": "Attractions Icon"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/BrzGQ35jh13PdpSpYabxpr/t200x200/3V-512x512.jpg",
+      "alt": "Farming Icon"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/AJBuPBGRqPhVWT1BaT8XZ4/t200x200/4U-512x512.jpg",
+      "alt": "Art Icon"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/KyKkZMwMhAH1sPqme5gWH9/t200x200/4W-512x512.jpg",
+      "alt": "Shopping Icon"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/TZrCWeK4FnHzd1uzioVgnw/t200x200/3R-512x512.jpg",
+      "alt": "Nature Icon"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/nBZnV5RQPHwTGvZvYquSY/t200x200/2R-512x512.jpg",
+      "alt": "Unique Icon"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/4LedxMXiqDwcY2fEMUHuMUDsXsAu/t620x376/4L-1500x900.jpg",
+      "alt": "Child"
+    },
+    {
+      "src": "https://img.grouponcdn.com/deal/2bSybLitFYbsFp9TZh6fr9Xf1BSP/t620x376/2b-1500x900.jpg",
+      "alt": "Adult"
+    }
+  ],
+  "script_counts": {
+    "total": 239,
+    "external": 192,
+    "inline": 47,
+    "json_ld": 5
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "TouristAttraction",
+    "ProductGroup",
+    "BreadcrumbList"
+  ],
   "seo": {
     "meta_title": "LA County Fair: Play Your Way at Fairplex - From $16 - Pomona | Groupon",
     "meta_description": "Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off)",
@@ -110,10 +210,28 @@
     "selling fast",
     "limited time"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1903261,
+    "mobile_html_bytes": 1922364,
+    "desktop_image_count": 91,
+    "mobile_image_count": 106,
+    "desktop_price_tiers": 3,
+    "mobile_price_tiers": 3,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 239,
+    "mobile_script_count": 244,
+    "differences": [
+      "Image count differs: desktop=91 vs mobile=106"
+    ]
   }
 }

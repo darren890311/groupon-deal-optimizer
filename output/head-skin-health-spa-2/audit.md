@@ -96,4 +96,29 @@ Limit 1 per person(s), may buy 1 additional as gift(s). Consultation required be
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=236 external=189 inline=47 json_ld=6
+- Image alt-text coverage: 47/63 (74.6%)
+- Alt-text sample (first 5):
+  - alt='60-Minute Deep Tissue / Swedish Massage Or 90-Minute Meridian Massage with Oil and Hot Stones (Up to 34% Off) - Primary Image'
+  - alt='Daily Views Icon'
+  - alt='Daily Views Icon'
+  - alt='Redemption locations map'
+  - alt='60 Mins Head Spa & 30 or 60 Mins Body Massage w/ Hot Stones & More 32%'
+
+## Schema.org markup present
+WebSite, Organization, HealthAndBeautyBusiness, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1807200 mobile=1788375
+- Image count: desktop=63 mobile=62
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=2 mobile=3
+- Script count: desktop=236 mobile=247
+- Notable differences:
+  - Highlights count differs: desktop=2 vs mobile=3

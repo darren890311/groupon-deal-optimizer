@@ -43,4 +43,29 @@ Really talented and amazing professional artist
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': False, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=236 external=189 inline=47 json_ld=6
+- Image alt-text coverage: 48/65 (73.8%)
+- Alt-text sample (first 5):
+  - alt="Experience Mermaid Beauty's exclusive haircut and color options with up to 50% off, featuring private suite services. - Primary Image"
+  - alt='Daily Views Icon'
+  - alt='Wifi'
+  - alt='Takes Reservations'
+  - alt='Redemption locations map'
+
+## Schema.org markup present
+WebSite, Organization, HairSalon, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1800388 mobile=1775908
+- Image count: desktop=65 mobile=66
+- Price tiers: desktop=4 mobile=4
+- Highlights count: desktop=3 mobile=2
+- Script count: desktop=236 mobile=219
+- Notable differences:
+  - Highlights count differs: desktop=3 vs mobile=2

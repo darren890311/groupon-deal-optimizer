@@ -56,4 +56,28 @@ Valid only for option purchased. May be repurchased every 180 days. Limit 3 per 
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=235 external=188 inline=47 json_ld=6
+- Image alt-text coverage: 47/61 (77.0%)
+- Alt-text sample (first 5):
+  - alt='Up to 63% Off on Oil Change at Pulse Auto Care - Primary Image'
+  - alt='Up to 63% Off on Oil Change at Pulse Auto Care - Image 2'
+  - alt='Daily Views Icon'
+  - alt='Daily Views Icon'
+  - alt='How often to change your oil'
+
+## Schema.org markup present
+WebSite, Organization, AutoRepair, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1802840 mobile=1768642
+- Image count: desktop=61 mobile=61
+- Price tiers: desktop=5 mobile=5
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=235 mobile=216
+- Notable differences: none

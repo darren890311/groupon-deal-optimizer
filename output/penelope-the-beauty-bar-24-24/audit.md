@@ -59,4 +59,28 @@ Their extensive range of services includes customized European facials, micro-pu
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=236 external=189 inline=47 json_ld=6
+- Image alt-text coverage: 61/82 (74.4%)
+- Alt-text sample (first 5):
+  - alt='Choice of a Massage Package at Award-Winning Penelope & The Beauty Bar (Up to 28% Off) - Primary Image'
+  - alt='Choice of a Massage Package at Award-Winning Penelope & The Beauty Bar (Up to 28% Off) - Image 2'
+  - alt='Daily Views Icon'
+  - alt='Daily Views Icon'
+  - alt='Parking'
+
+## Schema.org markup present
+WebSite, Organization, HealthAndBeautyBusiness, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=2040067 mobile=1998119
+- Image count: desktop=82 mobile=82
+- Price tiers: desktop=6 mobile=6
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=236 mobile=218
+- Notable differences: none

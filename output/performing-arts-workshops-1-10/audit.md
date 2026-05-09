@@ -70,4 +70,29 @@ HighlightsCultivate young talent in a nurturing, uplifting environment with expe
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=234 external=188 inline=46 json_ld=5
+- Image alt-text coverage: 39/53 (73.6%)
+- Alt-text sample (first 5):
+  - alt='Musical Theater Summer Camp for One Child at Camp at Performing Arts Workshops (Up to 46% Off) - Primary Image'
+  - alt='Musical Theater Summer Camp for One Child at Camp at Performing Arts Workshops (Up to 46% Off) - Image 2'
+  - alt='Musical Theater Summer Camp for One Child at Camp at Performing Arts Workshops (Up to 46% Off) - Image 3'
+  - alt='Musical Theater Summer Camp for One Child at Camp at Performing Arts Workshops (Up to 46% Off) - Image 4'
+  - alt='Musical Theater Summer Camp for One Child at Camp at Performing Arts Workshops (Up to 46% Off) - Image 5'
+
+## Schema.org markup present
+WebSite, Organization, TouristAttraction, ProductGroup, BreadcrumbList
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1915337 mobile=1875039
+- Image count: desktop=53 mobile=47
+- Price tiers: desktop=32 mobile=32
+- Highlights count: desktop=6 mobile=6
+- Script count: desktop=234 mobile=211
+- Notable differences:
+  - Image count differs: desktop=53 vs mobile=47

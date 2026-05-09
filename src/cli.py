@@ -21,6 +21,14 @@ def main() -> int:
     one_p.add_argument("url", help="Groupon deal URL")
     one_p.add_argument("--force", action="store_true")
 
+    refresh_p = sub.add_parser(
+        "refresh-audits",
+        help="Re-parse cached desktop HTML, scrape mobile, re-render audit.json/md (no LLM calls)",
+    )
+    refresh_p.add_argument("--urls", type=Path, default=Path("deals.txt"))
+    refresh_p.add_argument("--limit", type=int, default=None)
+    refresh_p.add_argument("--no-mobile", action="store_true", help="Skip mobile fetch")
+
     args = parser.parse_args()
 
     if not ANTHROPIC_API_KEY:
@@ -28,6 +36,23 @@ def main() -> int:
         return 2
     if not TAVILY_API_KEY:
         print("WARNING: TAVILY_API_KEY not set — research stage will produce no findings", file=sys.stderr)
+
+    if args.cmd == "refresh-audits":
+        urls = pipeline.read_urls(args.urls)
+        if args.limit:
+            urls = urls[: args.limit]
+        ok = errors = 0
+        for url in urls:
+            slug = url.split("?")[0].rstrip("/").split("/")[-1]
+            print(f"[{slug}] refreshing audit (mobile={'no' if args.no_mobile else 'yes'})...")
+            r = pipeline.refresh_audit(url, fetch_mobile=not args.no_mobile)
+            if r["status"] == "ok":
+                ok += 1
+            else:
+                errors += 1
+                print(f"  ERROR: {r}")
+        print(f"\n=== Refresh summary: {ok} ok, {errors} errors ===")
+        return 0 if errors == 0 else 1
 
     if args.cmd == "one":
         result = pipeline.process_url(args.url, force=args.force, skip_existing=False)

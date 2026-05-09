@@ -161,6 +161,107 @@
     }
   ],
   "image_count": 58,
+  "alt_text_coverage": {
+    "total_images": 58,
+    "with_alt_text": 37,
+    "coverage_pct": 63.8
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/bynder/3wSrbJdxfunkEaMH4dJoB8Yxehx4/3w-2048x1229/v1/t2001x1212.webp",
+      "alt": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/yvXXiYgWacyPNBR3y9oZhchus59/yv-2048x1229/v1/c108x72.webp",
+      "alt": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/6FUXPs9tsF9eDu9f92rLC6/26-680x510/v1/c108x72.webp",
+      "alt": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/WbNtE7WB53z3Z5WqozH9Em/4K-680x510/v1/c108x72.webp",
+      "alt": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 4"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/YFHgwBQRnUWhU2sdNNb2AJ/5X-382x510/v1/c108x72.webp",
+      "alt": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 5"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/74QW3ZXnexwFf5e2AUeNy1/3c-382x510/v1/c108x72.webp",
+      "alt": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 6"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/KgzmjyiGSFXsR36qmDpi1N/2h-382x510/v1/t2800x1696.webp",
+      "alt": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 7"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-73.4260235,40.629598400000006,-73.1204924,40.95673205/768x352@2x.webp?attribution=false&padding=0.2&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZp",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3VSawQ1sfvoSNpbCFpx498sgZvAU/3V-2048x1229/v1/t2001x1212.webp",
+      "alt": "Deep Conditioning and Blow-Dry with Highlights or Full Color"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Ad3oNrc7TCfZNFfwa6p9Jn/TG-1500x900/v1/t2001x1212.webp",
+      "alt": "Shampoo, Conditioner, Blow Dry, Partial or Full Highlights"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/kjGoodRzkDWhxE3R1UCM/KX-1555x933/v1/t2001x1212.webp",
+      "alt": "Revamp Your Look with Color and Highlights Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/92MfDcFHrUiHMJWYJ2c2/xN-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 55% Off on Salon - Hair Color / Highlights"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/44bEmLkUETnApMLPbKZX6xHmPTen/44-620x372/v1/t2001x1212.webp",
+      "alt": "Up to 60% Off Color or Highlights at Civility and Sway"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2JKRvuf7dCFkcKDKMb3c1HZTyWAE/2J-2125x3542/v1/t2800x1696.webp",
+      "alt": "20-Foil Partial Highlight and Toner for Hair Perfection"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/2ojjY2jHwg3m5YPHijLbKk9hab9A/2o-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 51% Off on Hair Color / Highlights - Ombre at Affinity Salon"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/kkhL3YXSQcYqPySLxQgA/XZ-4492x3369/v1/t2700x1800.webp",
+      "alt": "Hair & Scalp Treatment OR Haircut with Blow-Dry Styling for Women"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2MGbKjXGtV1LXdN3nMwyFkGMdgQb/2M-700x420/v1/t2001x1212.webp",
+      "alt": "Haircut, Partial Highlight or Scalp Treatment w/ Blowout"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/khiVkzTBiJpdy5fSjbDyreibkVu/kh-8530x5687/v1/t1800x1200.webp",
+      "alt": "Men's or Women's Haircut Packages"
+    }
+  ],
+  "script_counts": {
+    "total": 237,
+    "external": 190,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HairSalon",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Cactus Salon - From $22.50 | Groupon",
     "meta_description": "Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available.",
@@ -193,12 +294,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1677799,
+    "mobile_html_bytes": 1665378,
+    "desktop_image_count": 58,
+    "mobile_image_count": 53,
+    "desktop_price_tiers": 12,
+    "mobile_price_tiers": 12,
+    "desktop_highlights_count": 4,
+    "mobile_highlights_count": 4,
+    "desktop_script_count": 237,
+    "mobile_script_count": 212,
+    "differences": []
   }
 }

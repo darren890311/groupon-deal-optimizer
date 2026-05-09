@@ -40,4 +40,28 @@ Really talented and amazing professional artist
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=235 external=188 inline=47 json_ld=6
+- Image alt-text coverage: 47/64 (73.4%)
+- Alt-text sample (first 5):
+  - alt="Up to 55% Off on Salon - Women's Haircut at Mermaid Beauty - Primary Image"
+  - alt='Wifi'
+  - alt='Takes Reservations'
+  - alt='Redemption locations map'
+  - alt='Transform Your Look with Stunning Hair Color and Highlights'
+
+## Schema.org markup present
+WebSite, Organization, HairSalon, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1772208 mobile=1741952
+- Image count: desktop=64 mobile=66
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=235 mobile=216
+- Notable differences: none

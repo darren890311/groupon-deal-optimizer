@@ -2,7 +2,7 @@ from pathlib import Path
 
 import anthropic
 
-from src import render, research, scrape, storage, synthesize
+from src import parse, render, research, scrape, storage, synthesize
 from src.config import OUTPUT_DIR
 from src.parse import parse_audit
 
@@ -66,6 +66,40 @@ def process_url(url: str, *, force: bool = False, skip_existing: bool = True) ->
         "rec_count": len(proposal.recommendations),
         "findings_count": len(findings),
     }
+
+
+def refresh_audit(url: str, *, fetch_mobile: bool = True) -> dict:
+    """Re-parse cached desktop HTML, optionally scrape mobile, recompute audit, re-render.
+
+    Does NOT call the LLM or Tavily — proposal/research outputs stay as-is.
+    """
+    slug = scrape.slug_from_url(url)
+    out_dir = OUTPUT_DIR / slug
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    desktop_path = scrape.cached_html_path(slug)
+    if not desktop_path.exists():
+        return {"slug": slug, "status": "error", "stage": "refresh", "error": "no cached desktop HTML — run `run` first"}
+
+    desktop_html = desktop_path.read_text(encoding="utf-8")
+    desktop_audit = parse.parse_audit(desktop_html, url)
+
+    if fetch_mobile:
+        try:
+            mobile_html = scrape.fetch_html_mobile(url, slug)
+            mobile_audit = parse.parse_audit(mobile_html, url)
+            desktop_audit["mobile_vs_desktop"] = parse.compare_mobile_desktop(
+                desktop_audit, mobile_audit,
+                desktop_html_bytes=len(desktop_html),
+                mobile_html_bytes=len(mobile_html),
+            )
+        except Exception as e:
+            desktop_audit["mobile_vs_desktop"] = {"tested": False, "error": str(e)}
+
+    with storage.connect() as conn:
+        storage.upsert_deal(conn, slug, url, desktop_audit)
+    render.write_audit(out_dir, desktop_audit)
+    return {"slug": slug, "status": "ok"}
 
 
 def read_urls(path: Path) -> list[str]:

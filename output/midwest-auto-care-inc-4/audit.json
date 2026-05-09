@@ -77,6 +77,107 @@
     }
   ],
   "image_count": 61,
+  "alt_text_coverage": {
+    "total_images": 61,
+    "with_alt_text": 47,
+    "coverage_pct": 77.0
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/bynder/3C171hDx7ULP7wxuJqb1462vPUpJ/3C-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 29% Off on Oil Change at Midwest Auto Care Inc - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/MaErD5p6FdAi42Yco9r55D/Kw-680x510/v1/c108x72.webp",
+      "alt": "Up to 29% Off on Oil Change at Midwest Auto Care Inc - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/DwskMBy3fNij9HpmvZU9uA/4N-680x510/v1/c108x72.webp",
+      "alt": "Up to 29% Off on Oil Change at Midwest Auto Care Inc - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/FK7NUDFzmDCXg7WcL9BJk1/Mn-680x510/v1/t2700x1800.webp",
+      "alt": "Up to 29% Off on Oil Change at Midwest Auto Care Inc - Image 4"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-87.7045412,41.9390328,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIge",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3vgpFrrHXN1q4WKJ5QESchWABhH6/3v-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Complete air-conditioning recharge service for your car"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4GhKX21XeUj1TnXfZYg4BnqjmhEk/4G-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Brake pad and rotor replacement for one or two axles"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/22SRkUkhYxJXjPeeDtA6SGZCf33u/22-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Full Synthetic Oil Change with Filter Replacement, Maintenance"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/4Jbrn96NcRy9EYJdaLwJwVyZ7UtW/4J-1179x707/v1/t2001x1212.jpg",
+      "alt": "Creole Culinary Credit: $50, $75 & $100 to Savor Gluten-Free Delights"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/uc9DUj7vNbqu9MqpfnDJE7jeHQS/uc-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Weekend Brunch: $50 or $100 Towards Food & Drink"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/V8tZnNj61Ta3NstSk7YHKf/n3-4032x2419/v1/t2001x1212.jpg",
+      "alt": "Prime Location Adventure with 2-Hour Guided Themed Kayak Tours"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/sePz4guAngwAR8ZSVvof43x1cDY/se-1358x815/v1/t2001x1212.jpg",
+      "alt": "MI5 Needs You: Solve Clues, Defuse Bombs, and Stop The Fixer!"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/engr1ak784qEVwYbAQ4mNKu2dw2/en-1169x935/v1/t2700x1800.jpg",
+      "alt": "Experience Fitness Classes at Chicago's Premier Hybrid Gym"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/22SRkUkhYxJXjPeeDtA6SGZCf33u/22-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Full Synthetic Oil Change with Filter Replacement, Maintenance"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/sRBhS1YUqxKGFNoU6o6YGT/IMAGE_Valvoline-Instant-Oil-Change-Kansas-City_MO-700x420/v1/t2001x1212.jpg",
+      "alt": "Valvoline Instant Oil Change (Up to 19% Off) - 33 Locations"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3vgpFrrHXN1q4WKJ5QESchWABhH6/3v-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Complete air-conditioning recharge service for your car"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4GhKX21XeUj1TnXfZYg4BnqjmhEk/4G-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Brake pad and rotor replacement for one or two axles"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/PvEHXByuYMWuBPM7Bj3byW/2M-4080x3072/v1/t2700x1800.jpg",
+      "alt": "Up to 20% Off on Nano-Ceramic Technology at Tint City"
+    }
+  ],
+  "script_counts": {
+    "total": 235,
+    "external": 188,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "AutoRepair",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Midwest Auto Care Inc - From $77.40 - Chicago | Groupon",
     "meta_description": "Up to 29% Off on Oil Change at Midwest Auto Care Inc",
@@ -98,12 +199,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1758895,
+    "mobile_html_bytes": 1734897,
+    "desktop_image_count": 61,
+    "mobile_image_count": 61,
+    "desktop_price_tiers": 1,
+    "mobile_price_tiers": 1,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 235,
+    "mobile_script_count": 245,
+    "differences": []
   }
 }

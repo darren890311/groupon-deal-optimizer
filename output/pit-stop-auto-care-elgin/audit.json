@@ -76,6 +76,106 @@
   ],
   "faqs": [],
   "image_count": 42,
+  "alt_text_coverage": {
+    "total_images": 42,
+    "with_alt_text": 28,
+    "coverage_pct": 66.7
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/bynder/3zC9p5K3HbCKXuVJL4S17gNHZUaF/3z-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 15% Off on Oil Change at Pit Stop Auto Care - Carpentersville - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-88.4649914,41.73362409,-88.125236,42.1243428/768x352@2x.webp?attribution=false&padding=0.2&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9I",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4XBmHxYUyPh6xV4owJ7AsLBYzurG/4X-2048x1229/v1/t2001x1212.webp",
+      "alt": "Get Your Engine Running w/ Full or Synthetic Blend Oil Change"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/XZJHyhifajUDyCtZFUR4ry/2r-700x420/v1/t2001x1212.webp",
+      "alt": "Full Synthetic Oil Change w/ Filter Replace Up to 5, 6 or 8 Quarts"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/E6VoHPAGU8i6aSPa9wDEKp/38-1000x600/v1/t2001x1212.webp",
+      "alt": "Synthetic Blend or Full Synthetic Oil Change w/ Fluid Top Off & More"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/xUDLvbgEU4DyKiJHXcBGo1NURve/xU-1500x900/v1/t2001x1212.webp",
+      "alt": "Automotive Window Tinting at Nighthawk Window Tint"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/gZsNcjphpJNuAxQLVRo3/dA-1500x900/v1/t2001x1212.webp",
+      "alt": "Wheel Alignment at Tires Now"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/wLpeG3HQpGLRfYoT1oCV87jqCKg/wL-620x372/v1/t2001x1212.webp",
+      "alt": "Synthetic Oil Change Package at Precision Tune Auto Care Tacoma"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/aKxS9PR6fig7avLmdHBY/gr-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 54% Off Window Tinting at Car Toys"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3bq4w466Va3CFuV1ZvExqVkuSWUY/3b-700x420/v1/t2001x1212.webp",
+      "alt": "Wheel Alignment at Big O Tires Seattle (Up to 28% Off)"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ghGeZx39QKkkxkTRt3my/zf-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 43% Off on Automotive Window Tinting at Advanced Sound and Tint"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2YhetVX7PmGFtmsZDdNLUy/3e-700x420/v1/t2001x1212.webp",
+      "alt": "Full Synthetic Oil Change, Tire Rotation & Multi-Point Inspection"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Ck5mudy2MVdqACDvWBNZW7/Ye-4000x3000/v1/t2700x1800.webp",
+      "alt": "Smooth Stopping Power with Expert Brake Pad Replacement"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2NACSXHUGh3QTdnRcA8sRxTp2RxQ/2N-1536x1024/v1/t1800x1200.webp",
+      "alt": "Window Tinting and Clear Paint Protection Film Application"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2xT5np1FDwppZJeKufzEhA/3H-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 46% Off on Wheel Alignment / Balancing at US Wheels and Tires"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2Rs1kEgUU2Sgu7xRAkB3X3nQtUhH/2R-1000x550/v1/t2001x1212.webp",
+      "alt": "Up to 33% Off on Brake Pad Replacement at Legend Auto Specialists"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Qvn5SMTSAycf5cp89fE5D1/4L-2560x1536/v1/t2001x1212.webp",
+      "alt": "Street-Ready Car Tinting for the Bold, the Fast, and the Fearless"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/9tXpaYnF4Xaj17oQgjFU/Ww-2048x1242/v1/t2001x1212.webp",
+      "alt": "Wheel Alignment Special"
+    }
+  ],
+  "script_counts": {
+    "total": 235,
+    "external": 189,
+    "inline": 46,
+    "json_ld": 5
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "AutoRepair",
+    "ProductGroup",
+    "BreadcrumbList"
+  ],
   "seo": {
     "meta_title": "Pit Stop Auto Care - Elgin - From $27.99 | Groupon",
     "meta_description": "Up to 15% Off on Oil Change at Pit Stop Auto Care - Carpentersville",
@@ -98,10 +198,26 @@
   "urgency_signals": [
     "limited time"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1498021,
+    "mobile_html_bytes": 1463183,
+    "desktop_image_count": 42,
+    "mobile_image_count": 42,
+    "desktop_price_tiers": 3,
+    "mobile_price_tiers": 3,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 235,
+    "mobile_script_count": 216,
+    "differences": []
   }
 }

@@ -201,4 +201,29 @@ Things You'll Enjoy Experiencing in the Fair
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['selling fast', 'limited time']
+- Urgency keywords: ['selling fast', 'limited time']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=239 external=192 inline=47 json_ld=5
+- Image alt-text coverage: 70/91 (76.9%)
+- Alt-text sample (first 5):
+  - alt='Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Primary Image'
+  - alt='Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 2'
+  - alt='Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 3'
+  - alt='Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 4'
+  - alt='Single Entry Ticket for 1 Adult/Child to the Best County Fair - Play Your Way at Fairplex (Up to 38% Off) - Image 5'
+
+## Schema.org markup present
+WebSite, Organization, TouristAttraction, ProductGroup, BreadcrumbList
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1903261 mobile=1922364
+- Image count: desktop=91 mobile=106
+- Price tiers: desktop=3 mobile=3
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=239 mobile=244
+- Notable differences:
+  - Image count differs: desktop=91 vs mobile=106

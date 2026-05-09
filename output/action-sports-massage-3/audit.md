@@ -40,4 +40,28 @@ Valid only for option purchased. Limit 1 per person. All goods or services must 
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': False, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=240 external=191 inline=49 json_ld=6
+- Image alt-text coverage: 46/60 (76.7%)
+- Alt-text sample (first 5):
+  - alt='Unwind with a 60-or 90-Minute Custom Massage (Up to 19% Off) - Primary Image'
+  - alt='Daily Views Icon'
+  - alt='Redemption locations map'
+  - alt='Up to 37% Off on Eyelash Perm at Blink Beauty Lounge'
+  - alt='Up to 37% Off on Eyebrow Tinting at Blink Beauty Lounge'
+
+## Schema.org markup present
+WebSite, Organization, HealthAndBeautyBusiness, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1794729 mobile=1772825
+- Image count: desktop=60 mobile=60
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=3 mobile=3
+- Script count: desktop=240 mobile=221
+- Notable differences: none

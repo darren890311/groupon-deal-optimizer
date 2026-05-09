@@ -99,6 +99,107 @@
     }
   ],
   "image_count": 70,
+  "alt_text_coverage": {
+    "total_images": 70,
+    "with_alt_text": 47,
+    "coverage_pct": 67.1
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/iam/jGXbtR3Ejj1nRfjNAszL1MHkif2/jG-2048x1229/v1/t2001x1212.webp",
+      "alt": "Transform your look with a Haircut, Blow-Dry, and More at Balayage Me Hair Salon (Up to 74% Off) - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-73.9835368,40.7371349,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIge",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/ugc/74LXwEYv1pcwYphd4u1rWq/3e-2404x3408/v1/t2800x1696",
+      "alt": "Photo from reviewer"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/1ePYxdnKcM4HVhCS5PV45uSN1dg/1e-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Choice of Hair Colour Package with Haircut, Blow-Dry and Toner"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/uSBz25poj64TVZ6TqkaD/zX-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Get Stunning Balayage, Root Touch-Up or Haircut Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/ZuGuE6SMnxCFshyF8nk65rmDz5S/Zu-800x600/v1/t2700x1800.jpg",
+      "alt": "Parking at Manhattan Premium Parking Garage"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4Th1grWBtxbpFYVcdh71UcQ5XmYs/4T-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Partial Highlight, Partial Balayge or Haircut and Blowdry with Olaplex"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/VDJDqJcNVjbjJtsNZ51tEsZDQdW/VD-800x602/v1/t2700x1800.jpg",
+      "alt": "Parking at City Parking - 211 East 18th Street Garage LLC"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/jqPqpioF5yAfMYyeMheC/MG-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Forma RF Skin Tightening for a Smooth, Youthful Look"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/44EcZfBPYr3TpefVpmVmFYVE8NTF/44-800x600/v1/t2700x1800.jpg",
+      "alt": "Parking at iPark - 301 East 22nd Street Parking Corp. Garage"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/47HEZK3vd9tpMJ2i7X69DdraL7yc/47-800x600/v1/t2700x1800.jpg",
+      "alt": "Parking at Park-it Management - 200 E. 24th St. Garage"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/1ePYxdnKcM4HVhCS5PV45uSN1dg/1e-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Choice of Hair Colour Package with Haircut, Blow-Dry and Toner"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/uSBz25poj64TVZ6TqkaD/zX-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Get Stunning Balayage, Root Touch-Up or Haircut Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4Th1grWBtxbpFYVcdh71UcQ5XmYs/4T-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Partial Highlight, Partial Balayge or Haircut and Blowdry with Olaplex"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3k9kZdtZdtF1KJ89JtGaxT/2D-382x510/v1/t2800x1696.jpg",
+      "alt": "Root Touchup, Haircut and Blowdry, or Full Balayage at Balayage Bliss"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/NAgrEBBMMhmmdL8k9dWsDi/3d-1320x792/v1/t2001x1212.jpg",
+      "alt": "Transform Your Look with Full-Head Tape-In Extensions"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/jqPqpioF5yAfMYyeMheC/MG-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Forma RF Skin Tightening for a Smooth, Youthful Look"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/AbqePGiTgUdi8SpovYpK2A/4P-1536x1024/v1/t1800x1200.jpg",
+      "alt": "Smooth Away Wrinkles with Botox at NYC Natural Facelift"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/3pPqbkx73apq2Zi1Mt24Ka/4P-1170x800/v1/t1800x1200.jpg",
+      "alt": "Up to 40% Off on Eyelash Extensions at Lash Corner NY"
+    }
+  ],
+  "script_counts": {
+    "total": 237,
+    "external": 190,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HairSalon",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Balayage Me Hair Salon - From $53.10 - New York | Groupon",
     "meta_description": "Transform your look with a Haircut, Blow-Dry, and More at Balayage Me Hair Salon (Up to 74% Off)",
@@ -124,12 +225,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": false,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1824661,
+    "mobile_html_bytes": 1788133,
+    "desktop_image_count": 70,
+    "mobile_image_count": 70,
+    "desktop_price_tiers": 4,
+    "mobile_price_tiers": 4,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 237,
+    "mobile_script_count": 218,
+    "differences": []
   }
 }

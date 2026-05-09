@@ -55,4 +55,29 @@ May be repurchased every 90 days. Limit 3 per person.
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': False, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=244 external=194 inline=50 json_ld=6
+- Image alt-text coverage: 50/64 (78.1%)
+- Alt-text sample (first 5):
+  - alt='Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Primary Image'
+  - alt='Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 2'
+  - alt='Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 3'
+  - alt='Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 4'
+  - alt='Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 5'
+
+## Schema.org markup present
+WebSite, Organization, HealthAndBeautyBusiness, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1853863 mobile=1826240
+- Image count: desktop=64 mobile=65
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=6 mobile=6
+- Script count: desktop=244 mobile=246
+- Notable differences:
+  - Urgency signals differ: desktop=['limited time', 'today only'] vs mobile=['limited time', 'selling fast', 'today only']

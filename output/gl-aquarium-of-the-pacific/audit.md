@@ -49,4 +49,29 @@ The Aquarium of the Pacific is a place where ocean life comes alive through inte
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=236 external=189 inline=47 json_ld=6
+- Image alt-text coverage: 59/74 (79.7%)
+- Alt-text sample (first 5):
+  - alt='Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Primary Image'
+  - alt='Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 2'
+  - alt='Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 3'
+  - alt='Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 4'
+  - alt='Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 5'
+
+## Schema.org markup present
+WebSite, Organization, TouristAttraction, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1877880 mobile=1853745
+- Image count: desktop=74 mobile=80
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=236 mobile=243
+- Notable differences:
+  - Image count differs: desktop=74 vs mobile=80

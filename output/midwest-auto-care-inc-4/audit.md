@@ -65,4 +65,28 @@ After the oil change he suggested some additional service (expected) but there w
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=235 external=188 inline=47 json_ld=6
+- Image alt-text coverage: 47/61 (77.0%)
+- Alt-text sample (first 5):
+  - alt='Up to 29% Off on Oil Change at Midwest Auto Care Inc - Primary Image'
+  - alt='Up to 29% Off on Oil Change at Midwest Auto Care Inc - Image 2'
+  - alt='Up to 29% Off on Oil Change at Midwest Auto Care Inc - Image 3'
+  - alt='Up to 29% Off on Oil Change at Midwest Auto Care Inc - Image 4'
+  - alt='Daily Views Icon'
+
+## Schema.org markup present
+WebSite, Organization, AutoRepair, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1758895 mobile=1734897
+- Image count: desktop=61 mobile=61
+- Price tiers: desktop=1 mobile=1
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=235 mobile=245
+- Notable differences: none

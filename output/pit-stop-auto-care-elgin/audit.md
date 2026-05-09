@@ -48,4 +48,28 @@ Valid only for option purchased.
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=235 external=189 inline=46 json_ld=5
+- Image alt-text coverage: 28/42 (66.7%)
+- Alt-text sample (first 5):
+  - alt='Up to 15% Off on Oil Change at Pit Stop Auto Care - Carpentersville - Primary Image'
+  - alt='Daily Views Icon'
+  - alt='Daily Views Icon'
+  - alt='Redemption locations map'
+  - alt='Get Your Engine Running w/ Full or Synthetic Blend Oil Change'
+
+## Schema.org markup present
+WebSite, Organization, AutoRepair, ProductGroup, BreadcrumbList
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1498021 mobile=1463183
+- Image count: desktop=42 mobile=42
+- Price tiers: desktop=3 mobile=3
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=235 mobile=216
+- Notable differences: none

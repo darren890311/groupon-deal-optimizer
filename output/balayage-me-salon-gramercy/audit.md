@@ -88,4 +88,28 @@ I was there for a few hours, but the time went by quickly because every step was
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': False, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=237 external=190 inline=47 json_ld=6
+- Image alt-text coverage: 47/70 (67.1%)
+- Alt-text sample (first 5):
+  - alt='Transform your look with a Haircut, Blow-Dry, and More at Balayage Me Hair Salon (Up to 74% Off) - Primary Image'
+  - alt='Daily Views Icon'
+  - alt='Redemption locations map'
+  - alt='Photo from reviewer'
+  - alt='Choice of Hair Colour Package with Haircut, Blow-Dry and Toner'
+
+## Schema.org markup present
+WebSite, Organization, HairSalon, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1824661 mobile=1788133
+- Image count: desktop=70 mobile=70
+- Price tiers: desktop=4 mobile=4
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=237 mobile=218
+- Notable differences: none

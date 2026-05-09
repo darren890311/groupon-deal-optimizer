@@ -105,6 +105,107 @@
     }
   ],
   "image_count": 61,
+  "alt_text_coverage": {
+    "total_images": 61,
+    "with_alt_text": 47,
+    "coverage_pct": 77.0
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/bynder/3EUmERANWdZ46AV9nij7axtycgpU/3E-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 63% Off on Oil Change at Pulse Auto Care - Primary Image"
+    },
+    {
+      "src": "//img.youtube.com/vi/wmGbT5sufdM/hqdefault.jpg",
+      "alt": "Up to 63% Off on Oil Change at Pulse Auto Care - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://img.grouponcdn.com/seocms/wEnh5VzND78ReQKj1TfnAMuYp67/mechanic_changing_car_oil_hero_jpg-600x390/v1/t200x200",
+      "alt": "How often to change your oil"
+    },
+    {
+      "src": "https://img.grouponcdn.com/seocms/wEnh5VzND78ReQKj1TfnAMuYp67/mechanic_changing_car_oil_hero_jpg-600x390/v1/t200x200",
+      "alt": "How often to change your oil"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-88.23670829999999,41.6995171,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/LvWirRBaaQrWpiUMvNEP4JJpGDy/Lv-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Up to 33% Off on Couples Massage at RED SUN SPA"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3tWEtiPQnNu7kMzMM1wzK27NpC5/3t-1000x600/v1/t2001x1212.jpg",
+      "alt": "Up to 49% Off on Pampering Package at RED SUN SPA"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ETcCGG7JkXF5BbgTwU3FZH/3H-1000x600/v1/t2001x1212.jpg",
+      "alt": "Schlotzsky’s: $25 Toward Sandwiches, Salads, Soups & Drinks"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/LqWd1ghPEbWssVzUGS5Ek/3r-1000x600/v1/t2001x1212.jpg",
+      "alt": "Premium Color & Treatment Packages with Goldwell – Glow This Season"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/T1thuenvNPYhzdWv2URY7r/3b-2048x1536/v1/t2700x1800.jpg",
+      "alt": "Transform Your Hair with Styling, Deep-Conditioning, Highlights & More"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/XRuDfuEkrmubh7BLkn9pGq/3e-1200x720/v1/t2001x1212.jpg",
+      "alt": "Quality Smoothies and Acai Bowls at Pureberry Acai!"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/7uVDvMQFkur41W3sCdrm3e/2F-1512x907/v1/t2001x1212.jpg",
+      "alt": "AMC Yellow Ticket Deals & Snacks – Big-Screen Savings Anytime!"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/LdRFyXZwG4Lhat8MoJs3B58p3ad/Ld-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Up to 46% Off on Salon - Women's Haircut"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/sRBhS1YUqxKGFNoU6o6YGT/IMAGE_Valvoline-Instant-Oil-Change-Kansas-City_MO-700x420/v1/t2001x1212.jpg",
+      "alt": "Valvoline Instant Oil Change (Up to 19% Off) - 33 Locations"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/uQkxpbbAiGab5QwCRy4m/K3-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Full Synthetic Oil Change & Multi Point Inspection or Wheel Alignment"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3ZCCojngS4NjNEZDwv7WdKVtQFEu/3Z-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Oil Change at CCP Automotive"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/fydZ7EgGhgRHYepshJRUyEuPZGQ/fy-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Four Ultimate Car Washes at Circle K, Multiple Locations"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ETcCGG7JkXF5BbgTwU3FZH/3H-1000x600/v1/t2001x1212.jpg",
+      "alt": "Schlotzsky’s: $25 Toward Sandwiches, Salads, Soups & Drinks"
+    }
+  ],
+  "script_counts": {
+    "total": 235,
+    "external": 188,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "AutoRepair",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Pulse Auto Care - From $30.60 - Plainfield | Groupon",
     "meta_description": "Up to 63% Off on Oil Change at Pulse Auto Care",
@@ -130,12 +231,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1802840,
+    "mobile_html_bytes": 1768642,
+    "desktop_image_count": 61,
+    "mobile_image_count": 61,
+    "desktop_price_tiers": 5,
+    "mobile_price_tiers": 5,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 235,
+    "mobile_script_count": 216,
+    "differences": []
   }
 }

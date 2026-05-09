@@ -91,6 +91,107 @@
     }
   ],
   "image_count": 64,
+  "alt_text_coverage": {
+    "total_images": 64,
+    "with_alt_text": 47,
+    "coverage_pct": 73.4
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/3Lnk7AwGinWjzwPjLG6SGNc18wXR/3L-1125x580/v1/t2001x1212.webp",
+      "alt": "Up to 55% Off on Salon - Women's Haircut at Mermaid Beauty - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/sparta/YTJZEp21GN81eZFXs2xfAvHgDkN/YT-32x32.webp/v1/t100x100",
+      "alt": "Wifi"
+    },
+    {
+      "src": "//img.grouponcdn.com/sparta/4TeHFri6ygThLRwzDYi9sZvUrDQb/4T-32x32.webp/v1/t100x100",
+      "alt": "Takes Reservations"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-73.9790843,40.75747250000001,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/4EGnLbXcFafwNUBtAQEQxKGsJiLi/4E-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Transform Your Look with Stunning Hair Color and Highlights"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3gepMsC5awr5fWeiW97T1HmBmv7L/3g-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Transform Your Look with Haircut and Color Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/Wj9NEyJ7MyAQQkTwYsEpD/HL-1284x770/v1/t2001x1212.jpg",
+      "alt": "Relieve Stress & Reduce Muscle Tension with Therapeutic Massages"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5K6W78UCaanP1jNgbQfekz/3E-1000x600/v1/t2001x1212.jpg",
+      "alt": "1, 3, 6 Month or 1 Year Unlimited Online Home and Food Magazine Access"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/BpbsLxDyqP1vNewJUD7uMf/2G-620x372/v1/t2001x1212.jpg",
+      "alt": "Unlimited Children & Education Reading - Diverse Digital Library"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/7ewFDRh4RGHe3LC4yRgkqC/G5-1000x600/v1/t2001x1212.jpg",
+      "alt": "Up to One Year Unlimited Online Subscription Travel & Photography"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/H4thWnSVVjNgvgRzeoQ1rr/4m-1000x600/v1/t2001x1212.jpg",
+      "alt": "Up to One Year Unlimited Online Subscription Major US & Global Titles"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/EoPXoXDGvWQBKQ1RCcJdGH/4Y-1000x600/v1/t2001x1212.jpg",
+      "alt": "Unlimited Digital Reading: Sports & Automotive Magazines & Newspapers"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/4EGnLbXcFafwNUBtAQEQxKGsJiLi/4E-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Transform Your Look with Stunning Hair Color and Highlights"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3gepMsC5awr5fWeiW97T1HmBmv7L/3g-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Transform Your Look with Haircut and Color Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/Wj9NEyJ7MyAQQkTwYsEpD/HL-1284x770/v1/t2001x1212.jpg",
+      "alt": "Relieve Stress & Reduce Muscle Tension with Therapeutic Massages"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4BeAhjoHGiqGU3nYgo5QgBbmMZjy/4B-5198x3466/v1/t1800x1200.jpg",
+      "alt": "Up to 56% Off on Eyelash Extensions at Lash Xtend NYC"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/EAkZDxY59UoEcsU6PTAPto/2U-1536x1024/v1/t1800x1200.jpg",
+      "alt": "Experience New You Laser's Facial-Contouring Treatments for Lower Face and Neck for up to 84% off"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/EyNEv7iteQ1fg7SxZ5jaHX/2L-1536x1024/v1/t1800x1200.jpg",
+      "alt": "New You Laser NYC: Non-surgical eye, face and neck lift"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Lb5JMyqtCD8yGT76waqMWM/4B-683x472/v1/t1800x1200.jpg",
+      "alt": "Candela GentleMax Pro Laser Hair Removal Treatments at New You Laser"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4EXhAWTUSBiDQSUkwjg5Jms1a2qV/4E-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Revitalize your look with New You Laser's eye treatment options"
+    }
+  ],
+  "script_counts": {
+    "total": 235,
+    "external": 188,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HairSalon",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Mermaid Beauty - From $67.50 - New York | Groupon",
     "meta_description": "Up to 55% Off on Salon - Women's Haircut at Mermaid Beauty",
@@ -115,12 +216,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1772208,
+    "mobile_html_bytes": 1741952,
+    "desktop_image_count": 64,
+    "mobile_image_count": 66,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 235,
+    "mobile_script_count": 216,
+    "differences": []
   }
 }

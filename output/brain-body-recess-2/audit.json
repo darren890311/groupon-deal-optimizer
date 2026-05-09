@@ -99,6 +99,107 @@
     }
   ],
   "image_count": 67,
+  "alt_text_coverage": {
+    "total_images": 67,
+    "with_alt_text": 52,
+    "coverage_pct": 77.6
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/aC2HLHNKwDhihMqDR2S2/ym-2048x1229/v1/t2001x1212.webp",
+      "alt": "60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5QqZnUR9fKmLgazkHnfQcwVnmFv/5Q-2048x1229/v1/c108x72.webp",
+      "alt": "60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/15TdgTw2ATmCejurz5iKwY/2Q-1500x900/v1/c108x72.webp",
+      "alt": "60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5nDjn9ZgGAuPqUkYjyRaM7bPFoG/5n-2048x1229/v1/c108x72.webp",
+      "alt": "60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 4"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/1Xy9WnxuJDkiSmTJ1fuxPbFNRMe/1X-2048x1229/v1/t2001x1212.webp",
+      "alt": "60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 5"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-122.2842366,47.5581406,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIg",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5scYMmd73rQpdET6cvJySG/2Z-620x500/v1/t2700x1800.jpg",
+      "alt": "Yoga Classes: Improve Flexibility & Reduce Stress"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Wvc6z9mgYtjJsxijgxg79h/27-1000x600/v1/t2001x1212.jpg",
+      "alt": "Jet Ski Rentals on Lake Washington"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/eiAWkuW8ZBFZv33W4y9A/Kp-3867x2578/v1/t1800x1200.jpg",
+      "alt": "Full Set of Classic Eyelash Extensions with Optional Two-Week Fill"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/UidoYoa3Yd5PCVC62KmcCz/46-3000x2000/v1/t1800x1200.jpg",
+      "alt": "Fun Cooking Classes | Top Chefs, Hands-On & Fun for All Levels"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/3Gen8UpoLAbkvv9CvNxiENVeb3SB/3G-960x576/v1/t2001x1212.jpg",
+      "alt": "Up to 64% Off on Online Psychic / Astrology / Fortune Telling at Empress Joshett"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/4KdAkxuTPNQNJmqU8fy77ZfHctjk/4K-960x576/v1/t2001x1212.jpg",
+      "alt": "Paint Nite | 4.7 Stars, 65K+ Reviews | No Experience Needed"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/mjKSH3JEkMMngYC94mkEyp/101847643-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Up to 46% Off on Lipo - Non-Invasive Laser-iLipo"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/41gBF23TDjCsaNishAXsuj/2h-3577x2384/v1/t1800x1200.jpg",
+      "alt": "Experience Mindfulness Coaching or Reiki Healing Session for 60-minute"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/H1jZmMJaVPLUHW3eHbUzZq/36-4032x3024/v1/t2700x1800.jpg",
+      "alt": "Massage Packages at The Little Red Day Spa (Up to 40% Off)"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/QNeTygP4Y74vsmFv8WbSv1/46-1408x768/v1/t2001x1212.jpg",
+      "alt": "Non-Invasive Body Sculpting & Lymphatic Drainage Sessions"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/tVdtift3qfeHqDLvAZE6/zs-5616x3744/v1/t1800x1200.jpg",
+      "alt": "Up to 45% Off on Swedish Massage at Loman Massage Therapy"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/9MK3d9SraVxMt4euxW95J6/GJ-3982x2655/v1/t1800x1200.jpg",
+      "alt": "Therapeutic, Relaxing, & Precision Relief Massages; Day Spa Packages"
+    }
+  ],
+  "script_counts": {
+    "total": 235,
+    "external": 188,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HealthAndBeautyBusiness",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Brain & Body Recess - From $127.80 - Seattle | Groupon",
     "meta_description": "60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off)",
@@ -129,12 +230,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1857291,
+    "mobile_html_bytes": 1817865,
+    "desktop_image_count": 67,
+    "mobile_image_count": 66,
+    "desktop_price_tiers": 4,
+    "mobile_price_tiers": 4,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 235,
+    "mobile_script_count": 222,
+    "differences": []
   }
 }

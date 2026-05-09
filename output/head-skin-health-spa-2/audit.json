@@ -99,6 +99,107 @@
     }
   ],
   "image_count": 63,
+  "alt_text_coverage": {
+    "total_images": 63,
+    "with_alt_text": 47,
+    "coverage_pct": 74.6
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/UY8HjUAHvLCtSakiG34ghK/4S-1483x890/v1/t2001x1212.webp",
+      "alt": "60-Minute Deep Tissue / Swedish Massage Or 90-Minute Meridian Massage with Oil and Hot Stones (Up to 34% Off) - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-122.3442465,47.7738942,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIg",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/9HJXaVuKatGumWwvzjdzWr/33-2048x1229/v1/t2001x1212.jpg",
+      "alt": "60 Mins Head Spa & 30 or 60 Mins Body Massage w/ Hot Stones & More 32%"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ETsoko8AtoGsxet8XTzMYS/29-1106x752/v1/t1800x1200.jpg",
+      "alt": "60- or 90-Minute Full Body Couples Massage with Hot Stones"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/UrHpmbveQxrBfH26AHhmnP/2E-1024x614/v1/t2001x1212.jpg",
+      "alt": "60 or 90-Minute Signature Head Spa with Hand & Eye Masks, Water Circulation, Scalp Head Therapy, and Neck and Shoulder Massage"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3LzbvLeMcnaFWJE9aKzxReKpi475/3L-700x420/v1/t2001x1212.jpg",
+      "alt": "1-Year Membership + $45 Costco Shop Card (Gold Star or Executive)"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/i8yyXuhwUqdmMfZiCPU/hU-2048x1229/v1/t300x182.jpg",
+      "alt": "Up to 28% Off on Hardwood Floor Cleaning at JJ Cleaning Services"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/4ZMXfP9TTFqrErqUqjwEjGHTo88i/4Z-640x360/v1/t2001x1212.jpg",
+      "alt": "Online Booking - Round of Golf at Nile Shrine Golf Club"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/8Bvez8HydqYugbEbsHkFpG/7t-1920x1080/v1/t2001x1212.jpg",
+      "alt": "Regal Movie Ticket Deals & Discounts on Premiere & Premium Format"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/3Hadab7YRWYQKhQFtjg99oN9yYus/3H-513x366/v1/t2700x1800.jpg",
+      "alt": "5% Cash Back at Las Brasas Del Volcan"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/9HJXaVuKatGumWwvzjdzWr/33-2048x1229/v1/t2001x1212.jpg",
+      "alt": "60 Mins Head Spa & 30 or 60 Mins Body Massage w/ Hot Stones & More 32%"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ETsoko8AtoGsxet8XTzMYS/29-1106x752/v1/t1800x1200.jpg",
+      "alt": "60- or 90-Minute Full Body Couples Massage with Hot Stones"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/2TBfhNrUTSN3bGMSGusSFX2pwqvE/2T-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Unwind with a 60 or 90-Minute Swedish Massage or Cupping"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Nr5qsFmQDsSWorL3XSi2GE/3Q-1000x600/v1/t2001x1212.jpg",
+      "alt": "Luxury Relaxing Full Body Massage with Hot Stones & Aromatherapy"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/TnqJBJ9hdjT1jdzgrM4HZ2/2e-4032x3024/v1/t2700x1800.jpg",
+      "alt": "60-Min Deep Tissue, Choice of 90-Min, Or 60-Min Full-Body Massage"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/UrHpmbveQxrBfH26AHhmnP/2E-1024x614/v1/t2001x1212.jpg",
+      "alt": "60 or 90-Minute Signature Head Spa with Hand & Eye Masks, Water Circulation, Scalp Head Therapy, and Neck and Shoulder Massage"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3Bju45Lw4Njkhychm1rqa921U6zt/3B-5700x3800/v1/t1800x1200.jpg",
+      "alt": "Rejuvenating Infrared Sauna Sessions for Deep Detox"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/YJHXRKqQSdCiLKVrpccfZT/NN-1000x600/v1/t2001x1212.jpg",
+      "alt": "Full, Flawless Lash Extensions for a Glam Look"
+    }
+  ],
+  "script_counts": {
+    "total": 236,
+    "external": 189,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HealthAndBeautyBusiness",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Head&Skin Health Spa - From $79 - Shoreline | Groupon",
     "meta_description": "60-Minute Deep Tissue / Swedish Massage Or 90-Minute Meridian Massage with Oil and Hot Stones (Up to 34% Off)",
@@ -128,10 +229,28 @@
   "urgency_signals": [
     "limited time"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1807200,
+    "mobile_html_bytes": 1788375,
+    "desktop_image_count": 63,
+    "mobile_image_count": 62,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 3,
+    "desktop_script_count": 236,
+    "mobile_script_count": 247,
+    "differences": [
+      "Highlights count differs: desktop=2 vs mobile=3"
+    ]
   }
 }

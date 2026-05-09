@@ -111,6 +111,107 @@
     }
   ],
   "image_count": 82,
+  "alt_text_coverage": {
+    "total_images": 82,
+    "with_alt_text": 61,
+    "coverage_pct": 74.4
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/i5f6KBQhakyn8Av7Wgyy/4W-3000x1800/v1/t2001x1212.webp",
+      "alt": "Choice of a Massage Package at Award-Winning Penelope & The Beauty Bar (Up to 28% Off) - Primary Image"
+    },
+    {
+      "src": "//img.youtube.com/vi/ZpZNPPUqB18/hqdefault.jpg",
+      "alt": "Choice of a Massage Package at Award-Winning Penelope & The Beauty Bar (Up to 28% Off) - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/sparta/ULgqscfy4yxfsEQYe3CnobL3xyt/UL-32x32.webp/v1/t100x100",
+      "alt": "Parking"
+    },
+    {
+      "src": "//img.grouponcdn.com/sparta/2sTyXHEJX8nXudfeYbt53UTr4cib/2s-32x32.webp/v1/t100x100",
+      "alt": "Good for Kids"
+    },
+    {
+      "src": "//img.grouponcdn.com/sparta/4TeHFri6ygThLRwzDYi9sZvUrDQb/4T-32x32.webp/v1/t100x100",
+      "alt": "Takes Reservations"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-122.3340484,47.6081736,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIg",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/bxcuKZsZJNp2QgKeHWimbBcbEaX/bx-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Boost Your Beauty Routine: Two or Four Infrared Collagen Bed Visits"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/bD2X8cUj7Mzhv4vcZDQ7/vQ-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Red Carpet Treatment with or without Facial Toning"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/2Vdn8dM4gnGmtcZDgMsAnSNY36HF/2V-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Endospheres Fat Reduction and Cellulite at Penelope & The Beauty Bar"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/4URr7b2PpphRBRhWj12vNMiuznjD/4U-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Facial Services at Penelope & The Beauty Bar"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/27tZFNdz7LfS94QQcBryFtZLngmQ/27-2000x1200/v1/t2001x1212.jpg",
+      "alt": "Experience Waterless Mani-Pedis of Choice at Penelope & The Beauty Bar"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/qe6yxwVxAEHNHXXxH1uf/Gs-4272x2828/v1/t1800x1200.jpg",
+      "alt": "Rejuvenate with Signature Spa Rituals for Total Mind-Body Renewal"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/fd9hkLHamNqgLeKxbGLrX6u9ZrN/fd-2000x1200/v1/t2001x1212.jpg",
+      "alt": "Dermaplane Express Facial at Penelope & The Beauty Bar"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ruj8X6sfmZghpXHqtEzT7U/86492577-_1_-960x576/v1/t2001x1212.jpg",
+      "alt": "Get Smooth Skin Laser with  Hair Removal at Penelope & The Beauty Bar"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/fd9hkLHamNqgLeKxbGLrX6u9ZrN/fd-2000x1200/v1/t2001x1212.jpg",
+      "alt": "Dermaplane Express Facial at Penelope & The Beauty Bar"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/bD2X8cUj7Mzhv4vcZDQ7/vQ-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Red Carpet Treatment with or without Facial Toning"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/qe6yxwVxAEHNHXXxH1uf/Gs-4272x2828/v1/t1800x1200.jpg",
+      "alt": "Rejuvenate with Signature Spa Rituals for Total Mind-Body Renewal"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ruj8X6sfmZghpXHqtEzT7U/86492577-_1_-960x576/v1/t2001x1212.jpg",
+      "alt": "Get Smooth Skin Laser with  Hair Removal at Penelope & The Beauty Bar"
+    }
+  ],
+  "script_counts": {
+    "total": 236,
+    "external": 189,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HealthAndBeautyBusiness",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Penelope & The Beauty Bar - From $143.10 - Seattle | Groupon",
     "meta_description": "Choice of a Massage Package at Award-Winning Penelope & The Beauty Bar (Up to 28% Off)",
@@ -144,12 +245,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 2040067,
+    "mobile_html_bytes": 1998119,
+    "desktop_image_count": 82,
+    "mobile_image_count": 82,
+    "desktop_price_tiers": 6,
+    "mobile_price_tiers": 6,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 236,
+    "mobile_script_count": 218,
+    "differences": []
   }
 }

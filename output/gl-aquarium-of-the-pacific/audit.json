@@ -92,6 +92,107 @@
     }
   ],
   "image_count": 74,
+  "alt_text_coverage": {
+    "total_images": 74,
+    "with_alt_text": 59,
+    "coverage_pct": 79.7
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/MHEmP6C8EpFqtWAeFrLGsP/SV-3071x1843/v1/t2001x1212.webp",
+      "alt": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/7XXBJ79V4WBqnMpJTE8LM2/3v-3504x2336/v1/c108x72.webp",
+      "alt": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Gs8pAH3CbG2JBTWuYkhhpy/2m-2240x1343/v1/c108x72.webp",
+      "alt": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/4k5eiCxiPQqcgW9wqg9QMf/46-5184x3110/v1/c108x72.webp",
+      "alt": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 4"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/71thWQByqTHvRBbuJwgrrR/2S-5184x3110/v1/c108x72.webp",
+      "alt": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 5"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/CVpYaR5xTMDKsxYP4EuM7X/3m-2048x1229/v1/c108x72.webp",
+      "alt": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 6"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Se3t8WuhR4fWiU4kSKVDgq/4C-2048x1229/v1/c108x72.webp",
+      "alt": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets - Image 7"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/1HDJLUHVby9oD7vEPB4jN5jidjD/icon-bag-54x54-54x54/v1/t100x100",
+      "alt": "Daily Purchases Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/1HDJLUHVby9oD7vEPB4jN5jidjD/icon-bag-54x54-54x54/v1/t100x100",
+      "alt": "Daily Purchases Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Ki4qzqV2PWS79sKof6RjrF/t700x420/4D-5184x3110.jpg",
+      "alt": "image caption"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Ki4qzqV2PWS79sKof6RjrF/t700x420/4D-5184x3110.jpg",
+      "alt": "image caption"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-118.1966005,33.7622585,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIg",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/ugc/8Lhk8EmZwuvKtHTLvZPTFN/2K-4032x3024/v1/t2700x1800",
+      "alt": "Photo from reviewer"
+    },
+    {
+      "src": "//img.grouponcdn.com/ugc/UWmTavnoD1oaEXptp73FBs/2o-4032x3024/v1/t2700x1800",
+      "alt": "Photo from reviewer"
+    },
+    {
+      "src": "//img.grouponcdn.com/ugc/HLBtSWjmdSz2p2WoNZhubx/28-4032x3024/v1/t2700x1800",
+      "alt": "Photo from reviewer"
+    },
+    {
+      "src": "//img.grouponcdn.com/ugc/13wYjmvjm2SwEiaQ2M8jsw/3p-4032x3024/v1/t2700x1800",
+      "alt": "Photo from reviewer"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5xKkDWfLGxXVUSqeFRffq1/2M-1800x1200/v1/t1800x1200.jpg",
+      "alt": "Up to 50% Off- LA Top Attractions - Including Universal Studios"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2EX6xkpN83tnQF7s9rPkRM8Y5b5P/2E-1800x1200/v1/t1800x1200.jpg",
+      "alt": "Up to 50% Off- LA Top Attractions"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/QG6Xpvgku2MH5EwAZ4WuSW/Lf-1179x708/v1/t2001x1212.jpg",
+      "alt": "Whale Watching & Harbor Tour Deals - Up to 45% Off"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/37wFvXtrMFKFnxJmU9ZA6PhNdcBE/37-1500x900/v1/t2001x1212.jpg",
+      "alt": "Private Harbor Fishing Charters for Up to Four Adventure in Long Beach"
+    }
+  ],
+  "script_counts": {
+    "total": 236,
+    "external": 189,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "TouristAttraction",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Aquarium of the Pacific - From $29.95 - Long Beach | Groupon",
     "meta_description": "Aquarium of the Pacific Admission Deals – Up to 33% Off Tickets",
@@ -123,10 +224,28 @@
   "urgency_signals": [
     "limited time"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1877880,
+    "mobile_html_bytes": 1853745,
+    "desktop_image_count": 74,
+    "mobile_image_count": 80,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 236,
+    "mobile_script_count": 243,
+    "differences": [
+      "Image count differs: desktop=74 vs mobile=80"
+    ]
   }
 }

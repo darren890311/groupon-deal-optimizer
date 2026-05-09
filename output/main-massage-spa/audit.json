@@ -91,6 +91,107 @@
     }
   ],
   "image_count": 64,
+  "alt_text_coverage": {
+    "total_images": 64,
+    "with_alt_text": 50,
+    "coverage_pct": 78.1
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/bynder/3xUUCcgcv1vCaFmqrmf3raK9voH/3x-5472x3648/v1/t1800x1200.webp",
+      "alt": "Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/3wbcVyMmmhipGjTW4C2ieYYTgTij/3w-4032x2419/v1/c108x72.webp",
+      "alt": "Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/6cjqaoGXB2SAj2CRPaGhM6GpWUu/6c-3024x1814/v1/c108x72.webp",
+      "alt": "Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2Hxgz9yQpuCVAyzWZbteSTuob5iq/2H-4032x2419/v1/c108x72.webp",
+      "alt": "Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 4"
+    },
+    {
+      "src": "//img.youtube.com/vi/ZpZNPPUqB18/hqdefault.jpg",
+      "alt": "Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off - Image 5"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-122.2043712,47.4809008,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIg",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/LYdBBKqAxCcRkp3WMrNvLdY3cfL/LY-513x366/v1/t2700x1800.jpg",
+      "alt": "5% Cash Back at 8 Bit Arcade Bar"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/7kcaWd4Sm88mNsfTxMmz/KB-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Relax & Rejuvenate: One 60-Minute Full-Body Massage with Optional CBD"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2xwgUWkfzEDraC2KNVX1T1vdTAAY/2x-1284x836/v1/t1800x1200.jpg",
+      "alt": "Queen's Radiant Renewal, Luxurious Escape, or Ultimate Radiance Ritual"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/x9KnJz947kGyZ4uBsskhKDssuFR/x9-1284x845/v1/t1800x1200.jpg",
+      "alt": "Unique Spa Party Experience with Infrared Sauna & More!"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/BfEvWbB64bYnSZkxcRQi5f/tk-732x440/v1/t2001x1212.jpg",
+      "alt": "Smooth Away Wrinkles with 20 Units of Jeuveau"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/i8R9ozucawAktDj8h7EY/tP-2122x1415/v1/t1800x1200.jpg",
+      "alt": "Up to 59% Off on Lymphatic Drainage Massage at MMD beauty space"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/hBZkaug9KiaqVCRZA2jV/CP-7217x5412/v1/t2700x1800.jpg",
+      "alt": "Achieve Youthful Skin with Medical Grade Chemical Peels"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/rxtLL82P83oymcWfLsmv/5i-2048x1242/v1/t2001x1212.jpg",
+      "alt": "Up to 66% Off on Laser Hair Removal at MMD Beauty Space"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2BaYhNup71vdAp5287tNrPCVRypF/2B-3434x2506/v1/t2700x1800.jpg",
+      "alt": "Unwind with Medi Spa Renton's luxurious couples massage options, including hot stones and essential oils, up to 25% off"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/7kcaWd4Sm88mNsfTxMmz/KB-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Relax & Rejuvenate: One 60-Minute Full-Body Massage with Optional CBD"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/i8R9ozucawAktDj8h7EY/tP-2122x1415/v1/t1800x1200.jpg",
+      "alt": "Up to 59% Off on Lymphatic Drainage Massage at MMD beauty space"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/KDJbxvbLgoEbjHNCWwbNyb/3j-1192x715/v1/t2001x1212.jpg",
+      "alt": "60-, 90-, or 120-min Solo or Couples Body Massage(w/ Hot Stone & More)"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/Nz1gRLyJPPvYHZTxufood2/27-4032x3024/v1/t2700x1800.jpg",
+      "alt": "Swedish, Ashiatsu & Couples Massage Deal at Ashi Empire | Renton, WA"
+    }
+  ],
+  "script_counts": {
+    "total": 244,
+    "external": 194,
+    "inline": 50,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HealthAndBeautyBusiness",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Main Massage Spa - From $82.80 - Renton | Groupon",
     "meta_description": "Solo or Couples: Tailored Deluxe Massage with Hot Herb Bag, Hot Stones & More at Main Massage Spa- Up to 50% Off",
@@ -115,12 +216,31 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": false,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1853863,
+    "mobile_html_bytes": 1826240,
+    "desktop_image_count": 64,
+    "mobile_image_count": 65,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 6,
+    "mobile_highlights_count": 6,
+    "desktop_script_count": 244,
+    "mobile_script_count": 246,
+    "differences": [
+      "Urgency signals differ: desktop=['limited time', 'today only'] vs mobile=['limited time', 'selling fast', 'today only']"
+    ]
   }
 }

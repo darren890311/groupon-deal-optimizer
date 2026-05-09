@@ -84,6 +84,107 @@
     }
   ],
   "image_count": 60,
+  "alt_text_coverage": {
+    "total_images": 60,
+    "with_alt_text": 46,
+    "coverage_pct": 76.7
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/4QpJYLTpbUMbzr5QzZWQxEtacmFe/4Q-2048x1229/v1/t2001x1212.webp",
+      "alt": "Unwind with a 60-or 90-Minute Custom Massage (Up to 19% Off) - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-122.3398882,47.6374167,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIg",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/o9s8qzQq94GGpLEGiYSAMcFzynX/o9-1636x981/v1/t2001x1212.jpg",
+      "alt": "Up to 37% Off on Eyelash Perm at Blink Beauty Lounge"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/3CTypRwEAHg6gR72qZxXhPUVNznY/3C-1169x701/v1/t2001x1212.jpg",
+      "alt": "Up to 37% Off on Eyebrow Tinting at Blink Beauty Lounge"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/236Q2CBUsx2ywGbLS3JFy66xRZb1/23-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Experience Dulce Lash Lounge's Signature Facial and Microdermabrasion with up to 40% off for all skin types"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2L6Ypwcutu1dznSzVAiE3epXzus/2L-1242x814/v1/t1800x1200.jpg",
+      "alt": "New Client Microneedling Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/2uYZwcFzuGDsJNPJmzi5HSTJxZUA/2u-2048x1228/v1/t2001x1212.jpg",
+      "alt": "Dermaplaning and Ageless Facial for Smooth Skin"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3Bf4ukSb8Zu6MHWLKZFp94QDgpdp/3B-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Experience a clearer and smoother complexion with dermaplaning"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/AAqDVEuiotBX7VRbNQZdZD/3a-1000x600/v1/t2001x1212.jpg",
+      "alt": "Microblading, Microshading Brow, Powder Brow, or Lip Blush Session"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2FVhuUJ58NuWaKEmrCT2AqMK66Fk/2F-700x420/v1/t2001x1212.jpg",
+      "alt": "Get Gorgeous Lashes with Full Set Eyelash Extensions"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/6kBjzV18fzQzb2VXvsGx7v/GY-4032x3024/v1/t2700x1800.jpg",
+      "alt": "1,3, or 5 Choice-of-Massage: Deep Tissue/Swedish + Hot Stones & More"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/o9s8qzQq94GGpLEGiYSAMcFzynX/o9-1636x981/v1/t2001x1212.jpg",
+      "alt": "Up to 37% Off on Eyelash Perm at Blink Beauty Lounge"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/3CTypRwEAHg6gR72qZxXhPUVNznY/3C-1169x701/v1/t2001x1212.jpg",
+      "alt": "Up to 37% Off on Eyebrow Tinting at Blink Beauty Lounge"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/AAqDVEuiotBX7VRbNQZdZD/3a-1000x600/v1/t2001x1212.jpg",
+      "alt": "Microblading, Microshading Brow, Powder Brow, or Lip Blush Session"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/a6JXMCpZQ9AwKkYoZKUh/f2-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Get an Effective One 60, or 90-min Electrolysis Hair Removal Treatment"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2FVhuUJ58NuWaKEmrCT2AqMK66Fk/2F-700x420/v1/t2001x1212.jpg",
+      "alt": "Get Gorgeous Lashes with Full Set Eyelash Extensions"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2L6Ypwcutu1dznSzVAiE3epXzus/2L-1242x814/v1/t1800x1200.jpg",
+      "alt": "New Client Microneedling Options"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/2uYZwcFzuGDsJNPJmzi5HSTJxZUA/2u-2048x1228/v1/t2001x1212.jpg",
+      "alt": "Dermaplaning and Ageless Facial for Smooth Skin"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/UY8HjUAHvLCtSakiG34ghK/4S-1483x890/v1/t2001x1212.webp",
+      "alt": "60-Min Deep Tissue/Swedish Or 90-Min Meridian Massage with Hot Stones"
+    }
+  ],
+  "script_counts": {
+    "total": 240,
+    "external": 191,
+    "inline": 49,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HealthAndBeautyBusiness",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Action Sports Massage - From $87.99 - Seattle | Groupon",
     "meta_description": "Unwind with a 60-or 90-Minute Custom Massage (Up to 19% Off)",
@@ -110,10 +211,26 @@
   "urgency_signals": [
     "limited time"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": false,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1794729,
+    "mobile_html_bytes": 1772825,
+    "desktop_image_count": 60,
+    "mobile_image_count": 60,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 3,
+    "mobile_highlights_count": 3,
+    "desktop_script_count": 240,
+    "mobile_script_count": 221,
+    "differences": []
   }
 }

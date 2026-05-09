@@ -101,4 +101,28 @@ Color match of clients current color included. Corrective color not included.
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=237 external=190 inline=47 json_ld=6
+- Image alt-text coverage: 37/58 (63.8%)
+- Alt-text sample (first 5):
+  - alt='Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Primary Image'
+  - alt='Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 2'
+  - alt='Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 3'
+  - alt='Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 4'
+  - alt='Shampoo, Haircut, Balayage, Highlights, and More at Cactus Salon (Up to 66% Off). Eight Options Available. - Image 5'
+
+## Schema.org markup present
+WebSite, Organization, HairSalon, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1677799 mobile=1665378
+- Image count: desktop=58 mobile=53
+- Price tiers: desktop=12 mobile=12
+- Highlights count: desktop=4 mobile=4
+- Script count: desktop=237 mobile=212
+- Notable differences: none

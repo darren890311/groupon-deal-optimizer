@@ -54,4 +54,28 @@ Your session is tailored to what your body needs most — deep relaxation, tensi
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=235 external=188 inline=47 json_ld=6
+- Image alt-text coverage: 52/67 (77.6%)
+- Alt-text sample (first 5):
+  - alt='60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Primary Image'
+  - alt='60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 2'
+  - alt='60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 3'
+  - alt='60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 4'
+  - alt='60-Min Signature Recess™, 75-Min Botanicals Recess™, Or 90-Min Luxury Recess™ Couples Massage (Up to 51% Off) - Image 5'
+
+## Schema.org markup present
+WebSite, Organization, HealthAndBeautyBusiness, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1857291 mobile=1817865
+- Image count: desktop=67 mobile=66
+- Price tiers: desktop=4 mobile=4
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=235 mobile=222
+- Notable differences: none

@@ -80,6 +80,107 @@
     }
   ],
   "image_count": 67,
+  "alt_text_coverage": {
+    "total_images": 67,
+    "with_alt_text": 48,
+    "coverage_pct": 71.6
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/iam_raw/aaFJru5qotsACSsa8Nun/ve-5760x3840/v1/t1800x1200.webp",
+      "alt": "Keratinnyc Hair Salon's stunning full or partial highlights and style packages up to 50% off on diverse hair treatments - Primary Image"
+    },
+    {
+      "src": "//img.youtube.com/vi/7EQOotHkJV4/hqdefault.jpg",
+      "alt": "Keratinnyc Hair Salon's stunning full or partial highlights and style packages up to 50% off on diverse hair treatments - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-73.976927,40.7450598,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm9uZSIgeG",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ddPzt2ANHPaiTDHemkY3/1i-984x591/v1/t2001x1212.jpg",
+      "alt": "King Spa Chicago: All-Day Relaxation with Authentic Korean Wellness"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2wzFP9MWkbGB3CPeG7Hd/t4-2122x1415/v1/t1800x1200.jpg",
+      "alt": "Transform Your Hair with Straightening Treatments"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/mjX4ncrawMZdkbjayndT/Y1-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Transform Your Hair with Brazilian Blowout or Keratin at Keratinnyc"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/o7akMtpoTXvmJAXdkJL2/oR-3867x2578/v1/t1800x1200.jpg",
+      "alt": "Achieve Smooth Skin with Azulene, Chocolate, or Tea Tree Brazilian Wax"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/mHoMwum8NNgmcmVY52Xc/8o-1000x600/v1/t2001x1212.jpg",
+      "alt": "Get a Fresh Look with a Men's Haircut And Style"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3VYEuT41XLGcHtXoAZNeqaeJTdt5/3V-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Transform Your Glutes with Cupping Sessions"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/9hPhrAYR3Sfqmwnej7xZ4T45o38/9h-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Revitalize with Bamboo Massage: Wood Therapy Treatments Available"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/nYJgzGPMyJKjDEQrWs28oUHByfa/nY-800x600/v1/t2700x1800.jpg",
+      "alt": "Parking at City Parking - Anthem Garage LLC"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/9S4hwYMHrFGpCTCVzHt9xK/22-765x1000/v1/t2800x1696.jpg",
+      "alt": "Haircut, Balayage, Full/Partial Highlights, Conditioning, & More"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/nHcaFUXCthuyooeALKDo/VC-2592x3684/v1/t2800x1696.jpg",
+      "alt": "Up to 46% Off on Salon - Hair Color / Highlights at Zaks Hair Salon"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2BHagAQ1CqiZUBuqqkLiNiEbunEY/2B-1284x770/v1/t2001x1212.jpg",
+      "alt": "Transform Your Look with Highlights or Color Hair Treatments"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/3L6DugCtPicZ3xSieY6q/D6-4950x3300/v1/t1800x1200.jpg",
+      "alt": "Get a New Hairdo with a Haircut and Conditioning"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ddPzt2ANHPaiTDHemkY3/1i-984x591/v1/t2001x1212.jpg",
+      "alt": "King Spa Chicago: All-Day Relaxation with Authentic Korean Wellness"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2wzFP9MWkbGB3CPeG7Hd/t4-2122x1415/v1/t1800x1200.jpg",
+      "alt": "Transform Your Hair with Straightening Treatments"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/mjX4ncrawMZdkbjayndT/Y1-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Transform Your Hair with Brazilian Blowout or Keratin at Keratinnyc"
+    }
+  ],
+  "script_counts": {
+    "total": 237,
+    "external": 188,
+    "inline": 49,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "HairSalon",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Keratin NYC Hair Salon - From $45 - New York | Groupon",
     "meta_description": "Keratinnyc Hair Salon's stunning full or partial highlights and style packages up to 50% off on diverse hair treatments",
@@ -102,12 +203,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1789823,
+    "mobile_html_bytes": 1750006,
+    "desktop_image_count": 67,
+    "mobile_image_count": 66,
+    "desktop_price_tiers": 1,
+    "mobile_price_tiers": 1,
+    "desktop_highlights_count": 1,
+    "mobile_highlights_count": 1,
+    "desktop_script_count": 237,
+    "mobile_script_count": 219,
+    "differences": []
   }
 }

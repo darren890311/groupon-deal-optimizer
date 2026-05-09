@@ -47,4 +47,28 @@ Limit 3 per person. Must use promotional value in 1 visit. Valid only for option
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=236 external=189 inline=47 json_ld=6
+- Image alt-text coverage: 37/49 (75.5%)
+- Alt-text sample (first 5):
+  - alt='Explore Wilke Automotive And Marathon Gas for oil change options up to 45% off, featuring comprehensive inspections. - Primary Image'
+  - alt='Explore Wilke Automotive And Marathon Gas for oil change options up to 45% off, featuring comprehensive inspections. - Image 2'
+  - alt='Daily Views Icon'
+  - alt='Daily Views Icon'
+  - alt='Redemption locations map'
+
+## Schema.org markup present
+WebSite, Organization, AutoRepair, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1608421 mobile=1587416
+- Image count: desktop=49 mobile=51
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=236 mobile=217
+- Notable differences: none

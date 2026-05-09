@@ -71,7 +71,41 @@ def _audit_to_markdown(a: dict[str, Any]) -> str:
     lines.append("")
     lines.append("## Signals")
     lines.append(f"- Trust: {a.get('trust_signals')}")
-    lines.append(f"- Urgency: {a.get('urgency_signals')}")
+    lines.append(f"- Urgency keywords: {a.get('urgency_signals')}")
+    lines.append(f"- Countdown widget present: {a.get('has_countdown_widget')}")
+    lines.append(f"- Quantity-left mentions: {a.get('quantity_left_mentions')}")
+    lines.append("")
+    lines.append("## Page-load indicators")
+    sc = a.get("script_counts") or {}
+    lines.append(f"- Script count: total={sc.get('total')} external={sc.get('external')} inline={sc.get('inline')} json_ld={sc.get('json_ld')}")
+    cov = a.get("alt_text_coverage") or {}
+    lines.append(f"- Image alt-text coverage: {cov.get('with_alt_text')}/{cov.get('total_images')} ({cov.get('coverage_pct')}%)")
+    sample = a.get("alt_text_sample") or []
+    if sample:
+        lines.append(f"- Alt-text sample (first {min(5, len(sample))}):")
+        for s in sample[:5]:
+            lines.append(f"  - alt={s.get('alt')!r}")
+    lines.append("")
+    lines.append("## Schema.org markup present")
+    types = a.get("schema_types") or []
+    lines.append(", ".join(types) if types else "_none detected_")
+    lines.append("")
+    mvd = a.get("mobile_vs_desktop")
+    if mvd:
+        lines.append("## Mobile vs Desktop")
+        lines.append(f"- Tested: {mvd.get('tested')}")
+        lines.append(f"- HTML bytes: desktop={mvd.get('desktop_html_bytes')} mobile={mvd.get('mobile_html_bytes')}")
+        lines.append(f"- Image count: desktop={mvd.get('desktop_image_count')} mobile={mvd.get('mobile_image_count')}")
+        lines.append(f"- Price tiers: desktop={mvd.get('desktop_price_tiers')} mobile={mvd.get('mobile_price_tiers')}")
+        lines.append(f"- Highlights count: desktop={mvd.get('desktop_highlights_count')} mobile={mvd.get('mobile_highlights_count')}")
+        lines.append(f"- Script count: desktop={mvd.get('desktop_script_count')} mobile={mvd.get('mobile_script_count')}")
+        diffs = mvd.get("differences") or []
+        if diffs:
+            lines.append("- Notable differences:")
+            for d in diffs:
+                lines.append(f"  - {d}")
+        else:
+            lines.append("- Notable differences: none")
     return "\n".join(lines)
 
 

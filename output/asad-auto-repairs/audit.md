@@ -40,4 +40,28 @@ Choosing Asad Auto Repairs means your car is in good hands. Their team has years
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=236 external=190 inline=46 json_ld=5
+- Image alt-text coverage: 44/58 (75.9%)
+- Alt-text sample (first 5):
+  - alt='Quality Oil Change - Up to 30% Off - Primary Image'
+  - alt='Daily Views Icon'
+  - alt='Daily Views Icon'
+  - alt='Redemption locations map'
+  - alt='Valvoline Instant Oil Change (Up to 19% Off) - 33 Locations'
+
+## Schema.org markup present
+WebSite, Organization, AutoRepair, ProductGroup, BreadcrumbList
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1699970 mobile=1675211
+- Image count: desktop=58 mobile=58
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=236 mobile=244
+- Notable differences: none

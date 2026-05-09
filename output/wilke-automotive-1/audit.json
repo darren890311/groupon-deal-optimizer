@@ -87,6 +87,107 @@
     }
   ],
   "image_count": 49,
+  "alt_text_coverage": {
+    "total_images": 49,
+    "with_alt_text": 37,
+    "coverage_pct": 75.5
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/deal/jtKGD7WkfF4K6KYwTjr9br/78035208-1000x600/v1/t2001x1212.webp",
+      "alt": "Explore Wilke Automotive And Marathon Gas for oil change options up to 45% off, featuring comprehensive inspections. - Primary Image"
+    },
+    {
+      "src": "//img.youtube.com/vi/wmGbT5sufdM/hqdefault.jpg",
+      "alt": "Explore Wilke Automotive And Marathon Gas for oil change options up to 45% off, featuring comprehensive inspections. - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "https://api.maptiler.com/maps/streets-v2/static/-88.00436409999999,42.0828622,16/768x352@2x.webp?attribution=false&markers=icon%3Adata%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjMiIHZpZXdCb3g9IjAgMCA0NCA0MyIgZmlsbD0ibm",
+      "alt": "Redemption locations map"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/21F69V1euaZvtLmzN8FqT3MrMBU9/21-3966x2880/v1/t2700x1800.jpg",
+      "alt": "Get Smoother Skin with Dermaplaning or Microdermabrasion"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/3mQGQevwupdsFeGb95EcyejM8Hxw/3m-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Experience Smooth Skin with Chocolate Wax for Brazilian/Bikini"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/ezbhRRYA2tngSiQiSqUP/Pd-3623x2832/v1/t2700x1800.jpg",
+      "alt": "Revitalize Your Skin with a Luxurious HydraFacial Session"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam/3dp94ZY9BujMFxPenUCLa7whRhe9/3d-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Revitalize Your Style with Men's Haircut, Color, or Both"
+    },
+    {
+      "src": "//img.grouponcdn.com/iam_raw/fohpw89cWHHjb3VeDjbP/op-5729x3625/v1/t1800x1200.jpg",
+      "alt": "Transform Your Look: Deep Conditioning or Color, with Haircut, Blowdry"
+    },
+    {
+      "src": "//img.grouponcdn.com/pwa_test/mFSpG8N27UsXtURKZWzyuQpZvrb/mF-513x366/v1/t2700x1800.jpg",
+      "alt": "5% Cash Back at Big Ange's Eatery"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/34tTtoCRdcZy1752Efiid6E1ysFw/34-2048x1229/v1/t2001x1212.jpg",
+      "alt": "Up to 75% Off on Photo Framing at The Framers Edge"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/3XY8kx4CVEJWLyzrPG6adFSw8Ru7/3X-937x562/v1/t2001x1212.jpg",
+      "alt": "Immerse in Thrilling Escape Rooms withThemes and Exciting Challenges!"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/E6VoHPAGU8i6aSPa9wDEKp/38-1000x600/v1/t2001x1212.webp",
+      "alt": "Synthetic Blend or Full Synthetic Oil Change w/ Fluid Top Off & More"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/XZJHyhifajUDyCtZFUR4ry/2r-700x420/v1/t2001x1212.webp",
+      "alt": "Full Synthetic Oil Change w/ Filter Replace Up to 5, 6 or 8 Quarts"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/wLpeG3HQpGLRfYoT1oCV87jqCKg/wL-620x372/v1/t2001x1212.webp",
+      "alt": "Synthetic Oil Change Package at Precision Tune Auto Care Tacoma"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/xUDLvbgEU4DyKiJHXcBGo1NURve/xU-1500x900/v1/t2001x1212.webp",
+      "alt": "Automotive Window Tinting at Nighthawk Window Tint"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/gZsNcjphpJNuAxQLVRo3/dA-1500x900/v1/t2001x1212.webp",
+      "alt": "Wheel Alignment at Tires Now"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/aKxS9PR6fig7avLmdHBY/gr-2048x1229/v1/t2001x1212.webp",
+      "alt": "Up to 54% Off Window Tinting at Car Toys"
+    },
+    {
+      "src": "//img.grouponcdn.com/bynder/4XBmHxYUyPh6xV4owJ7AsLBYzurG/4X-2048x1229/v1/t2001x1212.webp",
+      "alt": "Get Your Engine Running w/ Full or Synthetic Blend Oil Change"
+    }
+  ],
+  "script_counts": {
+    "total": 236,
+    "external": 189,
+    "inline": 47,
+    "json_ld": 6
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "AutoRepair",
+    "ProductGroup",
+    "BreadcrumbList",
+    "FAQPage"
+  ],
   "seo": {
     "meta_title": "Wilke Automotive - From $38.95 - Arlington Heights | Groupon",
     "meta_description": "Explore Wilke Automotive And Marathon Gas for oil change options up to 45% off, featuring comprehensive inspections.",
@@ -110,10 +211,26 @@
   "urgency_signals": [
     "limited time"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1608421,
+    "mobile_html_bytes": 1587416,
+    "desktop_image_count": 49,
+    "mobile_image_count": 51,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 236,
+    "mobile_script_count": 217,
+    "differences": []
   }
 }

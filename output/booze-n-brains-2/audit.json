@@ -69,6 +69,105 @@
   ],
   "faqs": [],
   "image_count": 48,
+  "alt_text_coverage": {
+    "total_images": 48,
+    "with_alt_text": 34,
+    "coverage_pct": 70.8
+  },
+  "alt_text_sample": [
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/4WbTpakdQgxPtJ3APF8kv7GVAvyw/4W-700x420/v1/t2001x1212.webp",
+      "alt": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Primary Image"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/4XDtzvE66ahTxYbKYZ15PNBXXNP8/4X-1038x450/v1/c108x72.webp",
+      "alt": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 2"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/2EUTBewFGfZe2ttuAvrm5vPxTsAi/2E-700x420/v1/c108x72.webp",
+      "alt": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 3"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/vTxPCiLjWpGFX7E5i8SxEQrW3V5/vT-700x420/v1/c108x72.webp",
+      "alt": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 4"
+    },
+    {
+      "src": "//img.grouponcdn.com/metro_draft_service/4Stt31t8DE9sL3C1P7s1qyT4rgZe/4S-700x420/v1/t2001x1212.webp",
+      "alt": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 5"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/ums/2rosdXoFVr75FP24y1XEgKh7NXrx/icon-eye-54x54-54x54/v1/t100x100",
+      "alt": "Daily Views Icon"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/GsVSSfK1iKGDjU8MFdvw1msSVaW/Gs-1500x900/v1/t2001x1212.webp",
+      "alt": "Space Needle & Chihuly Garden Discount Tickets"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2z2Gh3koUDCwGYp3sx67HEQ8F3YK/2z-1875x1125/v1/t2001x1212.webp",
+      "alt": "Seattle C3 CityPASS Ticket Deals - Save up to 30% on 3 Attractions"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/32A38bVJWqQAKbLYAExzxmRuWJYF/32-1875x1125/v1/t2001x1212.webp",
+      "alt": "Seattle CityPASS Tickets - Save Up to 47% on Admission Deals"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/27pw6mFB5Bj219D8CzARbwB4pVEy/27-1199x719/v1/t2001x1212.webp",
+      "alt": "FLASH SALE! Save on Admission Tickets to Sky View Observatory!"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/B5B6D3F1YJCUecVJz9mXSV/3i-1024x614/v1/t2001x1212.webp",
+      "alt": "Seattle Coffee & Pastry Guided Walking Tour – Downtown Exploration"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5MTpC5KvXPsdVAQC4c2e/Bf-700x420/v1/t2001x1212.webp",
+      "alt": "Take to the skies with a helicopter flight lesson"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/XBLufb2Kx96fwsu3xwrncM/2N-1512x907/v1/t2001x1212.webp",
+      "alt": "Up to 20% Off Morning or Sunrise Hot Air Balloon Adventure"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/mnfG68adCi7hiNfpniejNt86Bsm/mn-1500x900/v1/t2001x1212.webp",
+      "alt": "All-Day Ticket to Smith Tower Observatory with Up to 16% Off"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/EjVJYQV6TGBHm2be5MxPxg/2e-2048x1229/v1/t2001x1212.webp",
+      "alt": "Embark on a Secret Food Tour for 1, 2, or 4 – A Culinary Adventure"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/HHt4QTnVpKdADhtCJGBYCt/hE-1499x992/v1/t1800x1200.webp",
+      "alt": "GetOut Washington with Admission to 41+ Iconic Attractions"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2D6arf1vUnYWSN92cCpstkKttZrf/2D-1298x919/v1/t2700x1800.webp",
+      "alt": "Wine Tasting Experience for One, Two or Four with Club Perks"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/5JyS2neFVq8wxBTw8UvvfS/HT-3024x1814/v1/t2001x1212.webp",
+      "alt": "Hop-On Hop-Off Bus Sightseeing Tour – Seattle"
+    },
+    {
+      "src": "//img.grouponcdn.com/deal/2vRVaYwPP9XdSnWn79UhRiQUNFy2/2v-700x420/v1/t2001x1212.webp",
+      "alt": "Whale or Orcas Watching Tours in San Juan Islands"
+    }
+  ],
+  "script_counts": {
+    "total": 229,
+    "external": 184,
+    "inline": 45,
+    "json_ld": 4
+  },
+  "schema_types": [
+    "WebSite",
+    "Organization",
+    "ProductGroup",
+    "BreadcrumbList"
+  ],
   "seo": {
     "meta_title": "Booze 'n' Brains - From $8.49 | Groupon",
     "meta_description": "Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off",
@@ -87,12 +186,29 @@
     ]
   },
   "urgency_signals": [
-    "limited time"
+    "limited time",
+    "today only"
   ],
+  "has_countdown_widget": false,
+  "quantity_left_mentions": [],
   "trust_signals": {
     "has_rating": true,
     "has_review_count": true,
     "has_bought_label": true,
     "has_guarantee_text": false
+  },
+  "mobile_vs_desktop": {
+    "tested": true,
+    "desktop_html_bytes": 1534866,
+    "mobile_html_bytes": 1505982,
+    "desktop_image_count": 48,
+    "mobile_image_count": 48,
+    "desktop_price_tiers": 2,
+    "mobile_price_tiers": 2,
+    "desktop_highlights_count": 2,
+    "mobile_highlights_count": 2,
+    "desktop_script_count": 229,
+    "mobile_script_count": 236,
+    "differences": []
   }
 }

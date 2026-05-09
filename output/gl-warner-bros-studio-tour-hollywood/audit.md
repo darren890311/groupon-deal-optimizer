@@ -44,4 +44,29 @@ Tour Duration: 3 1/2 hours total (1.5-hour tour with guide + 2 hours self-guided
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=218 external=171 inline=47 json_ld=6
+- Image alt-text coverage: 53/62 (85.5%)
+- Alt-text sample (first 5):
+  - alt='Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Primary Image'
+  - alt='Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 2'
+  - alt='Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 3'
+  - alt='Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 4'
+  - alt='Experience Hollywood’s Backlot Magic with Warner Bros. Studio Tour Hollywood - Image 5'
+
+## Schema.org markup present
+WebSite, Organization, Museum, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1864632 mobile=1856487
+- Image count: desktop=62 mobile=79
+- Price tiers: desktop=4 mobile=4
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=218 mobile=242
+- Notable differences:
+  - Image count differs: desktop=62 vs mobile=79

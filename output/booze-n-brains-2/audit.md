@@ -39,4 +39,28 @@ Valid only for option purchased.
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=229 external=184 inline=45 json_ld=4
+- Image alt-text coverage: 34/48 (70.8%)
+- Alt-text sample (first 5):
+  - alt="Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Primary Image"
+  - alt="Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 2"
+  - alt="Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 3"
+  - alt="Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 4"
+  - alt="Booze 'n' Brains (US) offers fun mobile-based interactive drinking games with up to 66% off - Image 5"
+
+## Schema.org markup present
+WebSite, Organization, ProductGroup, BreadcrumbList
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1534866 mobile=1505982
+- Image count: desktop=48 mobile=48
+- Price tiers: desktop=2 mobile=2
+- Highlights count: desktop=2 mobile=2
+- Script count: desktop=229 mobile=236
+- Notable differences: none

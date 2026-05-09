@@ -37,4 +37,28 @@ Limit 1 per person(s), may buy 1 additional as gift(s). Valid only for option pu
 
 ## Signals
 - Trust: {'has_rating': True, 'has_review_count': True, 'has_bought_label': True, 'has_guarantee_text': False}
-- Urgency: ['limited time']
+- Urgency keywords: ['limited time', 'today only']
+- Countdown widget present: False
+- Quantity-left mentions: []
+
+## Page-load indicators
+- Script count: total=237 external=188 inline=49 json_ld=6
+- Image alt-text coverage: 48/67 (71.6%)
+- Alt-text sample (first 5):
+  - alt="Keratinnyc Hair Salon's stunning full or partial highlights and style packages up to 50% off on diverse hair treatments - Primary Image"
+  - alt="Keratinnyc Hair Salon's stunning full or partial highlights and style packages up to 50% off on diverse hair treatments - Image 2"
+  - alt='Daily Views Icon'
+  - alt='Daily Views Icon'
+  - alt='Redemption locations map'
+
+## Schema.org markup present
+WebSite, Organization, HairSalon, ProductGroup, BreadcrumbList, FAQPage
+
+## Mobile vs Desktop
+- Tested: True
+- HTML bytes: desktop=1789823 mobile=1750006
+- Image count: desktop=67 mobile=66
+- Price tiers: desktop=1 mobile=1
+- Highlights count: desktop=1 mobile=1
+- Script count: desktop=237 mobile=219
+- Notable differences: none
