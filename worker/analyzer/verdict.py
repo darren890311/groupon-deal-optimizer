@@ -16,7 +16,7 @@ from pydantic import BaseModel, Field
 
 from .competitors import like_for_like_range
 from .config import SONNET_MODEL
-from .models import Badge, Competitor, Deal, Reputation, Verdict
+from .models import Badge, Competitor, Deal, DirectBooking, Reputation, Verdict
 
 
 def _min_deal_price(deal: Deal) -> float | None:
@@ -100,6 +100,7 @@ def synthesize_verdict(
     deal: Deal,
     competitors: list[Competitor],
     reputation: Reputation,
+    direct_booking: DirectBooking | None = None,
 ) -> Verdict:
     badges = compute_badges(deal, competitors, reputation)
     if client is None:
@@ -125,6 +126,8 @@ Cheaper same-service options:
 
 Reputation: Groupon {reputation.groupon_rating}/{reputation.groupon_reviews} reviews vs {reputation.external_source} {reputation.external_rating}/{reputation.external_reviews} → {reputation.gap_verdict}.
 {reputation.summary}
+
+Direct booking: {direct_booking.note if direct_booking else 'not checked'}
 
 Pre-computed badges:
 {chr(10).join(f'  - [{b.status}] {b.type}: {b.label}' for b in badges)}

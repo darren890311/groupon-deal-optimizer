@@ -14,7 +14,7 @@ from pathlib import Path
 import anthropic
 from tavily import TavilyClient
 
-from . import competitors, discount, parse, reputation, scrape, verdict
+from . import competitors, direct, discount, parse, reputation, scrape, verdict
 from .config import ANTHROPIC_API_KEY, TAVILY_API_KEY
 from .models import Deal, DealAnalysis, Meta, PriceTier, Reputation
 
@@ -86,12 +86,20 @@ def analyze(
         groupon_reviews=audit.get("review_count"),
     )
 
-    verd = verdict.synthesize_verdict(anthropic_client, deal, comps, rep)
+    direct_booking = direct.check_direct_booking(
+        anthropic_client, tavily_client,
+        merchant=deal.merchant, city=deal.city,
+        category_leaf=competitors._category_leaf(deal.category),
+        service=deal.title, deal_price=deal_price,
+    )
+
+    verd = verdict.synthesize_verdict(anthropic_client, deal, comps, rep, direct_booking)
 
     return DealAnalysis(
         deal=deal,
         reputation=rep,
         competitors=comps,
+        direct_booking=direct_booking,
         verdict=verd,
         meta=Meta(analyzed_at=datetime.now(timezone.utc).isoformat()),
     )
