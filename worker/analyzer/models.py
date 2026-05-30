@@ -1,0 +1,86 @@
+"""The DealAnalysis contract — shared shape across Python worker → Go → Vue.
+
+All free-text fields are produced in English (user-facing).
+Sections beyond `deal` default to empty so early milestones can emit a valid
+partial object before the later stages (competitors, reputation, verdict) land.
+"""
+
+from typing import Literal
+
+from pydantic import BaseModel, Field
+
+DiscountVerdict = Literal["honest", "exaggerated", "none"]
+GapVerdict = Literal["external_higher", "external_lower", "consistent", "insufficient"]
+WorthBuying = Literal["yes", "caution", "no"]
+BadgeStatus = Literal["ok", "warn", "bad"]
+
+
+class PriceTier(BaseModel):
+    label: str | None = None
+    original: float | None = None
+    deal: float | None = None
+    discount_pct: float | None = None
+
+
+class Deal(BaseModel):
+    url: str
+    title: str | None = None
+    merchant: str | None = None
+    city: str | None = None
+    category: str | None = None
+    advertised_discount_pct: float | None = None
+    actual_max_discount_pct: float | None = None
+    discount_verdict: DiscountVerdict = "none"
+    prices: list[PriceTier] = Field(default_factory=list)
+
+
+class Reputation(BaseModel):
+    groupon_rating: float | None = None
+    groupon_reviews: int | None = None
+    external_rating: float | None = None
+    external_reviews: int | None = None
+    external_source: str | None = None
+    gap_verdict: GapVerdict = "insufficient"
+    summary: str = ""
+
+
+class Competitor(BaseModel):
+    merchant: str | None = None
+    title: str | None = None
+    price: float | None = None
+    discount_pct: float | None = None
+    url: str | None = None
+    cheaper: bool | None = None
+
+
+class DirectBooking(BaseModel):
+    cheaper_than_groupon: bool | None = None
+    note: str = ""
+    source_url: str | None = None
+
+
+class Badge(BaseModel):
+    type: str
+    status: BadgeStatus
+    label: str
+
+
+class Verdict(BaseModel):
+    badges: list[Badge] = Field(default_factory=list)
+    worth_buying: WorthBuying = "caution"
+    one_liner: str = ""
+    recommended_action: str = ""
+
+
+class Meta(BaseModel):
+    analyzed_at: str
+    cache_expires_at: str | None = None
+
+
+class DealAnalysis(BaseModel):
+    deal: Deal
+    reputation: Reputation = Field(default_factory=Reputation)
+    competitors: list[Competitor] = Field(default_factory=list)
+    direct_booking: DirectBooking = Field(default_factory=DirectBooking)
+    verdict: Verdict = Field(default_factory=Verdict)
+    meta: Meta

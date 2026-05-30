@@ -222,3 +222,7 @@ __marimo__/
 
 # Project-specific
 data/
+
+# v2 worker dev scratch
+worker/explore_cache/
+worker/**/__pycache__/
