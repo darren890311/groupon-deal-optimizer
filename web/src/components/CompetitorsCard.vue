@@ -3,14 +3,6 @@ import { computed } from 'vue'
 
 const props = defineProps({ competitors: Array, worthBuying: String })
 
-// Honor the UX rule: for a weak deal lead with alternatives; for a good deal the
-// list is supporting evidence. Data is always shown either way.
-const heading = computed(() =>
-  props.worthBuying === 'yes'
-    ? 'How it compares (same-city)'
-    : 'Cheaper / comparable options nearby',
-)
-
 // Only genuine alternatives: same-service deals (any price — they show whether
 // you're paying a fair rate) plus cheaper "similar" ones. A pricier, non-identical
 // option is not an alternative, so it's hidden rather than shown as "comparable".
@@ -25,7 +17,7 @@ function price(n) { return n == null ? '—' : `$${n}` }
 
 <template>
   <div class="card" v-if="visible.length">
-    <h3>{{ heading }}</h3>
+    <h3>Same-city price comparison</h3>
     <ul class="list">
       <li v-for="c in visible" :key="c.url || c.merchant" class="comp">
         <div class="top">
