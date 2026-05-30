@@ -105,6 +105,8 @@ On price: only call a deal "overpriced" when it loses to an equivalent ("same") 
 
 `recommended_action`: one concrete next step — e.g. "Buy it — genuine discount and strong reviews", "Book directly via Yelp instead", or "Skip — a comparable full-synthetic change nearby is $40-55".
 
+Wording: this is a consumer tool. In your output, refer to other deals/shops as "similar deals" or "nearby options" — never "competitor" or "competitors".
+
 Ground everything in the numbers given. Never invent prices or ratings. Do not contradict the badges."""
 
 
@@ -128,7 +130,7 @@ def synthesize_verdict(
     rng = like_for_like_range(competitors)
     price = _min_deal_price(deal)
     if rng:
-        price_basis = f"comparable SAME-service competitors range {_fmt_range(*rng)}"
+        price_basis = f"comparable SAME-service deals range {_fmt_range(*rng)}"
     elif any(c.match == "similar" for c in competitors):
         sims = [c.price for c in competitors if c.match == "similar" and c.price is not None]
         price_basis = (f"no exact match found; SIMILAR (not identical) deals range {_fmt_range(min(sims), max(sims))} "
@@ -148,7 +150,7 @@ def synthesize_verdict(
 Discount: advertised {deal.advertised_discount_pct}% vs actual max {deal.actual_max_discount_pct}% → {deal.discount_verdict}
 
 Price: this deal from ${price}; {price_basis}.
-Competitors (same city; "same" = equivalent service, "similar" = related but a spec difference):
+Similar deals (same city; "same" = equivalent service, "similar" = related but a spec difference):
 {comp_lines}
 
 Reputation: Groupon {reputation.groupon_rating}/{reputation.groupon_reviews} reviews vs {reputation.external_source} {reputation.external_rating}/{reputation.external_reviews} → {reputation.gap_verdict}.
