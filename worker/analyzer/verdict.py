@@ -44,12 +44,13 @@ def compute_badges(deal: Deal, competitors: list[Competitor], reputation: Reputa
     price = _min_deal_price(deal)
     if rng and price is not None:
         lo, hi = rng
+        rng_str = f"${lo:.0f}" if lo == hi else f"${lo:.0f}-${hi:.0f}"
         if price <= hi:
             badges.append(Badge(type="price", status="ok",
-                                label=f"Price is fair for the service (${lo:.0f}-${hi:.0f} elsewhere)"))
+                                label=f"Price is fair for the service ({rng_str} elsewhere)"))
         else:
             badges.append(Badge(type="price", status="bad",
-                                label=f"Above comparable deals (${lo:.0f}-${hi:.0f} for the same service)"))
+                                label=f"Above comparable deals ({rng_str} for the same service)"))
     else:
         badges.append(Badge(type="price", status="warn",
                             label="Couldn't verify price against comparable deals"))

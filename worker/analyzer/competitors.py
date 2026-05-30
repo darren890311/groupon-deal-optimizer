@@ -247,6 +247,11 @@ def find_competitors(
     # like-for-like matches surface even if a different-service deal is cheaper.
     classify_comparability(anthropic_client, deal_title, deal_options, competitors)
 
+    # Drop deals that are a different service entirely (e.g. a brake job vs an oil
+    # change) — they aren't real alternatives, just same-category noise. Keep None
+    # (unclassified) so the degraded no-LLM path still returns something.
+    competitors = [c for c in competitors if c.match != "different"]
+
     # Like-for-like ("same") first, then by price ascending.
     competitors.sort(key=lambda x: (_MATCH_RANK.get(x.match, 1), x.price is None, x.price))
     return competitors[:max_n]
