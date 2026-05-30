@@ -59,9 +59,14 @@ def analyze_deal(req: AnalyzeRequest) -> DealAnalysis:
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Analysis failed while fetching/parsing the deal: {e}")
 
-    if not result.deal.title:
+    # A real deal page always yields a title plus at least prices or a rating.
+    # If none of that came through, the scrape was almost certainly blocked or
+    # served an empty/challenge page — surface an error so the gateway returns it
+    # (and does NOT cache a "no data" result for 24h). A retry usually succeeds.
+    no_signal = not result.deal.prices and result.reputation.groupon_rating is None
+    if not result.deal.title or no_signal:
         raise HTTPException(
             status_code=502,
-            detail="Could not read the deal page — it may be blocked, expired, or invalid.",
+            detail="Could not read the deal page — it may be temporarily blocked. Please try again in a moment.",
         )
     return result

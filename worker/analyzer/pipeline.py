@@ -64,6 +64,12 @@ def analyze(
     html = scrape.fetch_html(url, cache_dir=cache_dir)
     audit = parse.parse_audit(html, url)
 
+    # Datacenter IPs occasionally get a bot-challenge/empty page. If nothing real
+    # came through, scrape once more before giving up — a retry usually succeeds.
+    if not audit.get("title") or (not audit.get("prices") and audit.get("rating") is None):
+        html = scrape.fetch_html(url, cache_dir=cache_dir, force=True)
+        audit = parse.parse_audit(html, url)
+
     deal = _build_deal(url, audit)
     anthropic_client, tavily_client = _default_clients(anthropic_client, tavily_client)
 
