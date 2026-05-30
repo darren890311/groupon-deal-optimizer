@@ -1,7 +1,13 @@
 <script setup>
+import { computed } from 'vue'
 import { bookingUrl } from '../api'
 
 const props = defineProps({ verdict: Object, deal: Object })
+
+// "anyway" only reads right when we cautioned against the deal.
+const bookLabel = computed(() =>
+  props.verdict.worth_buying === 'yes' ? 'Buy on Groupon →' : 'Buy anyway on Groupon →',
+)
 
 const TONE = {
   yes: { cls: 'ok', label: 'Worth buying' },
@@ -35,7 +41,7 @@ function tone(w) {
       :href="bookingUrl(deal.url)"
       target="_blank"
       rel="noopener"
-    >Book anyway on Groupon →</a>
+    >{{ bookLabel }}</a>
   </div>
 </template>
 
