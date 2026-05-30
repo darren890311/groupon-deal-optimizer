@@ -226,3 +226,7 @@ data/
 # v2 worker dev scratch
 worker/explore_cache/
 worker/**/__pycache__/
+
+# Go build artifacts
+/api/groupon-api
+/api/api

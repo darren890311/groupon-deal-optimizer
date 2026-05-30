@@ -1,0 +1,27 @@
+# Local-dev Postgres for the analyzer gateway.
+# Data persists in the named volume `groupon-pgdata` across container stop/remove.
+# Credentials here are local-dev only; production uses Render's managed Postgres.
+#
+#   docker compose up -d      # start
+#   docker compose down       # stop (keeps the volume / data)
+#   docker compose down -v    # stop AND wipe the data
+services:
+  postgres:
+    image: postgres:16
+    container_name: groupon-pg
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: groupon
+    ports:
+      - "5432:5432"
+    volumes:
+      - groupon-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d groupon"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  groupon-pgdata:
