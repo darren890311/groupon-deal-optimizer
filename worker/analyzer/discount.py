@@ -10,18 +10,33 @@ from typing import Any
 
 from .models import DiscountVerdict
 
-_UP_TO_RE = re.compile(r"up\s+to\s+(\d{1,3})\s*%\s*off", re.IGNORECASE)
+# Discount claims show up in several title phrasings: "Up to 40% Off",
+# "Save 40%", "Save up to 40%", "40% Off". Match them all (not just any "%",
+# to avoid false hits like "100% satisfaction").
+_PCT_PATTERNS = [
+    re.compile(r"up\s+to\s+(\d{1,3})\s*%", re.IGNORECASE),
+    re.compile(r"save\s+(?:up\s+to\s+)?(\d{1,3})\s*%", re.IGNORECASE),
+    re.compile(r"(\d{1,3})\s*%\s*off", re.IGNORECASE),
+]
 
 # How many percentage points the claim may exceed reality before it's "exaggerated".
 EXAGGERATION_THRESHOLD_PP = 10.0
 
 
 def parse_advertised_discount(title: str | None) -> float | None:
-    """Pull the headline "Up to X% Off" claim from the title, if present."""
+    """Pull the headline discount claim from the title across common phrasings."""
     if not title:
         return None
-    m = _UP_TO_RE.search(title)
-    return float(m.group(1)) if m else None
+    values: list[float] = []
+    for pat in _PCT_PATTERNS:
+        for m in pat.finditer(title):
+            try:
+                v = float(m.group(1))
+            except ValueError:
+                continue
+            if 0 < v <= 100:
+                values.append(v)
+    return max(values) if values else None
 
 
 def actual_max_discount(prices: list[dict[str, Any]]) -> float | None:
