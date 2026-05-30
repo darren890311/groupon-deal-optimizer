@@ -8,6 +8,7 @@ Clients can be injected (FastAPI shares one set across requests) or are built
 lazily from env keys.
 """
 
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -68,30 +69,38 @@ def analyze(
 
     deal_price = min((t.deal for t in deal.prices if t.deal is not None), default=None)
 
-    comps = competitors.find_competitors(
-        deal.category, deal.city,
-        exclude_slug=scrape.slug_from_url(url),
-        deal_price=deal_price,
-        deal_title=deal.title,
-        deal_options=[t.label for t in deal.prices if t.label],
-        tavily_client=tavily_client,
-        anthropic_client=anthropic_client,
-        cache_dir=competitor_cache_dir,
-    )
-
-    rep = reputation.research_reputation(
-        anthropic_client, tavily_client,
-        merchant=deal.merchant, city=deal.city,
-        groupon_rating=audit.get("rating"),
-        groupon_reviews=audit.get("review_count"),
-    )
-
-    direct_booking = direct.check_direct_booking(
-        anthropic_client, tavily_client,
-        merchant=deal.merchant, city=deal.city,
-        category_leaf=competitors._category_leaf(deal.category),
-        service=deal.title, deal_price=deal_price,
-    )
+    # Competitors, reputation and direct-booking are independent (each derives only
+    # from the deal), so run them concurrently — they are all I/O-bound (Tavily,
+    # Anthropic, Playwright), which releases the GIL. Only the verdict waits on all.
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        f_comps = pool.submit(
+            competitors.find_competitors,
+            deal.category, deal.city,
+            exclude_slug=scrape.slug_from_url(url),
+            deal_price=deal_price,
+            deal_title=deal.title,
+            deal_options=[t.label for t in deal.prices if t.label],
+            tavily_client=tavily_client,
+            anthropic_client=anthropic_client,
+            cache_dir=competitor_cache_dir,
+        )
+        f_rep = pool.submit(
+            reputation.research_reputation,
+            anthropic_client, tavily_client,
+            merchant=deal.merchant, city=deal.city,
+            groupon_rating=audit.get("rating"),
+            groupon_reviews=audit.get("review_count"),
+        )
+        f_direct = pool.submit(
+            direct.check_direct_booking,
+            anthropic_client, tavily_client,
+            merchant=deal.merchant, city=deal.city,
+            category_leaf=competitors._category_leaf(deal.category),
+            service=deal.title, deal_price=deal_price,
+        )
+        comps = f_comps.result()
+        rep = f_rep.result()
+        direct_booking = f_direct.result()
 
     verd = verdict.synthesize_verdict(anthropic_client, deal, comps, rep, direct_booking)
 

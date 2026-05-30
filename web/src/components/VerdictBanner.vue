@@ -1,4 +1,6 @@
 <script setup>
+import { bookingUrl } from '../api'
+
 const props = defineProps({ verdict: Object, deal: Object })
 
 const TONE = {
@@ -26,6 +28,14 @@ function tone(w) {
     <p v-if="verdict.recommended_action" class="action">
       <strong>What to do:</strong> {{ verdict.recommended_action }}
     </p>
+
+    <a
+      v-if="deal && deal.url"
+      class="book"
+      :href="bookingUrl(deal.url)"
+      target="_blank"
+      rel="noopener"
+    >Book anyway on Groupon →</a>
   </div>
 </template>
 
@@ -74,4 +84,17 @@ function tone(w) {
 .badge.bad .dot  { background: var(--bad-fg); }
 
 .action { margin: 18px 0 0; font-size: 0.95rem; }
+
+.book {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.book:hover { text-decoration: none; border-color: var(--ink); }
 </style>

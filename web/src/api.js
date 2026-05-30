@@ -20,3 +20,10 @@ export async function analyzeDeal(url) {
   }
   return data
 }
+
+// Where "Book anyway" links to. Centralized so swapping the raw deal URL for a
+// Groupon affiliate link later is a one-line change.
+export function bookingUrl(dealUrl) {
+  // TODO: wrap with the Groupon affiliate redirect/params once enrolled.
+  return dealUrl
+}
