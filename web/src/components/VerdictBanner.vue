@@ -10,9 +10,9 @@ const bookLabel = computed(() =>
 )
 
 const TONE = {
-  yes: { cls: 'ok', label: 'Worth buying' },
-  caution: { cls: 'warn', label: 'Buy with caution' },
-  no: { cls: 'bad', label: 'Skip it' },
+  yes: { cls: 'ok', label: 'Worth buying', icon: '✓' },
+  caution: { cls: 'warn', label: 'Buy with caution', icon: '⚠' },
+  no: { cls: 'bad', label: 'Not worth it', icon: '✕' },
 }
 
 function tone(w) {
@@ -22,7 +22,9 @@ function tone(w) {
 
 <template>
   <div class="banner" :class="tone(verdict.worth_buying).cls">
-    <div class="verdict-tag">{{ tone(verdict.worth_buying).label }}</div>
+    <div class="verdict-tag">
+      <span class="vicon">{{ tone(verdict.worth_buying).icon }}</span>{{ tone(verdict.worth_buying).label }}
+    </div>
     <p class="one-liner">{{ verdict.one_liner }}</p>
 
     <div class="badges">
@@ -56,20 +58,36 @@ function tone(w) {
 .banner.bad  { background: var(--bad-bg);  border-color: var(--bad-line); }
 
 .verdict-tag {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.6rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+.vicon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  color: #fff;
+  flex: none;
 }
 .banner.ok .verdict-tag   { color: var(--ok-fg); }
 .banner.warn .verdict-tag { color: var(--warn-fg); }
 .banner.bad .verdict-tag  { color: var(--bad-fg); }
+.banner.ok .vicon   { background: var(--ok-fg); }
+.banner.warn .vicon { background: var(--warn-fg); }
+.banner.bad .vicon  { background: var(--bad-fg); }
 
 .one-liner {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 8px 0 18px;
-  line-height: 1.35;
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin: 10px 0 18px;
+  line-height: 1.45;
 }
 
 .badges { display: flex; flex-wrap: wrap; gap: 8px; }
