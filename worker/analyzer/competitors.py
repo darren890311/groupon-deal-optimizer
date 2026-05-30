@@ -167,10 +167,13 @@ def classify_comparability(
 
 Below are competing deals in the same city and category. For each, classify how comparable its service is to the shopper's deal:
 - "same": an equivalent substitute — the same service tier/spec the shopper would accept instead.
-- "similar": related but with a meaningful spec difference (e.g. conventional/blend vs full synthetic oil, missing tire rotation or inspection, fewer quarts, partial vs full).
-- "different": not a real substitute for what the shopper wants.
+- "similar": the SAME kind of service/experience, with a meaningful spec or scope difference (e.g. conventional/blend vs full synthetic oil, missing tire rotation, partial vs full highlights, 50-min vs 60-min massage).
+- "different": a different kind of service, venue, or experience — NOT a real substitute, even if it sits in the same Groupon category.
 
-Be strict: full synthetic vs conventional/blend is at most "similar", never "same".
+Be strict on two things:
+1. full synthetic vs conventional/blend is at most "similar", never "same".
+2. A different kind of venue/experience is "different", not "similar" — e.g. a waterpark vs a county fair, a museum vs a zoo, a massage vs a facial. Only mark "similar" when a shopper who wants THIS deal would seriously consider it as a near-substitute.
+
 For "similar"/"different", give a difference_note of <=12 words naming the key difference. For "same", leave difference_note empty.
 
 Competitors:

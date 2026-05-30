@@ -11,18 +11,23 @@ const heading = computed(() =>
     : 'Cheaper / comparable options nearby',
 )
 
-const sorted = computed(() =>
-  [...(props.competitors || [])].sort((a, b) => (b.cheaper ? 1 : 0) - (a.cheaper ? 1 : 0)),
+// Only genuine alternatives: same-service deals (any price — they show whether
+// you're paying a fair rate) plus cheaper "similar" ones. A pricier, non-identical
+// option is not an alternative, so it's hidden rather than shown as "comparable".
+const visible = computed(() =>
+  [...(props.competitors || [])]
+    .filter((c) => c.match === 'same' || c.cheaper)
+    .sort((a, b) => (b.cheaper ? 1 : 0) - (a.cheaper ? 1 : 0)),
 )
 
 function price(n) { return n == null ? '—' : `$${n}` }
 </script>
 
 <template>
-  <div class="card" v-if="competitors && competitors.length">
+  <div class="card" v-if="visible.length">
     <h3>{{ heading }}</h3>
     <ul class="list">
-      <li v-for="c in sorted" :key="c.url || c.merchant" class="comp">
+      <li v-for="c in visible" :key="c.url || c.merchant" class="comp">
         <div class="top">
           <a v-if="c.url" :href="c.url" target="_blank" rel="noopener" class="name">{{ c.merchant }}</a>
           <span v-else class="name">{{ c.merchant }}</span>
