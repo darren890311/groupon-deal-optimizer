@@ -18,6 +18,7 @@ from .parse_helpers import (
     extract_faqs,
     extract_fine_print,
     extract_highlights,
+    extract_prices_from_next_data,
     extract_prices_from_variants,
     find_business,
     find_jsonld,
@@ -59,8 +60,12 @@ def parse_audit(html: str, url: str) -> dict[str, Any]:
         (soup.find("meta", attrs={"name": "description"}) or {}).get("content")
     )
 
-    variants = product.get("hasVariant") or []
-    prices = extract_prices_from_variants(variants if isinstance(variants, list) else [])
+    # Prefer the Next.js DealOption pricing (true strike-through anchor); fall
+    # back to JSON-LD only if it's absent, since JSON-LD mis-reports promo deals.
+    prices = extract_prices_from_next_data(soup)
+    if not prices:
+        variants = product.get("hasVariant") or []
+        prices = extract_prices_from_variants(variants if isinstance(variants, list) else [])
     if not prices and isinstance(product.get("offers"), (dict, list)):
         offer = product["offers"]
         if isinstance(offer, list):

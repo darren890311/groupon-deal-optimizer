@@ -190,6 +190,56 @@ def extract_prices_from_variants(variants: list[dict[str, Any]]) -> list[dict[st
     return out
 
 
+def _nd_amount(price_obj: Any) -> float | None:
+    """Groupon Next.js prices are {amount: <cents>, ...}."""
+    if isinstance(price_obj, dict):
+        amt = price_obj.get("amount")
+        if isinstance(amt, (int, float)):
+            return amt / 100
+    return None
+
+
+def extract_prices_from_next_data(soup: BeautifulSoup) -> list[dict[str, Any]]:
+    """Authoritative deal-page pricing from the embedded Next.js state.
+
+    Each `DealOption` carries `unformattedStrikeThroughPrice` (the real anchor)
+    and `unformattedPrice` (the deal price) — what the page actually renders.
+    The JSON-LD `offers`, by contrast, on promo-code deals encode the deal price
+    as `price` and the promo price as `SalePrice`, hiding the true anchor and
+    yielding a wrong discount (e.g. 25% instead of the real 50%).
+    """
+    nd = soup.find("script", id="__NEXT_DATA__")
+    if not nd or not nd.string:
+        return []
+    try:
+        data = json.loads(nd.string)
+    except json.JSONDecodeError:
+        return []
+    apollo = (((data.get("props") or {}).get("pageProps") or {}).get("__APOLLO_STATE__")) or {}
+    if not isinstance(apollo, dict):
+        return []
+
+    out: list[dict[str, Any]] = []
+    for key, obj in apollo.items():
+        if not key.startswith("DealOption:") or not isinstance(obj, dict):
+            continue
+        deal_price = _nd_amount(obj.get("unformattedPrice"))
+        if deal_price is None:
+            continue
+        strike = _nd_amount(obj.get("unformattedStrikeThroughPrice"))
+        original = strike if strike is not None else deal_price
+        discount_pct = None
+        if original and original > 0 and deal_price < original:
+            discount_pct = round((1 - deal_price / original) * 100, 1)
+        out.append({
+            "label": obj.get("title") or "Default",
+            "original_price": original,
+            "deal_price": deal_price,
+            "discount_pct": discount_pct,
+        })
+    return out
+
+
 # --- DOM-based extractors (fallbacks for content not in JSON-LD) -----------
 
 def is_content_list(ul) -> bool:
