@@ -90,11 +90,11 @@ function tone(w) {
   margin-top: 18px;
   padding: 10px 18px;
   border-radius: 10px;
-  background: #fff;
-  border: 1px solid var(--line);
-  color: var(--ink);
+  background: #53a318; /* Groupon green */
+  border: 1px solid #53a318;
+  color: #fff;
   font-weight: 600;
   font-size: 0.92rem;
 }
-.book:hover { text-decoration: none; border-color: var(--ink); }
+.book:hover { text-decoration: none; background: #478c14; border-color: #478c14; }
 </style>

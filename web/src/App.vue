@@ -43,7 +43,7 @@ async function run() {
           {{ loading ? 'Analyzing…' : 'Analyze' }}
         </button>
       </form>
-      <p v-if="loading" class="hint">Scraping the live page and competitors — this takes ~30–45s.</p>
+      <p v-if="loading" class="hint">Scraping the live page and competitors — usually ~10s (instant if recently analyzed).</p>
       <p v-if="error" class="err">{{ error }}</p>
     </header>
 
