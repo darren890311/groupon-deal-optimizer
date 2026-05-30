@@ -6,8 +6,11 @@ import (
 	"context"
 	"encoding/json"
 	"io"
+	"log/slog"
 	"net/http"
 	"strings"
+
+	"google.golang.org/api/idtoken"
 )
 
 type Client struct {
@@ -16,7 +19,18 @@ type Client struct {
 }
 
 func New(baseURL string) *Client {
-	return &Client{baseURL: strings.TrimRight(baseURL, "/"), http: &http.Client{}}
+	base := strings.TrimRight(baseURL, "/")
+	// Authenticated service-to-service calls: attach a Google-signed identity
+	// token whose audience is the worker URL, so the worker can stay private.
+	// On Cloud Run this uses the service account; locally (no ADC) we fall back
+	// to an unauthenticated client, which is fine against a local/public worker.
+	httpClient := http.DefaultClient
+	if c, err := idtoken.NewClient(context.Background(), base); err == nil {
+		httpClient = c
+	} else {
+		slog.Warn("idtoken client unavailable; calling worker unauthenticated", "err", err)
+	}
+	return &Client{baseURL: base, http: httpClient}
 }
 
 // Analyze posts the deal URL to the worker and returns the raw response body and
