@@ -24,6 +24,10 @@ def _min_deal_price(deal: Deal) -> float | None:
     return min(prices) if prices else None
 
 
+def _fmt_range(lo: float, hi: float) -> str:
+    return f"${lo:.0f}" if lo == hi else f"${lo:.0f}-${hi:.0f}"
+
+
 def compute_badges(deal: Deal, competitors: list[Competitor], reputation: Reputation) -> list[Badge]:
     badges: list[Badge] = []
 
@@ -39,18 +43,30 @@ def compute_badges(deal: Deal, competitors: list[Competitor], reputation: Reputa
     else:  # none
         badges.append(Badge(type="discount", status="warn", label="No real discount on offer"))
 
-    # --- price (vs like-for-like competitors) -----------------------------
-    rng = like_for_like_range(competitors)
+    # --- price (tiered: like-for-like → comparable-but-not-identical) -----
     price = _min_deal_price(deal)
-    if rng and price is not None:
-        lo, hi = rng
-        rng_str = f"${lo:.0f}" if lo == hi else f"${lo:.0f}-${hi:.0f}"
+    same_rng = like_for_like_range(competitors)
+    similar_prices = [c.price for c in competitors if c.match == "similar" and c.price is not None]
+    if price is not None and same_rng:
+        lo, hi = same_rng
+        rng_str = _fmt_range(lo, hi)
         if price <= hi:
             badges.append(Badge(type="price", status="ok",
                                 label=f"Price is fair for the service ({rng_str} elsewhere)"))
         else:
             badges.append(Badge(type="price", status="bad",
                                 label=f"Above comparable deals ({rng_str} for the same service)"))
+    elif price is not None and similar_prices:
+        # No exact match — benchmark against similar (not identical) deals, and
+        # say so, so a premium for extra features doesn't read as "overpriced".
+        lo, hi = min(similar_prices), max(similar_prices)
+        rng_str = _fmt_range(lo, hi)
+        if price <= hi * 1.10:
+            badges.append(Badge(type="price", status="ok",
+                                label=f"In line with comparable (not identical) deals ({rng_str})"))
+        else:
+            badges.append(Badge(type="price", status="warn",
+                                label=f"Pricier than comparable (not identical) deals ({rng_str}) — check the extras are worth it"))
     else:
         badges.append(Badge(type="price", status="warn",
                             label="Couldn't verify price against comparable deals"))
@@ -83,6 +99,8 @@ Decide `worth_buying`:
 - "caution": mixed signals — e.g. the price is fair but the advertised discount is misleading, or the rating picture is muddy. Buyable, but the shopper should know the catch (and may do better booking direct).
 - "no": the deal is worse than comparable same-service options (overpriced AND/OR the merchant rates clearly lower elsewhere), often compounded by a fake discount. Steer them away.
 
+On price: only call a deal "overpriced" when it loses to an equivalent ("same") service. If the only competitors are "similar" (related but a spec difference), do NOT call it overpriced — instead note that comparable deals run $X-Y and that this one's higher price may reflect the extras it includes. Never compare a richer bundle to a barer service as if equal.
+
 `one_liner`: ONE sentence capturing the punchline, in the spirit of "Price is OK but the advertised discount is misleading — consider booking directly via Yelp." Name the specific catch.
 
 `recommended_action`: one concrete next step — e.g. "Buy it — genuine discount and strong reviews", "Book directly via Yelp instead", or "Skip — a comparable full-synthetic change nearby is $40-55".
@@ -109,21 +127,29 @@ def synthesize_verdict(
 
     rng = like_for_like_range(competitors)
     price = _min_deal_price(deal)
-    cheaper_same = [
-        c for c in competitors if c.match == "same" and c.cheaper
-    ]
-    cheaper_lines = "\n".join(
-        f"  - {c.merchant}: ${c.price:.0f} ({c.discount_pct:.0f}% off) {c.url}"
-        for c in cheaper_same[:3]
-    ) or "  (none cheaper at the same service tier)"
+    if rng:
+        price_basis = f"comparable SAME-service competitors range {_fmt_range(*rng)}"
+    elif any(c.match == "similar" for c in competitors):
+        sims = [c.price for c in competitors if c.match == "similar" and c.price is not None]
+        price_basis = (f"no exact match found; SIMILAR (not identical) deals range {_fmt_range(min(sims), max(sims))} "
+                       "— a higher price here may be justified by extras this deal includes")
+    else:
+        price_basis = "no comparable deals found"
+
+    comp_lines = "\n".join(
+        f"  - [{c.match}] {c.merchant}: ${c.price:.0f} ({c.discount_pct:.0f}% off)"
+        + (f" — {c.difference_note}" if c.difference_note else "")
+        + (f" {c.url}" if c.cheaper else "")
+        for c in competitors[:5]
+    ) or "  (no comparable deals found)"
 
     user_content = f"""Deal: {deal.title}  ({deal.merchant}, {deal.city})
 
 Discount: advertised {deal.advertised_discount_pct}% vs actual max {deal.actual_max_discount_pct}% → {deal.discount_verdict}
 
-Price: this deal from ${price}; comparable same-service competitors range {f'${rng[0]:.0f}-${rng[1]:.0f}' if rng else 'unknown (no like-for-like match found)'}.
-Cheaper same-service options:
-{cheaper_lines}
+Price: this deal from ${price}; {price_basis}.
+Competitors (same city; "same" = equivalent service, "similar" = related but a spec difference):
+{comp_lines}
 
 Reputation: Groupon {reputation.groupon_rating}/{reputation.groupon_reviews} reviews vs {reputation.external_source} {reputation.external_rating}/{reputation.external_reviews} → {reputation.gap_verdict}.
 {reputation.summary}
