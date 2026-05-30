@@ -1,27 +1,35 @@
-"""Competitor discovery — same city, on Groupon.
+"""Competitor discovery — same city, on Groupon, with service comparability.
 
 Strategy (hybrid):
   1. Tavily, constrained to groupon.com, to discover the Groupon *local category*
      page URL for this deal's (category, city) — e.g. /local/chicago/oil-change.
   2. Playwright-scrape that page. It is already city-scoped, so every deal on it
      is a same-city competitor by construction.
-  3. Parse the deal cards out of the page's embedded Apollo state
+  3. BeautifulSoup locates the page's embedded Apollo state
      (__NEXT_DATA__ → __APOLLO_STATE__.ROOT_QUERY.browseDealFeed(...).cards),
      which carries real prices + discounts (no fragile DOM scraping).
+  4. Claude (Sonnet) judges how comparable each competitor's *service* is to the
+     analyzed deal — "same" / "similar" / "different" + a one-line difference —
+     so a full-synthetic oil change is not blindly compared to a conventional one.
 
-The deal under analysis is excluded by slug, remaining cards are marked
-`cheaper` relative to it and returned cheapest-first.
+The deal under analysis is excluded by slug; remaining competitors are labelled,
+marked `cheaper`, and returned with like-for-like ("same") matches first.
 """
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 from urllib.parse import urlparse
 
+import anthropic
 from bs4 import BeautifulSoup
+from pydantic import BaseModel, Field
 
 from . import scrape
+from .config import SONNET_MODEL
 from .models import Competitor
+
+_MATCH_RANK = {"same": 0, "similar": 1, None: 1, "different": 2}
 
 
 # --- parse the local category page (pure, network-free) --------------------
@@ -120,6 +128,81 @@ def discover_local_url(category: str | None, city: str | None, tavily_client) ->
     return local_urls[0]
 
 
+# --- LLM service comparability ---------------------------------------------
+
+class _ComparabilityItem(BaseModel):
+    index: int
+    match: Literal["same", "similar", "different"]
+    difference_note: str = Field(
+        default="", description="<=12 words naming the key spec difference; empty when match is 'same'"
+    )
+
+
+class _ComparabilityResult(BaseModel):
+    items: list[_ComparabilityItem]
+
+
+def classify_comparability(
+    client: anthropic.Anthropic | None,
+    deal_title: str | None,
+    deal_options: list[str] | None,
+    competitors: list[Competitor],
+) -> None:
+    """Annotate each competitor in place with `match` + `difference_note`.
+
+    No-op when no client/competitors. On any failure, leaves match=None so the
+    pipeline degrades gracefully (treated as "similar" for ranking).
+    """
+    if not client or not competitors:
+        return
+
+    options_str = "; ".join(deal_options) if deal_options else "(none listed)"
+    comp_block = "\n".join(
+        f"{i}. {c.title or '(untitled)'}  [merchant: {c.merchant}]"
+        for i, c in enumerate(competitors)
+    )
+    prompt = f"""The shopper is looking at THIS Groupon deal:
+- Title: {deal_title}
+- Service options: {options_str}
+
+Below are competing deals in the same city and category. For each, classify how comparable its service is to the shopper's deal:
+- "same": an equivalent substitute — the same service tier/spec the shopper would accept instead.
+- "similar": related but with a meaningful spec difference (e.g. conventional/blend vs full synthetic oil, missing tire rotation or inspection, fewer quarts, partial vs full).
+- "different": not a real substitute for what the shopper wants.
+
+Be strict: full synthetic vs conventional/blend is at most "similar", never "same".
+For "similar"/"different", give a difference_note of <=12 words naming the key difference. For "same", leave difference_note empty.
+
+Competitors:
+{comp_block}"""
+
+    try:
+        resp = client.messages.parse(
+            model=SONNET_MODEL,
+            max_tokens=1500,
+            messages=[{"role": "user", "content": prompt}],
+            output_format=_ComparabilityResult,
+        )
+        by_idx = {it.index: it for it in resp.parsed_output.items}
+    except Exception as e:
+        print(f"  comparability classification failed: {e}")
+        return
+
+    for i, c in enumerate(competitors):
+        it = by_idx.get(i)
+        if it:
+            c.match = it.match
+            c.difference_note = it.difference_note
+
+
+def like_for_like_range(competitors: list[Competitor]) -> tuple[float, float] | None:
+    """Min/max deal price across "same"-service competitors — the fair benchmark."""
+    prices = [c.price for c in competitors if c.match == "same" and c.price is not None]
+    if not prices:
+        return None
+    return min(prices), max(prices)
+
+
 # --- orchestrator ----------------------------------------------------------
 
 def find_competitors(
@@ -128,7 +211,10 @@ def find_competitors(
     *,
     exclude_slug: str | None,
     deal_price: float | None,
+    deal_title: str | None = None,
+    deal_options: list[str] | None = None,
     tavily_client,
+    anthropic_client: anthropic.Anthropic | None = None,
     max_n: int = 5,
     cache_dir: str | Path | None = None,
 ) -> list[Competitor]:
@@ -142,53 +228,71 @@ def find_competitors(
         print(f"  competitor page scrape failed ({local_url}): {e}")
         return []
 
-    cards = parse_local_cards(html)
     competitors: list[Competitor] = []
-    for c in cards:
+    for c in parse_local_cards(html):
         if exclude_slug and c.get("slug") == exclude_slug:
             continue
         if c.get("deal_price") is None:
             continue
-        cheaper = (
-            deal_price is not None and c["deal_price"] < deal_price
-        )
         competitors.append(Competitor(
             merchant=c.get("merchant"),
             title=c.get("title"),
             price=c.get("deal_price"),
             discount_pct=c.get("discount_pct"),
             url=c.get("url"),
-            cheaper=cheaper,
+            cheaper=deal_price is not None and c["deal_price"] < deal_price,
         ))
 
-    competitors.sort(key=lambda x: (x.price is None, x.price))
+    # Judge service comparability across all candidates before trimming, so
+    # like-for-like matches surface even if a different-service deal is cheaper.
+    classify_comparability(anthropic_client, deal_title, deal_options, competitors)
+
+    # Like-for-like ("same") first, then by price ascending.
+    competitors.sort(key=lambda x: (_MATCH_RANK.get(x.match, 1), x.price is None, x.price))
     return competitors[:max_n]
 
 
-# --- standalone demo: python -m analyzer.competitors "<category>" "<city>" ---
+# --- standalone demo: python -m analyzer.competitors <deal_url> -------------
 
 def _demo() -> int:
+    import os
     import sys
 
-    from dotenv import load_dotenv
-    load_dotenv()
     from tavily import TavilyClient
-    import os
 
-    category = sys.argv[1] if len(sys.argv) > 1 else "Oil Change"
-    city = sys.argv[2] if len(sys.argv) > 2 else "Chicago"
-    exclude = sys.argv[3] if len(sys.argv) > 3 else None
-    deal_price = float(sys.argv[4]) if len(sys.argv) > 4 else None
+    from .config import TAVILY_API_KEY
+    from .pipeline import analyze
 
+    if len(sys.argv) < 2:
+        print("usage: python -m analyzer.competitors <groupon-deal-url>", file=sys.stderr)
+        return 2
+
+    deal_url = sys.argv[1]
     cache_dir = Path(__file__).resolve().parents[1] / "explore_cache"
-    tavily = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+    # Analyze the deal first to derive city/category/price/service from the page.
+    analysis = analyze(deal_url, cache_dir=Path(__file__).resolve().parents[2] / "data" / "raw_html")
+    d = analysis.deal
+    deal_price = min((t.deal for t in d.prices if t.deal is not None), default=None)
+    options = [t.label for t in d.prices if t.label]
+
+    print(f"Deal: {d.title}  ({d.city}, {d.category})")
+    print(f"  price={deal_price}  options={options}\n")
+
+    tavily = TavilyClient(api_key=TAVILY_API_KEY or os.environ["TAVILY_API_KEY"])
+    client = anthropic.Anthropic()
 
     comps = find_competitors(
-        category, city,
-        exclude_slug=exclude, deal_price=deal_price,
-        tavily_client=tavily, cache_dir=cache_dir,
+        d.category, d.city,
+        exclude_slug=scrape.slug_from_url(deal_url),
+        deal_price=deal_price,
+        deal_title=d.title, deal_options=options,
+        tavily_client=tavily, anthropic_client=client,
+        cache_dir=cache_dir,
     )
     print(json.dumps([c.model_dump() for c in comps], ensure_ascii=False, indent=2))
+    rng = like_for_like_range(comps)
+    print(f"\nlike-for-like (same-service) price range: {rng}")
     return 0
 
 

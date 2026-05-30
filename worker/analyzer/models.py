@@ -44,6 +44,9 @@ class Reputation(BaseModel):
     summary: str = ""
 
 
+ServiceMatch = Literal["same", "similar", "different"]
+
+
 class Competitor(BaseModel):
     merchant: str | None = None
     title: str | None = None
@@ -51,6 +54,9 @@ class Competitor(BaseModel):
     discount_pct: float | None = None
     url: str | None = None
     cheaper: bool | None = None
+    # How comparable this competitor's service is to the analyzed deal.
+    match: ServiceMatch | None = None
+    difference_note: str = ""
 
 
 class DirectBooking(BaseModel):
