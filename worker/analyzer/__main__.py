@@ -24,9 +24,11 @@ def main() -> int:
         return 2
 
     url = args[0]
-    cache_dir = None if "--no-cache" in sys.argv else _DEFAULT_CACHE
+    use_cache = "--no-cache" not in sys.argv
+    cache_dir = _DEFAULT_CACHE if use_cache else None
+    competitor_cache_dir = (_DEFAULT_CACHE.parent.parent / "worker" / "explore_cache") if use_cache else None
 
-    result = analyze(url, cache_dir=cache_dir)
+    result = analyze(url, cache_dir=cache_dir, competitor_cache_dir=competitor_cache_dir)
     print(json.dumps(result.model_dump(), ensure_ascii=False, indent=2))
     return 0
 

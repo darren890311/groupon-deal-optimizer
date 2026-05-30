@@ -1,26 +1,29 @@
-"""Orchestrator: a Groupon URL → a DealAnalysis.
+"""Orchestrator: a Groupon URL → a full DealAnalysis.
 
-Milestone 1 fills `deal` (incl. the advertised-vs-actual discount verdict) and
-the Groupon side of `reputation`. Competitors, external reputation, direct
-booking and the LLM verdict are layered in by later milestones.
+Stages: scrape → parse → discount → competitors (+ comparability) →
+cross-platform reputation → verdict. Each LLM/Tavily stage degrades gracefully
+when no client/key is available (so the deal + discount always return).
+
+Clients can be injected (FastAPI shares one set across requests) or are built
+lazily from env keys.
 """
 
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import discount, parse, scrape
+import anthropic
+from tavily import TavilyClient
+
+from . import competitors, discount, parse, reputation, scrape, verdict
+from .config import ANTHROPIC_API_KEY, TAVILY_API_KEY
 from .models import Deal, DealAnalysis, Meta, PriceTier, Reputation
 
 
-def analyze(url: str, *, cache_dir: str | Path | None = None) -> DealAnalysis:
-    html = scrape.fetch_html(url, cache_dir=cache_dir)
-    audit = parse.parse_audit(html, url)
-
+def _build_deal(url: str, audit: dict) -> Deal:
     prices = audit.get("prices") or []
     advertised = discount.parse_advertised_discount(audit.get("title"))
     actual = discount.actual_max_discount(prices)
-
-    deal = Deal(
+    return Deal(
         url=url,
         title=audit.get("title"),
         merchant=audit.get("merchant_name"),
@@ -40,13 +43,55 @@ def analyze(url: str, *, cache_dir: str | Path | None = None) -> DealAnalysis:
         ],
     )
 
-    reputation = Reputation(
+
+def _default_clients(anthropic_client, tavily_client):
+    if anthropic_client is None and ANTHROPIC_API_KEY:
+        anthropic_client = anthropic.Anthropic()
+    if tavily_client is None and TAVILY_API_KEY:
+        tavily_client = TavilyClient(api_key=TAVILY_API_KEY)
+    return anthropic_client, tavily_client
+
+
+def analyze(
+    url: str,
+    *,
+    cache_dir: str | Path | None = None,
+    competitor_cache_dir: str | Path | None = None,
+    anthropic_client: anthropic.Anthropic | None = None,
+    tavily_client=None,
+) -> DealAnalysis:
+    html = scrape.fetch_html(url, cache_dir=cache_dir)
+    audit = parse.parse_audit(html, url)
+
+    deal = _build_deal(url, audit)
+    anthropic_client, tavily_client = _default_clients(anthropic_client, tavily_client)
+
+    deal_price = min((t.deal for t in deal.prices if t.deal is not None), default=None)
+
+    comps = competitors.find_competitors(
+        deal.category, deal.city,
+        exclude_slug=scrape.slug_from_url(url),
+        deal_price=deal_price,
+        deal_title=deal.title,
+        deal_options=[t.label for t in deal.prices if t.label],
+        tavily_client=tavily_client,
+        anthropic_client=anthropic_client,
+        cache_dir=competitor_cache_dir,
+    )
+
+    rep = reputation.research_reputation(
+        anthropic_client, tavily_client,
+        merchant=deal.merchant, city=deal.city,
         groupon_rating=audit.get("rating"),
         groupon_reviews=audit.get("review_count"),
     )
 
+    verd = verdict.synthesize_verdict(anthropic_client, deal, comps, rep)
+
     return DealAnalysis(
         deal=deal,
-        reputation=reputation,
+        reputation=rep,
+        competitors=comps,
+        verdict=verd,
         meta=Meta(analyzed_at=datetime.now(timezone.utc).isoformat()),
     )
