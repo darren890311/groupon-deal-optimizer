@@ -1,75 +1,127 @@
-# Groupon Deal Page Optimizer
+# Is This Groupon Deal Worth It?
 
-Pipeline that takes Groupon deal URLs, scrapes them, runs competitive and merchant research, and produces an actionable optimization proposal per deal — backed by quoted evidence from reviews and competitor data.
+A consumer tool that tells you whether a Groupon deal is actually a good buy. Paste a
+deal link and it scrapes the live page, checks the **real** discount against the
+advertised one, compares prices to similar same-city deals on Groupon, cross-references
+the merchant's rating on Yelp/Google, and returns a clear **buy / caution / skip**
+verdict — every claim grounded in scraped data, not vibes.
 
-## Outputs per deal (in `output/<slug>/`)
+**▶︎ Live: https://groupon-analyzer-31548.web.app**
 
-- `audit.json` / `audit.md` — every structured element of the live page (title, pricing, highlights, fine print, reviews, SEO, trust + urgency signals)
-- `research.json` / `research.md` — competitive pricing, reputation, category benchmarks, content gaps (with sources)
-- `proposal.json` / `proposal.md` — prioritized recommendations, each tied to specific scraped or researched evidence
+![screenshot](docs/screenshot.png)
 
-All structured data also lives in `data/groupon.duckdb` (queryable via DuckDB CLI).
+---
 
-## Setup
+## Why it exists
 
-```bash
-pip install -r requirements.txt
-playwright install chromium
-cp .env.example .env  # fill in ANTHROPIC_API_KEY and TAVILY_API_KEY
-```
+Groupon deal pages routinely advertise a headline discount ("Up to 50% Off") that's
+larger than what the price tiers actually show, hide cheaper equivalents a few clicks
+away, and lean on a thin on-platform review count. This tool does the legwork a careful
+shopper can't do at scale and gives a straight answer.
 
-## Run
+## What it checks
 
-```bash
-# Process all URLs in deals.txt
-python -m src run --urls deals.txt
-
-# One-off
-python -m src one "https://www.groupon.com/deals/<slug>"
-
-# Resume — skips deals whose proposal.md already exists
-python -m src run --urls deals.txt
-
-# Force re-process
-python -m src run --urls deals.txt --force
-```
+| Signal | What it does |
+| --- | --- |
+| **Discount truth** | Parses the advertised claim from the title and compares it to the real strike-through discount on each price tier. Flags `genuine` / `exaggerated` / `none`. |
+| **Like-for-like price** | Finds same-city deals on Groupon and uses an LLM to judge which are the *same* service vs merely *similar*, so a full-synthetic oil change isn't compared to a conventional one. |
+| **Cross-platform reputation** | Pulls the merchant's Yelp/Google rating and compares it to the Groupon score — surfacing when a deal looks great on Groupon but rates lower elsewhere. |
+| **Direct booking** | Checks whether booking the merchant directly (or via their site) beats the Groupon price. |
+| **Verdict** | Combines the above into deterministic badges + an LLM-written one-liner and recommended action. |
 
 ## Architecture
 
 ```
-URL → scrape (Playwright, HTML cached to data/raw_html/<slug>.html)
-    → parse  (BeautifulSoup + JSON-LD product schema → audit dict)
-    → store  (DuckDB: deals, prices, reviews)
-    → research (Claude generates Tavily queries → searches → extract themes)
-    → store  (DuckDB: research_findings)
-    → synthesize (Claude Opus 4.7, adaptive thinking, structured output via Pydantic)
-    → store  (DuckDB: recommendations)
-    → render (Markdown + JSON to output/<slug>/)
+Browser
+   │  POST /analyze { url }
+   ▼
+Vue 3 (Firebase Hosting)
+   ▼
+Go / Gin gateway  ──────────►  Neon Postgres
+   │  (cache by URL, 24h TTL)     (cache + history)
+   │  identity-token auth
+   ▼
+Python worker (FastAPI, private)
+   scrape (Playwright) → parse (BeautifulSoup + Next.js state)
+   → discount math → similar-deal scrape → reputation/direct (Tavily + Claude)
+   → verdict (Claude)
 ```
 
-### AI integration
+- **Stateless Python worker** does the heavy work (headless-Chromium scraping, LLM
+  calls). It's deployed **private** on Cloud Run — only the Go gateway can reach it,
+  via a Google-signed identity token — so the expensive backend can't be hit directly.
+- **Go gateway** is the only stateful layer: it owns caching/history in Postgres and is
+  the public entry point. The right-sized tool per layer — Go for the low-latency edge,
+  Python for the scraping/ML.
+- The three independent research stages (competitors, reputation, direct booking) run
+  **concurrently**; only the final verdict waits on all of them.
 
-Claude is wired into the pipeline at three judgment points, not just as final summarization:
+## Tech stack
 
-1. **`research.generate_queries`** — Claude (Sonnet 4.6) reads the audit and emits 5–7 Tavily queries spanning competitor pricing, reputation, category benchmarks, and content gaps. Structured output via Pydantic (`messages.parse()`).
-2. **`research.extract_review_themes`** — Claude (Sonnet 4.6) extracts recurring positive/negative themes from research snippets, with verbatim quotes.
-3. **`synthesize.synthesize_proposal`** — Claude (Opus 4.7, adaptive thinking, `effort: "high"`) writes the proposal grounded in audit + research data. The system prompt is ~5 KB of detailed rubric, marked with `cache_control: ephemeral` so the prefix is reused across all 20 deals (~90% input-cost reduction after the first call).
+- **Frontend:** Vue 3 + Vite, deployed on **Firebase Hosting**
+- **API gateway:** **Go** (Gin, pgx), packaged with a multi-stage Dockerfile, on **Cloud Run**
+- **Worker:** **Python** (FastAPI, Playwright, BeautifulSoup), Dockerized, on **Cloud Run** (private)
+- **Data:** **Neon** (serverless Postgres) for the analysis cache
+- **AI/search:** **Claude** (Anthropic) for judgment + structured output, **Tavily** for web search
+- **Infra:** GCP (Cloud Run, Cloud Build, Artifact Registry, IAM), Docker, service-to-service auth
 
-### Schema
+## Engineering notes
 
-```sql
-deals(slug PK, url, title, merchant_name, city, region, category, rating, review_count, bought_label, ...)
-prices(slug, option_idx, label, original_price, deal_price, discount_pct)
-reviews(slug, review_idx, rating, quote, author, date)
-research_findings(slug, finding_idx, category, query, source_url, snippet)
-recommendations(slug, rec_idx, field, current_value, proposed_value, rationale, evidence, priority)
+A few decisions worth calling out:
+
+- **Pricing is read from Groupon's embedded Next.js state, not JSON-LD.** On promo-code
+  deals the JSON-LD reports the deal price as the anchor and the promo price as the
+  "sale," yielding a wrong discount (e.g. 25% instead of the real 50%). The Next.js
+  `DealOption` state carries the true strike-through, which is what the page renders.
+- **The worker is private.** `allUsers` invoke access is removed; the Go gateway
+  authenticates with an OIDC identity token (`google.golang.org/api/idtoken`).
+- **Failures aren't cached.** A datacenter IP occasionally gets a bot-challenge page;
+  the worker retries once and, if still empty, returns an error instead of caching a
+  bogus "no data" result for 24h.
+- **The Go gateway is small on purpose** — a thin, tested edge (cache check → worker →
+  store) with graceful shutdown, structured logging, context timeouts, and table-driven
+  handler tests.
+
+## Local development
+
+Prereqs: Docker, Go 1.26+, Python 3.13+, Node 22+. Copy `.env.example` to `.env` and
+fill in `ANTHROPIC_API_KEY` and `TAVILY_API_KEY`.
+
+```bash
+# 1. Postgres
+docker compose up -d
+
+# 2. Python worker  →  http://127.0.0.1:8000
+cd worker && pip install -r requirements.txt && playwright install chromium
+python -m uvicorn main:app --port 8000
+
+# 3. Go gateway     →  http://127.0.0.1:8080
+cd api && DATABASE_URL="postgres://postgres:postgres@127.0.0.1:5432/groupon" \
+          WORKER_URL="http://127.0.0.1:8000" go run .
+
+# 4. Frontend       →  http://127.0.0.1:5173
+cd web && npm install && npm run dev
 ```
 
-## Adding more deals
+Quick CLI (no servers, analyzes one URL):
 
-Append URLs to `deals.txt`, one per line. The CLI deduplicates by slug and skips deals that already have a `proposal.md`.
+```bash
+cd worker && python -m analyzer "https://www.groupon.com/deals/<slug>"
+```
 
-## Notes
+## Deployment
 
-- Groupon pages are JS-rendered with bot detection — the scraper uses Playwright (Chromium, realistic UA, lazy-load scrolls). Raw HTML is cached so re-runs of parse/research/synthesize don't re-scrape.
-- Tavily free tier allows 1000 calls/month; 20 deals × ~5 queries = ~100 calls.
+- **Worker & gateway** → Cloud Run via `gcloud run deploy --source` (Cloud Build builds
+  the Dockerfiles). The worker is deployed with `--no-allow-unauthenticated`.
+- **Frontend** → `firebase deploy --only hosting` (build with `VITE_API_URL` set to the
+  gateway URL).
+- **DB** → Neon free tier; connection string set as the gateway's `DATABASE_URL`.
+
+## Repo layout
+
+```
+web/      Vue 3 frontend
+api/      Go (Gin) gateway — internal/{config,store,server,worker}
+worker/   Python FastAPI worker — analyzer/{scrape,parse,discount,competitors,reputation,direct,verdict}
+docs/     screenshot
+```
