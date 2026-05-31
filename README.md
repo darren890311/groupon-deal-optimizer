@@ -42,7 +42,7 @@ Go / Gin gateway  ──────────►  Neon Postgres
    │  identity-token auth
    ▼
 Python worker (FastAPI, private)
-   scrape (Playwright) → parse (BeautifulSoup + Next.js state)
+   scrape (Playwright) → parse (BeautifulSoup + Groupon's embedded JSON)
    → discount math → similar-deal scrape → reputation/direct (Tavily + Claude)
    → verdict (Claude)
 ```
@@ -69,10 +69,11 @@ Python worker (FastAPI, private)
 
 A few decisions worth calling out:
 
-- **Pricing is read from Groupon's embedded Next.js state, not JSON-LD.** On promo-code
-  deals the JSON-LD reports the deal price as the anchor and the promo price as the
-  "sale," yielding a wrong discount (e.g. 25% instead of the real 50%). The Next.js
-  `DealOption` state carries the true strike-through, which is what the page renders.
+- **Pricing is read from Groupon's embedded page data (`__NEXT_DATA__`), not JSON-LD.**
+  On promo-code deals the JSON-LD reports the deal price as the anchor and the promo
+  price as the "sale," yielding a wrong discount (e.g. 25% instead of the real 50%).
+  Groupon's embedded `DealOption` data carries the true strike-through, which is what
+  the page renders.
 - **The worker is private.** `allUsers` invoke access is removed; the Go gateway
   authenticates with an OIDC identity token (`google.golang.org/api/idtoken`).
 - **Failures aren't cached.** A datacenter IP occasionally gets a bot-challenge page;
