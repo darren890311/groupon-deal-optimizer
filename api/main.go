@@ -16,10 +16,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/darren890311/groupon-deal-optimizer/api/internal/config"
-	"github.com/darren890311/groupon-deal-optimizer/api/internal/server"
-	"github.com/darren890311/groupon-deal-optimizer/api/internal/store"
-	"github.com/darren890311/groupon-deal-optimizer/api/internal/worker"
+	"github.com/darren890311/revelio/api/internal/config"
+	"github.com/darren890311/revelio/api/internal/server"
+	"github.com/darren890311/revelio/api/internal/store"
+	"github.com/darren890311/revelio/api/internal/worker"
 )
 
 func main() {

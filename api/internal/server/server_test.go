@@ -13,7 +13,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/darren890311/groupon-deal-optimizer/api/internal/worker"
+	"github.com/darren890311/revelio/api/internal/worker"
 )
 
 // fakeCache is an in-memory Cache for handler tests.

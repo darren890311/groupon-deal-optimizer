@@ -12,8 +12,8 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	"github.com/darren890311/groupon-deal-optimizer/api/internal/store"
-	"github.com/darren890311/groupon-deal-optimizer/api/internal/worker"
+	"github.com/darren890311/revelio/api/internal/store"
+	"github.com/darren890311/revelio/api/internal/worker"
 )
 
 // How long to wait on the worker (a cold analysis is ~12s; leave headroom).

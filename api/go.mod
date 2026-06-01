@@ -1,4 +1,4 @@
-module github.com/darren890311/groupon-deal-optimizer/api
+module github.com/darren890311/revelio/api
 
 go 1.26
 
