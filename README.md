@@ -6,7 +6,7 @@ advertised one, compares prices to similar same-city deals on Groupon, cross-ref
 the merchant's rating on Yelp/Google, and returns a clear **buy / caution / skip**
 verdict — every claim grounded in scraped data, not vibes.
 
-**▶︎ Live: https://groupon-analyzer-31548.web.app**
+**▶︎ Live: https://getrevelio.web.app**
 
 ![screenshot](docs/screenshot.png)
 
