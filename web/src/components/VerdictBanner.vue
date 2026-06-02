@@ -99,8 +99,8 @@ function tone(w) {
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 999px;
-  background: #fff;
-  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 .dot { width: 8px; height: 8px; border-radius: 50%; }
 .badge.ok .dot   { background: var(--ok-fg); }

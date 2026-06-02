@@ -40,7 +40,7 @@ async function run() {
           :disabled="loading"
         />
         <button type="submit" :disabled="loading || !url">
-          {{ loading ? 'Analyzing…' : 'Analyze' }}
+          {{ loading ? 'Revealing…' : 'Reveal' }}
         </button>
       </form>
       <p v-if="loading" class="hint">Analyzing the deal and finding similar deals — usually ~10s (instant if recently analyzed).</p>
