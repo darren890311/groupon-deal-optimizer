@@ -73,7 +73,7 @@ def compute_badges(deal: Deal, competitors: list[Competitor], reputation: Reputa
 
     # --- reputation (external vs Groupon) ---------------------------------
     gv = reputation.gap_verdict
-    src = reputation.external_source or "other platforms"
+    src = "Google" if reputation.google_rating is not None else ("Yelp" if reputation.yelp_rating is not None else "other platforms")
     if gv == "external_lower":
         badges.append(Badge(type="reputation", status="bad",
                             label=f"Rated lower on {src} than on Groupon"))
@@ -164,7 +164,7 @@ Price: this deal from ${price}; {price_basis}.
 Similar deals (same city; "same" = equivalent service, "similar" = related but a spec difference):
 {comp_lines}
 
-Reputation: Groupon {reputation.groupon_rating}/{reputation.groupon_reviews} reviews vs {reputation.external_source} {reputation.external_rating}/{reputation.external_reviews} → {reputation.gap_verdict}.
+Reputation: Groupon {reputation.groupon_rating}★/{reputation.groupon_reviews} reviews · Google {reputation.google_rating}★/{reputation.google_reviews} · Yelp {reputation.yelp_rating}★/{reputation.yelp_reviews} → {reputation.gap_verdict}.
 {reputation.summary}
 
 Direct booking: {direct_booking.note if direct_booking else 'not checked'}

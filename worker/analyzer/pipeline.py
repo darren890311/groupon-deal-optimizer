@@ -16,7 +16,7 @@ import anthropic
 from tavily import TavilyClient
 
 from . import competitors, direct, discount, parse, reputation, scrape, verdict
-from .config import ANTHROPIC_API_KEY, TAVILY_API_KEY
+from .config import ANTHROPIC_API_KEY, GOOGLE_PLACES_API_KEY, TAVILY_API_KEY
 from .models import Deal, DealAnalysis, Meta, PriceTier, Reputation
 
 
@@ -96,6 +96,7 @@ def analyze(
             merchant=deal.merchant, city=deal.city,
             groupon_rating=audit.get("rating"),
             groupon_reviews=audit.get("review_count"),
+            places_api_key=GOOGLE_PLACES_API_KEY,
         )
         f_direct = pool.submit(
             direct.check_direct_booking,

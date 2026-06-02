@@ -37,10 +37,11 @@ class Deal(BaseModel):
 class Reputation(BaseModel):
     groupon_rating: float | None = None
     groupon_reviews: int | None = None
-    external_rating: float | None = None
-    external_reviews: int | None = None
-    external_source: str | None = None
-    gap_verdict: GapVerdict = "insufficient"
+    google_rating: float | None = None
+    google_reviews: int | None = None
+    yelp_rating: float | None = None
+    yelp_reviews: int | None = None
+    gap_verdict: GapVerdict = "insufficient"  # Groupon vs the primary external (Google preferred)
     summary: str = ""
 
 

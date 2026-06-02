@@ -1,31 +1,41 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({ reputation: Object })
-function star(n) { return n == null ? '—' : `${n}★` }
+
+const platforms = computed(() => {
+  const r = props.reputation || {}
+  return [
+    { name: 'Groupon', rating: r.groupon_rating, reviews: r.groupon_reviews },
+    { name: 'Google', rating: r.google_rating, reviews: r.google_reviews },
+    { name: 'Yelp', rating: r.yelp_rating, reviews: r.yelp_reviews },
+  ]
+})
 </script>
 
 <template>
   <div class="card">
     <h3>Reputation across platforms</h3>
-    <div class="cmp">
-      <div class="side">
-        <div class="score">{{ star(reputation.groupon_rating) }}</div>
-        <div class="src">Groupon<span v-if="reputation.groupon_reviews"> · {{ reputation.groupon_reviews }} reviews</span></div>
-      </div>
-      <div class="vs">vs</div>
-      <div class="side">
-        <div class="score">{{ star(reputation.external_rating) }}</div>
-        <div class="src">{{ reputation.external_source || 'External' }}<span v-if="reputation.external_reviews"> · {{ reputation.external_reviews }} reviews</span></div>
+    <div class="row">
+      <div v-for="p in platforms" :key="p.name" class="plat">
+        <div class="score" :class="{ none: p.rating == null }">
+          {{ p.rating == null ? '—' : p.rating }}<span v-if="p.rating != null" class="star">★</span>
+        </div>
+        <div class="name">{{ p.name }}</div>
+        <div class="rev">{{ p.reviews != null ? p.reviews + ' reviews' : 'no rating found' }}</div>
       </div>
     </div>
-    <p class="summary">{{ reputation.summary }}</p>
+    <p v-if="reputation.summary" class="summary">{{ reputation.summary }}</p>
   </div>
 </template>
 
 <style scoped>
-.cmp { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-.side { flex: 1; text-align: center; }
-.score { font-size: 1.8rem; font-weight: 700; }
-.src { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
-.vs { color: var(--muted); font-size: 0.85rem; font-weight: 600; }
+.row { display: flex; gap: 10px; margin-bottom: 14px; }
+.plat { flex: 1; text-align: center; }
+.score { font-size: 1.7rem; font-weight: 700; line-height: 1.1; }
+.score.none { color: var(--muted); }
+.star { color: #f5b301; font-size: 1.2rem; margin-left: 1px; }
+.name { font-size: 0.9rem; font-weight: 600; margin-top: 4px; }
+.rev { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 .summary { font-size: 0.92rem; color: var(--ink); margin: 0; }
 </style>

@@ -1,46 +1,135 @@
-"""Cross-platform reputation — does this merchant rate higher/lower elsewhere?
+"""Cross-platform reputation — Groupon vs Google vs Yelp.
 
-Groupon's on-page rating is often a thin, self-selected sample. We pull the
-merchant's rating from external review sites (Yelp/Google) via Tavily, then let
-Claude (Sonnet) extract the external rating and judge the gap vs Groupon — so a
-shopper sees "5.0 on Yelp vs 3.5 on Groupon (only 4 reviews)" instead of trusting
-a tiny on-platform sample.
+Groupon's on-page rating is often a thin, self-selected sample. We pull two
+external ratings to put it in context:
+  - **Google** via the Places API (reliable, structured rating + review count).
+  - **Yelp** via Tavily web search + Claude extraction (Yelp exposes its rating
+    in search snippets; Google's lives in Maps and isn't reliably searchable).
+
+The gap verdict compares Groupon against the most authoritative external rating
+(Google preferred), and is computed deterministically.
 """
 
-from typing import Any, Literal
+import json
+import urllib.request
 
 import anthropic
 from pydantic import BaseModel, Field
 
 from .config import SONNET_MODEL
-from .models import Reputation
+from .models import GapVerdict, Reputation
 
 
-def _gather_snippets(tavily_client, merchant: str, city: str | None) -> list[str]:
+# --- Google rating via Places API (no LLM) ---------------------------------
+
+def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tuple[float | None, int | None]:
+    if not api_key or not merchant:
+        return None, None
+    query = f"{merchant} {city}".strip() if city else merchant
+    req = urllib.request.Request(
+        "https://places.googleapis.com/v1/places:searchText",
+        data=json.dumps({"textQuery": query}).encode(),
+        method="POST",
+        headers={
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": api_key,
+            "X-Goog-FieldMask": "places.rating,places.userRatingCount",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+    except Exception as e:
+        print(f"  Places API error: {e}")
+        return None, None
+    places = data.get("places") or []
+    if not places:
+        return None, None
+    p = places[0]
+    r, c = p.get("rating"), p.get("userRatingCount")
+    return (float(r) if r is not None else None, int(c) if c is not None else None)
+
+
+# --- Yelp rating via Tavily + LLM ------------------------------------------
+
+def _gather_yelp_snippets(tavily_client, merchant: str, city: str | None) -> list[str]:
     if tavily_client is None:
         return []
-    query = " ".join(p for p in (merchant, city, "Yelp Google reviews rating") if p)
+    query = " ".join(p for p in (merchant, city, "Yelp rating reviews") if p)
     try:
         res = tavily_client.search(query=query, max_results=6, search_depth="basic")
     except Exception as e:
         print(f"  Tavily reputation error: {e}")
         return []
-    snippets = []
+    out = []
     for item in res.get("results", []):
-        title = item.get("title") or ""
         content = item.get("content") or ""
         if content:
-            snippets.append(f"[{title}] {content}")
-    return snippets
+            out.append(f"[{item.get('title') or ''}] {content}")
+    return out
 
 
-class _ReputationExtract(BaseModel):
-    external_rating: float | None = Field(default=None, description="Rating on the external platform, only if explicitly stated")
-    external_reviews: int | None = Field(default=None, description="Review count on that platform, only if explicitly stated")
-    external_source: str | None = Field(default=None, description="The platform name, e.g. 'Yelp' or 'Google'")
-    gap_verdict: Literal["external_higher", "external_lower", "consistent", "insufficient"]
-    summary: str = Field(description="One or two sentences in English a shopper can act on")
+class _YelpExtract(BaseModel):
+    yelp_rating: float | None = Field(default=None, description="Yelp star rating, only if explicitly stated for THIS merchant")
+    yelp_reviews: int | None = Field(default=None, description="Yelp review count, only if explicitly stated")
+    summary: str = Field(description="One or two sentences in English comparing the platforms a shopper can act on")
 
+
+def _extract_yelp_and_summary(client, merchant, city, groupon_rating, groupon_reviews,
+                              google_rating, google_reviews, snippets) -> _YelpExtract | None:
+    known = [f"Groupon: {groupon_rating}★ from {groupon_reviews} reviews"]
+    if google_rating is not None:
+        known.append(f"Google: {google_rating}★ from {google_reviews} reviews (authoritative, from Google Places)")
+    prompt = f"""The merchant is "{merchant}"{f' in {city}' if city else ''}.
+
+Ratings already known:
+- {chr(10).join('- ' + k for k in known)}
+
+Below are web search snippets, used to find this merchant's YELP rating.
+1. Extract the merchant's YELP rating and review count — ONLY if explicitly stated for THIS merchant; otherwise leave both null. Do not invent numbers.
+2. Write a one-to-two sentence English summary a shopper can act on, comparing the platforms: note small samples (e.g. few Groupon reviews) and whether the more-reviewed Google/Yelp ratings agree or disagree with Groupon.
+
+Snippets:
+{chr(10).join('———' + chr(10) + s for s in snippets[:8]) or '(none)'}"""
+    try:
+        resp = client.messages.parse(
+            model=SONNET_MODEL, max_tokens=1000,
+            messages=[{"role": "user", "content": prompt}],
+            output_format=_YelpExtract,
+        )
+        return resp.parsed_output
+    except Exception as e:
+        print(f"  yelp extraction failed: {e}")
+        return None
+
+
+# --- gap verdict (deterministic) -------------------------------------------
+
+def _compute_gap(groupon: float | None, google: float | None, yelp: float | None) -> GapVerdict:
+    """Compare Groupon against the most authoritative external (Google preferred)."""
+    primary = google if google is not None else yelp
+    if groupon is None or primary is None:
+        return "insufficient"
+    diff = primary - groupon
+    if diff >= 0.3:
+        return "external_higher"
+    if diff <= -0.3:
+        return "external_lower"
+    return "consistent"
+
+
+def _template_summary(gr, grv, gg, ggv, yr, yrv) -> str:
+    ext = []
+    if gg is not None:
+        ext.append(f"Google {gg}★ ({ggv} reviews)")
+    if yr is not None:
+        ext.append(f"Yelp {yr}★ ({yrv} reviews)")
+    if not ext:
+        return "No external rating found to compare against the Groupon score."
+    return f"Groupon shows {gr}★ from {grv} reviews; elsewhere: " + ", ".join(ext) + "."
+
+
+# --- orchestrator ----------------------------------------------------------
 
 def research_reputation(
     anthropic_client: anthropic.Anthropic | None,
@@ -50,88 +139,60 @@ def research_reputation(
     city: str | None,
     groupon_rating: float | None,
     groupon_reviews: int | None,
+    places_api_key: str = "",
 ) -> Reputation:
-    base = Reputation(groupon_rating=groupon_rating, groupon_reviews=groupon_reviews)
-    if not merchant or anthropic_client is None:
-        return base
+    rep = Reputation(groupon_rating=groupon_rating, groupon_reviews=groupon_reviews)
+    if not merchant:
+        return rep
 
-    snippets = _gather_snippets(tavily_client, merchant, city)
-    if not snippets:
-        base.summary = "No external review data found to compare against the Groupon rating."
-        return base
+    # Google (Places API) — independent of the LLM.
+    rep.google_rating, rep.google_reviews = _google_places_rating(merchant, city, places_api_key)
 
-    snippet_block = "\n\n---\n\n".join(snippets[:8])
-    groupon_desc = (
-        f"{groupon_rating} stars from {groupon_reviews} reviews"
-        if groupon_rating is not None else "no rating shown"
-    )
-    prompt = f"""The merchant is "{merchant}"{f' in {city}' if city else ''}. On Groupon this merchant shows {groupon_desc}.
-
-Below are web search snippets about this merchant from review sites (Yelp, Google, etc.).
-
-1. Extract the merchant's rating on the most authoritative external platform you can find (prefer Yelp or Google): the rating value, its review count, and the platform name. Use ONLY numbers explicitly stated in the snippets — if none is clearly about THIS merchant, leave them null.
-2. Classify gap_verdict comparing external vs Groupon:
-   - "external_higher": external rating is clearly higher than Groupon's (about 0.3 stars or more).
-   - "external_lower": external is clearly lower.
-   - "consistent": within ~0.3 stars.
-   - "insufficient": no reliable external rating for this merchant was found.
-3. Write a one-to-two sentence English summary a shopper can act on (call out small Groupon sample size, or a genuine quality gap).
-
-Do not invent ratings or review counts.
-
-Snippets:
-{snippet_block}"""
-
-    try:
-        resp = anthropic_client.messages.parse(
-            model=SONNET_MODEL,
-            max_tokens=1200,
-            messages=[{"role": "user", "content": prompt}],
-            output_format=_ReputationExtract,
+    # Yelp (Tavily + LLM) + a comparison summary.
+    summary = ""
+    if anthropic_client is not None:
+        snippets = _gather_yelp_snippets(tavily_client, merchant, city)
+        ext = _extract_yelp_and_summary(
+            anthropic_client, merchant, city, groupon_rating, groupon_reviews,
+            rep.google_rating, rep.google_reviews, snippets,
         )
-        ext = resp.parsed_output
-    except Exception as e:
-        print(f"  reputation extraction failed: {e}")
-        base.summary = "External reputation lookup failed."
-        return base
+        if ext:
+            rep.yelp_rating, rep.yelp_reviews = ext.yelp_rating, ext.yelp_reviews
+            summary = ext.summary
 
-    base.external_rating = ext.external_rating
-    base.external_reviews = ext.external_reviews
-    base.external_source = ext.external_source
-    base.gap_verdict = ext.gap_verdict
-    base.summary = ext.summary
-    return base
+    rep.gap_verdict = _compute_gap(groupon_rating, rep.google_rating, rep.yelp_rating)
+    rep.summary = summary or _template_summary(
+        groupon_rating, groupon_reviews, rep.google_rating, rep.google_reviews,
+        rep.yelp_rating, rep.yelp_reviews,
+    )
+    return rep
 
 
 # --- standalone demo: python -m analyzer.reputation <deal_url> --------------
 
 def _demo() -> int:
-    import json
     import os
     import sys
     from pathlib import Path
 
     from tavily import TavilyClient
 
-    from .config import TAVILY_API_KEY
+    from .config import GOOGLE_PLACES_API_KEY, TAVILY_API_KEY
     from .pipeline import analyze
 
     if len(sys.argv) < 2:
         print("usage: python -m analyzer.reputation <groupon-deal-url>", file=sys.stderr)
         return 2
 
-    deal_url = sys.argv[1]
-    analysis = analyze(deal_url, cache_dir=Path(__file__).resolve().parents[2] / "data" / "raw_html")
+    analysis = analyze(sys.argv[1], cache_dir=Path(__file__).resolve().parents[2] / "data" / "raw_html")
     d = analysis.deal
-
     tavily = TavilyClient(api_key=TAVILY_API_KEY or os.environ["TAVILY_API_KEY"])
-    client = anthropic.Anthropic()
-
     rep = research_reputation(
-        client, tavily,
+        anthropic.Anthropic(), tavily,
         merchant=d.merchant, city=d.city,
         groupon_rating=analysis.reputation.groupon_rating,
         groupon_reviews=analysis.reputation.groupon_reviews,
+        places_api_key=GOOGLE_PLACES_API_KEY,
     )
     print(f"Merchant: {d.merchant} ({d.city})\n")
     print(json.dumps(rep.model_dump(), ensure_ascii=False, indent=2))
