@@ -43,7 +43,10 @@ async function run() {
           {{ loading ? 'Revealing…' : 'Reveal' }}
         </button>
       </form>
-      <p v-if="loading" class="hint">Revealing the deal and finding similar deals — usually ~10s (instant if recently analyzed).</p>
+      <div v-if="loading" class="loader">
+        <img src="/favicon.png" class="spinner" alt="Revealing" />
+        <p class="hint">Revealing the deal and finding similar deals — usually ~10s (instant if recently analyzed).</p>
+      </div>
       <p v-if="error" class="err">{{ error }}</p>
     </header>
 
@@ -77,6 +80,25 @@ async function run() {
 .bar input { flex: 1; }
 
 .hint { color: var(--muted); font-size: 0.9rem; margin-top: 14px; }
+
+/* Spinning Revelio globe while the analysis runs */
+.loader {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  perspective: 520px;
+}
+.spinner {
+  width: 78px;
+  height: 78px;
+  animation: spin-y 1.4s linear infinite;
+}
+.loader .hint { margin-top: 0; }
+@keyframes spin-y {
+  to { transform: rotateY(360deg); }
+}
 .err {
   color: var(--bad-fg); background: var(--bad-bg); border: 1px solid var(--bad-line);
   border-radius: 10px; padding: 10px 14px; margin: 16px auto 0; max-width: 600px; font-size: 0.9rem;
