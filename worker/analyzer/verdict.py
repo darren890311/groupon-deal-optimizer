@@ -94,12 +94,9 @@ SYSTEM_PROMPT = """You write the final buy/skip verdict for a consumer tool that
 
 Your job: write the short narrative the shopper acts on. Be direct, honest, plain English. No marketing fluff.
 
-Decide `worth_buying`:
-- "yes": the discount is genuine OR the price is clearly fair for the service, and there is no reputation red flag. A confident buy.
-- "caution": mixed signals — e.g. the price is fair but the advertised discount is misleading, or the rating picture is muddy. Buyable, but the shopper should know the catch (and may do better booking direct).
-- "no": the deal is worse than comparable same-service options (overpriced AND/OR the merchant rates clearly lower elsewhere), often compounded by a fake discount. Steer them away.
+The overall verdict (`worth_buying`) is ALREADY DECIDED for you and given in the input below — do not re-decide it. It is "yes" only when all three signals (discount, price, reputation) are good, "no" only when all three are bad, and "caution" otherwise (a single weak signal is caution, not "no"). Your one-liner and action must match the given verdict.
 
-On price: only call a deal "overpriced" when it loses to an equivalent ("same") service. If the only competitors are "similar" (related but a spec difference), do NOT call it overpriced — instead note that comparable deals run $X-Y and that this one's higher price may reflect the extras it includes. Never compare a richer bundle to a barer service as if equal.
+On price: only describe a deal as "overpriced" when it loses to an equivalent ("same") service. If the only similar deals are "similar" (related but a spec difference), do NOT call it overpriced — note that comparable deals run $X-Y and that the higher price may reflect extras this deal includes. Never compare a richer bundle to a barer service as if equal.
 
 `one_liner`: ONE sentence capturing the punchline, in the spirit of "Price is OK but the advertised discount is misleading — consider booking directly via Yelp." Name the specific catch.
 
@@ -110,8 +107,21 @@ Wording: this is a consumer tool. In your output, refer to other deals/shops as 
 Ground everything in the numbers given. Never invent prices or ratings. Do not contradict the badges."""
 
 
+def derive_worth_buying(badges: list[Badge]) -> str:
+    """Deterministic verdict from the three signal badges (discount, price,
+    reputation): all good → yes, all bad → no, anything in between → caution.
+    A single weak signal never drops a deal to "no".
+    """
+    by_type = {b.type: b.status for b in badges}
+    signals = [by_type.get("discount"), by_type.get("price"), by_type.get("reputation")]
+    if all(s == "ok" for s in signals):
+        return "yes"
+    if all(s == "bad" for s in signals):
+        return "no"
+    return "caution"
+
+
 class _VerdictNarrative(BaseModel):
-    worth_buying: Literal["yes", "caution", "no"]
     one_liner: str = Field(description="One sentence punchline naming the specific catch")
     recommended_action: str = Field(description="One concrete next step for the shopper")
 
@@ -124,8 +134,9 @@ def synthesize_verdict(
     direct_booking: DirectBooking | None = None,
 ) -> Verdict:
     badges = compute_badges(deal, competitors, reputation)
+    worth = derive_worth_buying(badges)
     if client is None:
-        return Verdict(badges=badges)
+        return Verdict(badges=badges, worth_buying=worth)
 
     rng = like_for_like_range(competitors)
     price = _min_deal_price(deal)
@@ -161,6 +172,8 @@ Direct booking: {direct_booking.note if direct_booking else 'not checked'}
 Pre-computed badges:
 {chr(10).join(f'  - [{b.status}] {b.type}: {b.label}' for b in badges)}
 
+Overall verdict (ALREADY DECIDED — write a one-liner and action consistent with this, do not contradict it): {worth}
+
 Write the verdict narrative."""
 
     try:
@@ -174,13 +187,13 @@ Write the verdict narrative."""
         n = resp.parsed_output
         return Verdict(
             badges=badges,
-            worth_buying=n.worth_buying,
+            worth_buying=worth,
             one_liner=n.one_liner,
             recommended_action=n.recommended_action,
         )
     except Exception as e:
         print(f"  verdict synthesis failed: {e}")
-        return Verdict(badges=badges)
+        return Verdict(badges=badges, worth_buying=worth)
 
 
 # --- standalone demo: python -m analyzer.verdict <deal_url> -----------------
