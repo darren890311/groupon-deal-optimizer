@@ -45,7 +45,10 @@ def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tupl
     query = f"{merchant} {city}".strip() if city else merchant
     req = urllib.request.Request(
         "https://places.googleapis.com/v1/places:searchText",
-        data=json.dumps({"textQuery": query}).encode(),
+        # regionCode anchors the search to the US so results don't depend on the
+        # caller's IP — without it, a no-city chain name returns nothing from a
+        # datacenter IP (Cloud Run) while resolving fine from a US laptop.
+        data=json.dumps({"textQuery": query, "regionCode": "US"}).encode(),
         method="POST",
         headers={
             "Content-Type": "application/json",
@@ -167,13 +170,19 @@ def research_reputation(
     # Google (Places API) — independent of the LLM.
     rep.google_rating, rep.google_reviews, rep.chain = _google_places_rating(merchant, city, places_api_key)
 
-    # Multi-location chain: no single external rating is meaningful. Don't pull a
-    # per-branch Yelp number either — just say so.
+    # National deal (no city) with no single Google location is effectively the
+    # same case — ratings vary by branch. Treat it as a chain rather than a bare
+    # "no rating found".
+    if not rep.chain and rep.google_rating is None and not city:
+        rep.chain = True
+
+    # Multi-location / national: no single external rating is meaningful. Don't
+    # pull a per-branch Yelp number either — just say so.
     if rep.chain:
         rep.gap_verdict = "insufficient"
         gr = f"{groupon_rating}★ from {groupon_reviews} reviews" if groupon_rating is not None else "the Groupon score above"
         rep.summary = (
-            f"{merchant} is a multi-location chain, so Google and Yelp ratings vary by individual "
+            f"{merchant} operates across many locations, so Google and Yelp ratings vary by individual "
             f"branch — there's no single brand-wide score to compare. {gr.capitalize()} reflects this "
             "specific deal; check the rating of the exact location you'd visit before buying."
         )
