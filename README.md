@@ -8,7 +8,7 @@ verdict — every claim grounded in scraped data, not vibes.
 
 **▶︎ Live: https://getrevelio.web.app**
 
-![screenshot](docs/screenshot.png)
+![screenshot](docs/getrevelio.web.app_.png)
 
 ---
 
