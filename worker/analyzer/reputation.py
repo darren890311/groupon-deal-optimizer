@@ -22,9 +22,26 @@ from .models import GapVerdict, Reputation
 
 # --- Google rating via Places API (no LLM) ---------------------------------
 
-def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tuple[float | None, int | None]:
+def _is_chain(merchant: str, places: list[dict]) -> bool:
+    """A multi-location chain: several of the top results share the merchant's
+    brand name but sit at different addresses (e.g. AMC, Massage Envy). For those
+    there is no single 'merchant' rating — picking places[0] would be one random
+    branch, so we don't trust it.
+    """
+    brand = merchant.split()[0].lower() if merchant else ""
+    same_brand = [
+        p for p in places[:5]
+        if ((p.get("displayName") or {}).get("text", "").split() or [""])[0].lower() == brand
+    ]
+    addrs = {p.get("formattedAddress") for p in same_brand}
+    return len(same_brand) >= 3 and len(addrs) >= 3
+
+
+def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tuple[float | None, int | None, bool]:
+    """Return (rating, review_count, is_chain). For a chain, rating/count are
+    None — the rating varies by location, so there's no honest single number."""
     if not api_key or not merchant:
-        return None, None
+        return None, None, False
     query = f"{merchant} {city}".strip() if city else merchant
     req = urllib.request.Request(
         "https://places.googleapis.com/v1/places:searchText",
@@ -33,7 +50,7 @@ def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tupl
         headers={
             "Content-Type": "application/json",
             "X-Goog-Api-Key": api_key,
-            "X-Goog-FieldMask": "places.rating,places.userRatingCount",
+            "X-Goog-FieldMask": "places.displayName,places.formattedAddress,places.rating,places.userRatingCount",
         },
     )
     try:
@@ -41,13 +58,15 @@ def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tupl
             data = json.loads(resp.read().decode())
     except Exception as e:
         print(f"  Places API error: {e}")
-        return None, None
+        return None, None, False
     places = data.get("places") or []
     if not places:
-        return None, None
+        return None, None, False
+    if _is_chain(merchant, places):
+        return None, None, True
     p = places[0]
     r, c = p.get("rating"), p.get("userRatingCount")
-    return (float(r) if r is not None else None, int(c) if c is not None else None)
+    return (float(r) if r is not None else None, int(c) if c is not None else None, False)
 
 
 # --- Yelp rating via Tavily + LLM ------------------------------------------
@@ -146,7 +165,19 @@ def research_reputation(
         return rep
 
     # Google (Places API) — independent of the LLM.
-    rep.google_rating, rep.google_reviews = _google_places_rating(merchant, city, places_api_key)
+    rep.google_rating, rep.google_reviews, rep.chain = _google_places_rating(merchant, city, places_api_key)
+
+    # Multi-location chain: no single external rating is meaningful. Don't pull a
+    # per-branch Yelp number either — just say so.
+    if rep.chain:
+        rep.gap_verdict = "insufficient"
+        gr = f"{groupon_rating}★ from {groupon_reviews} reviews" if groupon_rating is not None else "the Groupon score above"
+        rep.summary = (
+            f"{merchant} is a multi-location chain, so Google and Yelp ratings vary by individual "
+            f"branch — there's no single brand-wide score to compare. {gr.capitalize()} reflects this "
+            "specific deal; check the rating of the exact location you'd visit before buying."
+        )
+        return rep
 
     # Yelp (Tavily + LLM) + a comparison summary.
     summary = ""

@@ -6,11 +6,19 @@ const props = defineProps({ reputation: Object })
 const platforms = computed(() => {
   const r = props.reputation || {}
   return [
-    { name: 'Groupon', rating: r.groupon_rating, reviews: r.groupon_reviews },
-    { name: 'Google', rating: r.google_rating, reviews: r.google_reviews },
-    { name: 'Yelp', rating: r.yelp_rating, reviews: r.yelp_reviews },
+    { name: 'Groupon', rating: r.groupon_rating, reviews: r.groupon_reviews, external: false },
+    { name: 'Google', rating: r.google_rating, reviews: r.google_reviews, external: true },
+    { name: 'Yelp', rating: r.yelp_rating, reviews: r.yelp_reviews, external: true },
   ]
 })
+
+// Subtitle under each score. A bare review count with no star reads as broken,
+// so only show the count when we actually have a rating; otherwise say why not.
+function caption(p) {
+  if (p.rating != null) return p.reviews != null ? p.reviews + ' reviews' : ''
+  if (p.external && props.reputation?.chain) return 'varies by location'
+  return 'no rating found'
+}
 </script>
 
 <template>
@@ -22,7 +30,7 @@ const platforms = computed(() => {
           {{ p.rating == null ? '—' : p.rating }}<span v-if="p.rating != null" class="star">★</span>
         </div>
         <div class="name">{{ p.name }}</div>
-        <div class="rev">{{ p.reviews != null ? p.reviews + ' reviews' : 'no rating found' }}</div>
+        <div class="rev">{{ caption(p) }}</div>
       </div>
     </div>
     <p v-if="reputation.summary" class="summary">{{ reputation.summary }}</p>

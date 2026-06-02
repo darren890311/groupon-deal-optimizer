@@ -41,6 +41,9 @@ class Reputation(BaseModel):
     google_reviews: int | None = None
     yelp_rating: float | None = None
     yelp_reviews: int | None = None
+    # True when the merchant is a multi-location chain (e.g. AMC, Massage Envy):
+    # there is no single external rating, so Google/Yelp vary by location.
+    chain: bool = False
     gap_verdict: GapVerdict = "insufficient"  # Groupon vs the primary external (Google preferred)
     summary: str = ""
 
