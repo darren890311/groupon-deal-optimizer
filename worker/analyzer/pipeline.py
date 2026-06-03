@@ -8,6 +8,7 @@ Clients can be injected (FastAPI shares one set across requests) or are built
 lazily from env keys.
 """
 
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
@@ -61,13 +62,25 @@ def analyze(
     anthropic_client: anthropic.Anthropic | None = None,
     tavily_client=None,
 ) -> DealAnalysis:
-    html = scrape.fetch_html(url, cache_dir=cache_dir)
+    timings: dict[str, float] = {}
+
+    def _timed(name, fn, *args, **kwargs):
+        """Run fn, recording its wall-clock duration under `name` in `timings`."""
+        start = time.perf_counter()
+        try:
+            return fn(*args, **kwargs)
+        finally:
+            timings[name] = time.perf_counter() - start
+
+    t_total = time.perf_counter()
+
+    html = _timed("scrape", scrape.fetch_html, url, cache_dir=cache_dir)
     audit = parse.parse_audit(html, url)
 
     # Datacenter IPs occasionally get a bot-challenge/empty page. If nothing real
     # came through, scrape once more before giving up — a retry usually succeeds.
     if not audit.get("title") or (not audit.get("prices") and audit.get("rating") is None):
-        html = scrape.fetch_html(url, cache_dir=cache_dir, force=True)
+        html = _timed("scrape_retry", scrape.fetch_html, url, cache_dir=cache_dir, force=True)
         audit = parse.parse_audit(html, url)
 
     deal = _build_deal(url, audit)
@@ -78,9 +91,10 @@ def analyze(
     # Competitors, reputation and direct-booking are independent (each derives only
     # from the deal), so run them concurrently — they are all I/O-bound (Tavily,
     # Anthropic, Playwright), which releases the GIL. Only the verdict waits on all.
+    t_parallel = time.perf_counter()
     with ThreadPoolExecutor(max_workers=3) as pool:
         f_comps = pool.submit(
-            competitors.find_competitors,
+            _timed, "competitors", competitors.find_competitors,
             deal.category, deal.city,
             exclude_slug=scrape.slug_from_url(url),
             deal_price=deal_price,
@@ -91,7 +105,7 @@ def analyze(
             cache_dir=competitor_cache_dir,
         )
         f_rep = pool.submit(
-            reputation.research_reputation,
+            _timed, "reputation", reputation.research_reputation,
             anthropic_client, tavily_client,
             merchant=deal.merchant, city=deal.city,
             groupon_rating=audit.get("rating"),
@@ -100,7 +114,7 @@ def analyze(
             yelp_api_key=YELP_API_KEY,
         )
         f_direct = pool.submit(
-            direct.check_direct_booking,
+            _timed, "direct", direct.check_direct_booking,
             anthropic_client, tavily_client,
             merchant=deal.merchant, city=deal.city,
             category_leaf=competitors._category_leaf(deal.category),
@@ -109,8 +123,12 @@ def analyze(
         comps = f_comps.result()
         rep = f_rep.result()
         direct_booking = f_direct.result()
+    timings["parallel_wall"] = time.perf_counter() - t_parallel
 
-    verd = verdict.synthesize_verdict(anthropic_client, deal, comps, rep, direct_booking)
+    verd = _timed("verdict", verdict.synthesize_verdict, anthropic_client, deal, comps, rep, direct_booking)
+
+    timings["total"] = time.perf_counter() - t_total
+    print("[timing] " + "  ".join(f"{k}={v:.2f}s" for k, v in timings.items()))
 
     return DealAnalysis(
         deal=deal,
