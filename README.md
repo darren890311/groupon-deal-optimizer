@@ -1,4 +1,4 @@
-# Is This Groupon Deal Worth It?
+# Revelio — Is This Groupon Deal Worth It?
 
 A consumer tool that tells you whether a Groupon deal is actually a good buy. Paste a
 deal link and it scrapes the live page, checks the **real** discount against the
@@ -25,7 +25,7 @@ shopper can't do at scale and gives a straight answer.
 | --- | --- |
 | **Discount truth** | Parses the advertised claim from the title and compares it to the real strike-through discount on each price tier. Flags `genuine` / `exaggerated` / `none`. |
 | **Like-for-like price** | Finds same-city deals on Groupon and uses an LLM to judge which are the *same* service vs merely *similar*, so a full-synthetic oil change isn't compared to a conventional one. |
-| **Cross-platform reputation** | Pulls the merchant's Yelp/Google rating and compares it to the Groupon score — surfacing when a deal looks great on Groupon but rates lower elsewhere. |
+| **Cross-platform reputation** | Pulls the merchant's structured rating from the **Google Places** and **Yelp Fusion** APIs and compares both to the Groupon score — surfacing when a deal looks great on Groupon but rates lower elsewhere. Multi-location chains (no single rating) are flagged as *varies by location* rather than guessed. |
 | **Direct booking** | Checks whether booking the merchant directly (or via their site) beats the Groupon price. |
 | **Verdict** | Combines the above into deterministic badges + an LLM-written one-liner and recommended action. |
 
@@ -43,8 +43,8 @@ Go / Gin gateway  ──────────►  Neon Postgres
    ▼
 Python worker (FastAPI, private)
    scrape (Playwright) → parse (BeautifulSoup + Groupon's embedded JSON)
-   → discount math → similar-deal scrape → reputation/direct (Tavily + Claude)
-   → verdict (Claude)
+   → discount math → competitors (Tavily + Claude) → reputation (Google Places + Yelp Fusion)
+   → direct booking (Tavily + Claude) → verdict (Claude)
 ```
 
 - **Stateless Python worker** does the heavy work (headless-Chromium scraping, LLM
@@ -63,6 +63,7 @@ Python worker (FastAPI, private)
 - **Worker:** **Python** (FastAPI, Playwright, BeautifulSoup), Dockerized, on **Cloud Run** (private)
 - **Data:** **Neon** (serverless Postgres) for the analysis cache
 - **AI/search:** **Claude** (Anthropic) for judgment + structured output, **Tavily** for web search
+- **External APIs:** **Google Places** + **Yelp Fusion** for structured cross-platform ratings
 - **Infra:** GCP (Cloud Run, Cloud Build, Artifact Registry, IAM), Docker, service-to-service auth
 
 ## Engineering notes
@@ -79,6 +80,13 @@ A few decisions worth calling out:
 - **Failures aren't cached.** A datacenter IP occasionally gets a bot-challenge page;
   the worker retries once and, if still empty, returns an error instead of caching a
   bogus "no data" result for 24h.
+- **Yelp ratings come from the Fusion API, not web search.** Yelp renders its stars as
+  images, so search snippets carry the review count but never the score — only the
+  official API returns the number, which is why Yelp is integrated directly.
+- **Chains and datacenter geography are handled explicitly.** A no-city chain name
+  (e.g. "AMC Theatres") returns nothing from Cloud Run's datacenter IP, so the Places
+  query is anchored with `regionCode=US`; multi-location merchants with no single
+  rating are surfaced as *varies by location* instead of a misleading random branch.
 - **The Go gateway is small on purpose** — a thin, tested edge (cache check → worker →
   store) with graceful shutdown, structured logging, context timeouts, and table-driven
   handler tests.
@@ -86,7 +94,8 @@ A few decisions worth calling out:
 ## Local development
 
 Prereqs: Docker, Go 1.26+, Python 3.13+, Node 22+. Copy `.env.example` to `.env` and
-fill in `ANTHROPIC_API_KEY` and `TAVILY_API_KEY`.
+fill in `ANTHROPIC_API_KEY`, `TAVILY_API_KEY`, `GOOGLE_PLACES_API_KEY`, and `YELP_API_KEY`
+(each stage degrades gracefully if its key is missing).
 
 ```bash
 # 1. Postgres
