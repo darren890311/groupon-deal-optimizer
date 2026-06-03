@@ -17,7 +17,7 @@ import urllib.request
 import anthropic
 from pydantic import BaseModel, Field
 
-from .config import SONNET_MODEL
+from .config import HAIKU_MODEL
 from .models import GapVerdict, Reputation
 
 
@@ -150,7 +150,7 @@ Snippets:
 {chr(10).join('———' + chr(10) + s for s in snippets[:8]) or '(none)'}"""
     try:
         resp = client.messages.parse(
-            model=SONNET_MODEL, max_tokens=1000,
+            model=HAIKU_MODEL, max_tokens=1000,
             messages=[{"role": "user", "content": prompt}],
             output_format=_YelpExtract,
         )
@@ -204,7 +204,7 @@ def _write_summary(client, merchant, city, gr, grv, gg, ggv, yr, yrv) -> str:
 Write a one-to-two sentence English summary a shopper can act on: note small samples (e.g. few Groupon reviews) and whether the larger-sample Google/Yelp ratings agree or disagree with Groupon. Ground every number in the data above; invent nothing."""
     try:
         resp = client.messages.parse(
-            model=SONNET_MODEL, max_tokens=600,
+            model=HAIKU_MODEL, max_tokens=600,
             messages=[{"role": "user", "content": prompt}],
             output_format=_Summary,
         )

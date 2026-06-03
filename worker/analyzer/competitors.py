@@ -26,7 +26,7 @@ from bs4 import BeautifulSoup
 from pydantic import BaseModel, Field
 
 from . import scrape
-from .config import SONNET_MODEL
+from .config import HAIKU_MODEL
 from .models import Competitor
 
 _MATCH_RANK = {"same": 0, "similar": 1, None: 1, "different": 2}
@@ -181,7 +181,7 @@ Competitors:
 
     try:
         resp = client.messages.parse(
-            model=SONNET_MODEL,
+            model=HAIKU_MODEL,
             max_tokens=1500,
             messages=[{"role": "user", "content": prompt}],
             output_format=_ComparabilityResult,

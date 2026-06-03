@@ -15,7 +15,7 @@ import anthropic
 from pydantic import BaseModel, Field
 
 from .competitors import like_for_like_range
-from .config import SONNET_MODEL
+from .config import HAIKU_MODEL, SONNET_MODEL
 from .models import Badge, Competitor, Deal, DirectBooking, Reputation, Verdict
 
 
@@ -135,6 +135,7 @@ def synthesize_verdict(
     competitors: list[Competitor],
     reputation: Reputation,
     direct_booking: DirectBooking | None = None,
+    model: str = HAIKU_MODEL,  # flip to SONNET_MODEL for a slightly richer verdict
 ) -> Verdict:
     badges = compute_badges(deal, competitors, reputation)
     worth = derive_worth_buying(badges)
@@ -181,7 +182,7 @@ Write the verdict narrative."""
 
     try:
         resp = client.messages.parse(
-            model=SONNET_MODEL,
+            model=model,
             max_tokens=1000,
             system=[{"type": "text", "text": SYSTEM_PROMPT, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": user_content}],

@@ -11,7 +11,7 @@ from typing import Literal
 import anthropic
 from pydantic import BaseModel, Field
 
-from .config import SONNET_MODEL
+from .config import HAIKU_MODEL
 from .models import DirectBooking
 
 
@@ -75,7 +75,7 @@ Snippets:
 
     try:
         resp = anthropic_client.messages.parse(
-            model=SONNET_MODEL,
+            model=HAIKU_MODEL,
             max_tokens=800,
             messages=[{"role": "user", "content": prompt}],
             output_format=_DirectExtract,
