@@ -227,12 +227,19 @@ def find_competitors(
 
     try:
         html = scrape.fetch_html(local_url, cache_dir=cache_dir)
+        cards = parse_local_cards(html)
+        # A datacenter IP occasionally gets a bot-challenge/empty page, which
+        # parses to zero cards and would wrongly read as "no comparable deals".
+        # Retry once before giving up — a fresh fetch usually gets through.
+        if not cards:
+            html = scrape.fetch_html(local_url, cache_dir=cache_dir, force=True)
+            cards = parse_local_cards(html)
     except Exception as e:
         print(f"  competitor page scrape failed ({local_url}): {e}")
         return []
 
     competitors: list[Competitor] = []
-    for c in parse_local_cards(html):
+    for c in cards:
         if exclude_slug and c.get("slug") == exclude_slug:
             continue
         if c.get("deal_price") is None:

@@ -11,6 +11,7 @@ The gap verdict compares Groupon against the most authoritative external rating
 """
 
 import json
+import urllib.parse
 import urllib.request
 
 import anthropic
@@ -72,7 +73,41 @@ def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tupl
     return (float(r) if r is not None else None, int(c) if c is not None else None, False)
 
 
-# --- Yelp rating via Tavily + LLM ------------------------------------------
+# --- Yelp rating via Fusion API (no LLM, structured) -----------------------
+
+def _yelp_fusion_rating(merchant: str, city: str | None, api_key: str) -> tuple[float | None, int | None]:
+    """Best-match Yelp business for (merchant, city) → (rating, review_count).
+
+    Yelp renders its stars as images, so web snippets carry the review count but
+    not the score — the Fusion API is the only reliable source of the number.
+    """
+    if not api_key or not merchant:
+        return None, None
+    params = urllib.parse.urlencode({
+        "term": merchant,
+        "location": city or "United States",
+        "limit": 1,
+        "sort_by": "best_match",
+    })
+    req = urllib.request.Request(
+        f"https://api.yelp.com/v3/businesses/search?{params}",
+        headers={"Authorization": f"Bearer {api_key}"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+    except Exception as e:
+        print(f"  Yelp Fusion error: {e}")
+        return None, None
+    businesses = data.get("businesses") or []
+    if not businesses:
+        return None, None
+    b = businesses[0]
+    r, c = b.get("rating"), b.get("review_count")
+    return (float(r) if r is not None else None, int(c) if c is not None else None)
+
+
+# --- Yelp rating via Tavily + LLM (fallback when no Fusion key) -------------
 
 def _gather_yelp_snippets(tavily_client, merchant: str, city: str | None) -> list[str]:
     if tavily_client is None:
@@ -151,6 +186,34 @@ def _template_summary(gr, grv, gg, ggv, yr, yrv) -> str:
     return f"Groupon shows {gr}★ from {grv} reviews; elsewhere: " + ", ".join(ext) + "."
 
 
+class _Summary(BaseModel):
+    summary: str = Field(description="One or two sentences in English a shopper can act on")
+
+
+def _write_summary(client, merchant, city, gr, grv, gg, ggv, yr, yrv) -> str:
+    """LLM comparison summary when all ratings are already structured (Google +
+    Yelp from their APIs) — no extraction, just a shopper-facing read."""
+    lines = [f"Groupon: {gr}★ from {grv} reviews"]
+    if gg is not None:
+        lines.append(f"Google: {gg}★ from {ggv} reviews")
+    if yr is not None:
+        lines.append(f"Yelp: {yr}★ from {yrv} reviews")
+    prompt = f"""The merchant is "{merchant}"{f' in {city}' if city else ''}. Ratings (all from official sources):
+{chr(10).join('- ' + l for l in lines)}
+
+Write a one-to-two sentence English summary a shopper can act on: note small samples (e.g. few Groupon reviews) and whether the larger-sample Google/Yelp ratings agree or disagree with Groupon. Ground every number in the data above; invent nothing."""
+    try:
+        resp = client.messages.parse(
+            model=SONNET_MODEL, max_tokens=600,
+            messages=[{"role": "user", "content": prompt}],
+            output_format=_Summary,
+        )
+        return resp.parsed_output.summary
+    except Exception as e:
+        print(f"  summary write failed: {e}")
+        return ""
+
+
 # --- orchestrator ----------------------------------------------------------
 
 def research_reputation(
@@ -162,6 +225,7 @@ def research_reputation(
     groupon_rating: float | None,
     groupon_reviews: int | None,
     places_api_key: str = "",
+    yelp_api_key: str = "",
 ) -> Reputation:
     rep = Reputation(groupon_rating=groupon_rating, groupon_reviews=groupon_reviews)
     if not merchant:
@@ -188,9 +252,17 @@ def research_reputation(
         )
         return rep
 
-    # Yelp (Tavily + LLM) + a comparison summary.
+    # Yelp + a comparison summary. Prefer the Fusion API (structured stars);
+    # fall back to Tavily + LLM extraction only when no Fusion key is set.
     summary = ""
-    if anthropic_client is not None:
+    if yelp_api_key:
+        rep.yelp_rating, rep.yelp_reviews = _yelp_fusion_rating(merchant, city, yelp_api_key)
+        if anthropic_client is not None:
+            summary = _write_summary(
+                anthropic_client, merchant, city, groupon_rating, groupon_reviews,
+                rep.google_rating, rep.google_reviews, rep.yelp_rating, rep.yelp_reviews,
+            )
+    elif anthropic_client is not None:
         snippets = _gather_yelp_snippets(tavily_client, merchant, city)
         ext = _extract_yelp_and_summary(
             anthropic_client, merchant, city, groupon_rating, groupon_reviews,
