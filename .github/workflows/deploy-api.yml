@@ -27,5 +27,5 @@ jobs:
             --region us-central1 \
             --memory 512Mi --timeout 300 --max-instances 3 \
             --allow-unauthenticated \
-            --set-env-vars "^|^DATABASE_URL=${{ secrets.DATABASE_URL }}|WORKER_URL=https://groupon-worker-xklyudhzbq-uc.a.run.app|ALLOWED_ORIGIN=*" \
+            --set-env-vars "^|^REDIS_URL=${{ secrets.REDIS_URL }}|WORKER_URL=https://groupon-worker-xklyudhzbq-uc.a.run.app|ALLOWED_ORIGIN=*" \
             --quiet

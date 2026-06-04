@@ -37,8 +37,8 @@ Browser
    ▼
 Vue 3 (Firebase Hosting)
    ▼
-Go / Gin gateway  ──────────►  Neon Postgres
-   │  (cache by URL, 24h TTL)     (cache + history)
+Go / Gin gateway  ──────────►  Upstash Redis
+   │  (cache by URL, 24h TTL)     (URL key → result, native TTL)
    │  identity-token auth
    ▼
 Python worker (FastAPI, private)
@@ -50,18 +50,18 @@ Python worker (FastAPI, private)
 - **Stateless Python worker** does the heavy work (headless-Chromium scraping, LLM
   calls). It's deployed **private** on Cloud Run — only the Go gateway can reach it,
   via a Google-signed identity token — so the expensive backend can't be hit directly.
-- **Go gateway** is the only stateful layer: it owns caching/history in Postgres and is
-  the public entry point. The right-sized tool per layer — Go for the low-latency edge,
-  Python for the scraping/ML.
+- **Go gateway** is the only stateful layer: it owns the Redis cache and is the public
+  entry point. The right-sized tool per layer — Go for the low-latency edge, Python for
+  the scraping/ML.
 - The three independent research stages (competitors, reputation, direct booking) run
   **concurrently**; only the final verdict waits on all of them.
 
 ## Tech stack
 
 - **Frontend:** Vue 3 + Vite, deployed on **Firebase Hosting**
-- **API gateway:** **Go** (Gin, pgx), packaged with a multi-stage Dockerfile, on **Cloud Run**
+- **API gateway:** **Go** (Gin, go-redis), packaged with a multi-stage Dockerfile, on **Cloud Run**
 - **Worker:** **Python** (FastAPI, Playwright, BeautifulSoup), Dockerized, on **Cloud Run** (private)
-- **Data:** **Neon** (serverless Postgres) for the analysis cache
+- **Data:** **Upstash** (serverless Redis) for the analysis cache — URL key → result with a native TTL
 - **AI/search:** **Claude** (Anthropic) for judgment + structured output, **Tavily** for web search
 - **External APIs:** **Google Places** + **Yelp Fusion** for structured cross-platform ratings
 - **Infra:** GCP (Cloud Run, Cloud Build, Artifact Registry, IAM), Docker, service-to-service auth
@@ -98,7 +98,7 @@ fill in `ANTHROPIC_API_KEY`, `TAVILY_API_KEY`, `GOOGLE_PLACES_API_KEY`, and `YEL
 (each stage degrades gracefully if its key is missing).
 
 ```bash
-# 1. Postgres
+# 1. Redis (local) — or point REDIS_URL at an Upstash instance instead
 docker compose up -d
 
 # 2. Python worker  →  http://127.0.0.1:8000
@@ -106,7 +106,7 @@ cd worker && pip install -r requirements.txt && playwright install chromium
 python -m uvicorn main:app --port 8000
 
 # 3. Go gateway     →  http://127.0.0.1:8080
-cd api && DATABASE_URL="postgres://postgres:postgres@127.0.0.1:5432/groupon" \
+cd api && REDIS_URL="redis://127.0.0.1:6379" \
           WORKER_URL="http://127.0.0.1:8000" go run .
 
 # 4. Frontend       →  http://127.0.0.1:5173
@@ -125,7 +125,7 @@ cd worker && python -m analyzer "https://www.groupon.com/deals/<slug>"
   the Dockerfiles). The worker is deployed with `--no-allow-unauthenticated`.
 - **Frontend** → `firebase deploy --only hosting` (build with `VITE_API_URL` set to the
   gateway URL).
-- **DB** → Neon free tier; connection string set as the gateway's `DATABASE_URL`.
+- **Cache** → Upstash Redis free tier; connection string set as the gateway's `REDIS_URL`.
 
 ## Repo layout
 

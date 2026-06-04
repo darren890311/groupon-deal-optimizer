@@ -1,9 +1,9 @@
 // Command api is the stateful gateway in front of the Python analyzer worker.
 //
-// Flow: receive a Groupon deal URL → look it up in Postgres (keyed by the
+// Flow: receive a Groupon deal URL → look it up in Redis (keyed by the
 // normalized URL) → return the cached DealAnalysis if still fresh → otherwise
-// call the worker, persist the result, and return it. The worker stays
-// stateless; this layer owns caching + history.
+// call the worker, persist the result with a TTL, and return it. The worker
+// stays stateless; this layer owns caching.
 package main
 
 import (
@@ -32,18 +32,14 @@ func main() {
 	}
 
 	ctx := context.Background()
-	db, err := store.New(ctx, cfg.DatabaseURL)
+	cache, err := store.New(ctx, cfg.RedisURL)
 	if err != nil {
-		log.Error("db connect", "err", err)
+		log.Error("redis connect", "err", err)
 		os.Exit(1)
 	}
-	defer db.Close()
-	if err := db.Migrate(ctx); err != nil {
-		log.Error("migrate", "err", err)
-		os.Exit(1)
-	}
+	defer cache.Close()
 
-	srv := server.New(db, worker.New(cfg.WorkerURL), cfg.CacheTTL, log)
+	srv := server.New(cache, worker.New(cfg.WorkerURL), cfg.CacheTTL, log)
 	httpServer := &http.Server{
 		Addr:    ":" + cfg.Port,
 		Handler: srv.Router(cfg.AllowedOrigin),

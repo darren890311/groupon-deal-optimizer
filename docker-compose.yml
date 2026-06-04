@@ -1,27 +1,24 @@
-# Local-dev Postgres for the analyzer gateway.
-# Data persists in the named volume `groupon-pgdata` across container stop/remove.
-# Credentials here are local-dev only; production uses Render's managed Postgres.
+# Local-dev Redis for the analyzer gateway's cache.
+# Data persists in the named volume `groupon-redisdata` across container stop/remove.
+# Production uses Upstash (serverless Redis); point REDIS_URL there to skip this.
 #
 #   docker compose up -d      # start
 #   docker compose down       # stop (keeps the volume / data)
 #   docker compose down -v    # stop AND wipe the data
 services:
-  postgres:
-    image: postgres:16
-    container_name: groupon-pg
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: groupon
+  redis:
+    image: redis:7
+    container_name: groupon-redis
+    command: ["redis-server", "--appendonly", "yes"]
     ports:
-      - "5432:5432"
+      - "6379:6379"
     volumes:
-      - groupon-pgdata:/var/lib/postgresql/data
+      - groupon-redisdata:/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d groupon"]
+      test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 10
 
 volumes:
-  groupon-pgdata:
+  groupon-redisdata:
