@@ -115,12 +115,115 @@
           <p class="oneliner">${escapeHtml(v.one_liner || "")}</p>
           ${badges ? `<div class="badges">${badges}</div>` : ""}
           ${v.recommended_action ? `<p class="action"><b>What to do:</b> ${escapeHtml(v.recommended_action)}</p>` : ""}
-          <a class="cta book" href="${bookingUrl(deal.url || location.href)}" target="_blank" rel="noopener">
-            ${v.worth_buying === "yes" ? "Buy on Groupon →" : "Buy anyway on Groupon →"}
-          </a>
         </div>
+
+        <div class="sections">
+          ${discountSection(deal)}
+          ${reputationSection(data.reputation)}
+          ${competitorsSection(data.competitors)}
+          ${directSection(data.direct_booking)}
+        </div>
+
+        <a class="cta book" href="${bookingUrl(deal.url || location.href)}" target="_blank" rel="noopener">
+          ${v.worth_buying === "yes" ? "Buy on Groupon →" : "Buy anyway on Groupon →"}
+        </a>
       </div>`;
     wireHeader(w);
+  }
+
+  // ---- detail sections (collapsed; <summary> carries a one-line takeaway) --
+
+  const DISCOUNT_VERDICT = {
+    honest: { cls: "ok", word: "genuine" },
+    exaggerated: { cls: "bad", word: "exaggerated" },
+    none: { cls: "warn", word: "no real discount" },
+  };
+
+  function discountSection(deal) {
+    if (!deal) return "";
+    const dv = DISCOUNT_VERDICT[deal.discount_verdict] || { cls: "warn", word: deal.discount_verdict || "—" };
+    const max = deal.actual_max_discount_pct != null ? `up to ${Math.round(deal.actual_max_discount_pct)}%` : "";
+    const claim = deal.advertised_discount_pct != null
+      ? `Headline claim: ${Math.round(deal.advertised_discount_pct)}% · `
+      : "No headline % claim · ";
+    const tiers = (deal.prices || []).map((p) => `
+      <div class="row">
+        <span class="rl">${escapeHtml(p.label || "Option")}</span>
+        <span class="rr">${p.original != null ? `<s>${money(p.original)}</s> ` : ""}${money(p.deal)}${p.discount_pct != null ? ` <em>-${Math.round(p.discount_pct)}%</em>` : ""}</span>
+      </div>`).join("");
+    return section(
+      `Discount`,
+      `<span class="pill ${dv.cls}">${dv.word}</span> ${max}`,
+      `<p class="note">${claim}real strike-through per option:</p>${tiers}`,
+    );
+  }
+
+  function reputationSection(rep) {
+    if (!rep) return "";
+    const gap = { consistent: "ok", lower_elsewhere: "warn", higher_elsewhere: "warn" }[rep.gap_verdict] || "warn";
+    const star = (r, n) => r != null
+      ? `<span class="star">${Number(r).toFixed(1)}★<small>${n != null ? ` (${Number(n).toLocaleString()})` : ""}</small></span>`
+      : `<span class="star muted">—</span>`;
+    const stats = `
+      <div class="stars">
+        <div><b>Groupon</b>${star(rep.groupon_rating, rep.groupon_reviews)}</div>
+        <div><b>Google</b>${star(rep.google_rating, rep.google_reviews)}</div>
+        <div><b>Yelp</b>${star(rep.yelp_rating, rep.yelp_reviews)}</div>
+      </div>`;
+    const takeaway = rep.chain ? "varies by location" : (rep.gap_verdict || "").replace(/_/g, " ") || "—";
+    return section(
+      `Reputation`,
+      `<span class="pill ${rep.chain ? "warn" : gap}">${takeaway}</span>`,
+      `${stats}${rep.summary ? `<p class="note">${escapeHtml(rep.summary)}</p>` : ""}`,
+    );
+  }
+
+  const MATCH = { same: "ok", similar: "warn", different: "muted" };
+
+  function competitorsSection(comps) {
+    if (!comps || !comps.length) {
+      return section(`Competitors`, `<span class="pill muted">none found</span>`, `<p class="note">No comparable same-city deals found.</p>`);
+    }
+    const rows = comps.map((c) => `
+      <div class="comp">
+        <div class="comp-top">
+          <a href="${escapeHtml(c.url || "#")}" target="_blank" rel="noopener">${escapeHtml(c.merchant || "—")}</a>
+          <span class="rr">${money(c.price)}${c.cheaper ? ` <em class="bad">cheaper ↓</em>` : ""}</span>
+        </div>
+        <div class="comp-sub">
+          <span class="pill ${MATCH[c.match] || "muted"}">${escapeHtml(c.match || "—")}</span>
+          ${c.difference_note ? `<span class="diff">${escapeHtml(c.difference_note)}</span>` : ""}
+        </div>
+      </div>`).join("");
+    const anyCheaper = comps.some((c) => c.cheaper);
+    return section(
+      `Competitors`,
+      `<span class="pill ${anyCheaper ? "warn" : "ok"}">${comps.length} found${anyCheaper ? " · cheaper exists" : ""}</span>`,
+      rows,
+    );
+  }
+
+  function directSection(db) {
+    if (!db) return "";
+    const cheaper = db.cheaper_than_groupon;
+    return section(
+      `Direct booking`,
+      `<span class="pill ${cheaper ? "warn" : "ok"}">${cheaper ? "may be cheaper" : "Groupon wins"}</span>`,
+      `${db.note ? `<p class="note">${escapeHtml(db.note)}</p>` : ""}${db.source_url ? `<a class="src" href="${escapeHtml(db.source_url)}" target="_blank" rel="noopener">source ↗</a>` : ""}`,
+    );
+  }
+
+  function section(title, takeaway, body) {
+    return `
+      <details>
+        <summary><span class="st">${escapeHtml(title)}</span>${takeaway}<span class="chev">›</span></summary>
+        <div class="sbody">${body}</div>
+      </details>`;
+  }
+
+  function money(n) {
+    if (n == null) return "—";
+    return "$" + (Number.isInteger(n) ? n : Number(n).toFixed(2));
   }
 
   // ---- shared header (close button) --------------------------------------
@@ -255,6 +358,46 @@
     .badge i { width: 7px; height: 7px; border-radius: 50%; }
     .badge.ok i { background: #4ade80; } .badge.warn i { background: #fbbf24; } .badge.bad i { background: #f87171; }
     .action { font-size: 12.5px; line-height: 1.5; margin: 12px 0 0; color: #cbced4; }
+
+    /* collapsible detail sections */
+    .sections { margin: 14px 0 4px; border-top: 1px solid #2e2e32; }
+    details { border-bottom: 1px solid #2e2e32; }
+    summary {
+      list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      padding: 10px 2px; font-size: 12.5px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .st { font-weight: 650; color: #f4f4f5; }
+    .chev { margin-left: auto; color: #9ca3af; transition: transform .15s; }
+    details[open] .chev { transform: rotate(90deg); }
+    .sbody { padding: 2px 2px 12px; }
+    .pill {
+      font-size: 11px; font-weight: 650; padding: 2px 8px; border-radius: 999px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); white-space: nowrap;
+    }
+    .pill.ok { color: #4ade80; } .pill.warn { color: #fbbf24; } .pill.bad { color: #f87171; } .pill.muted { color: #9ca3af; }
+    .note { font-size: 12px; line-height: 1.5; color: #cbced4; margin: 0 0 8px; }
+    .row { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; padding: 4px 0; border-top: 1px solid #242428; }
+    .rl { color: #cbced4; flex: 1; }
+    .rr { color: #f4f4f5; white-space: nowrap; font-weight: 600; }
+    .rr s { color: #6b7280; font-weight: 400; }
+    .rr em, .row em { font-style: normal; color: #4ade80; }
+    .rr em.bad, .bad { color: #f87171; }
+    .stars { display: flex; gap: 8px; margin-bottom: 10px; }
+    .stars > div { flex: 1; background: rgba(255,255,255,.04); border-radius: 8px; padding: 8px; text-align: center; }
+    .stars b { display: block; font-size: 10.5px; color: #9ca3af; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 3px; }
+    .star { font-size: 13px; font-weight: 700; color: #f4f4f5; }
+    .star small { font-weight: 400; color: #9ca3af; }
+    .star.muted { color: #6b7280; }
+    .comp { padding: 8px 0; border-top: 1px solid #242428; }
+    .comp:first-child { border-top: 0; }
+    .comp-top { display: flex; justify-content: space-between; gap: 10px; }
+    .comp-top a { color: #93c5fd; text-decoration: none; font-size: 12.5px; font-weight: 600; }
+    .comp-top a:hover { text-decoration: underline; }
+    .comp-sub { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+    .diff { font-size: 11.5px; color: #9ca3af; }
+    .src { font-size: 11.5px; color: #93c5fd; text-decoration: none; }
+    .src:hover { text-decoration: underline; }
   `;
 
   // ---- boot (after STYLES/TONE are initialized) --------------------------
