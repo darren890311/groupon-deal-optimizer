@@ -87,6 +87,56 @@ def parse_local_cards(html: str) -> list[dict[str, Any]]:
     return out
 
 
+def parse_similar_cards(html: str) -> list[dict[str, Any]]:
+    """Competitor cards straight off a *deal* page's on-page recommendations.
+
+    Each "Similar/Recommended deal" renders as an `<a data-bhd="...">` whose
+    attribute holds a JSON blob with typed sections (title / prices / subtitle /
+    rating). Prices are integer cents. This is the extension path: the cards are
+    already in the rendered HTML the content script sends, so no separate
+    category-page scrape (and no Playwright) is needed.
+    """
+    soup = BeautifulSoup(html, "lxml")
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for a in soup.select("a[data-bhd]"):
+        try:
+            bhd = json.loads(a.get("data-bhd") or "")
+        except (json.JSONDecodeError, TypeError):
+            continue
+
+        by_type: dict[str, Any] = {}
+        for sec in (bhd.get("body") or {}).values():
+            if isinstance(sec, dict) and sec.get("type"):
+                by_type[sec["type"]] = sec.get("content")
+
+        prices = by_type.get("prices")
+        if not isinstance(prices, dict):
+            continue  # not a deal card (could be a nav/category link)
+
+        href = a.get("href") or ""
+        slug = scrape.slug_from_url(href) if href else None
+        if not slug or slug in seen:
+            continue
+        seen.add(slug)
+
+        sell = prices.get("sell_price")
+        listp = prices.get("list_price")
+        rating = by_type.get("rating") if isinstance(by_type.get("rating"), dict) else {}
+        out.append({
+            "slug": slug,
+            "url": "https://www.groupon.com" + href if href.startswith("/") else href,
+            "title": by_type.get("title1") or by_type.get("title"),
+            "merchant": by_type.get("merchant"),  # cards often omit it; title carries the signal
+            "deal_price": sell / 100 if isinstance(sell, (int, float)) else None,
+            "original_price": listp / 100 if isinstance(listp, (int, float)) else None,
+            "discount_pct": prices.get("discount"),
+            "rating": rating.get("numeric_value"),
+            "rating_count": rating.get("number_of_ratings"),
+        })
+    return out
+
+
 # --- discover the local category URL via Tavily ----------------------------
 
 def _category_leaf(category: str | None) -> str:
@@ -220,23 +270,28 @@ def find_competitors(
     anthropic_client: anthropic.Anthropic | None = None,
     max_n: int = 5,
     cache_dir: str | Path | None = None,
+    prefetched_cards: list[dict[str, Any]] | None = None,
 ) -> list[Competitor]:
-    local_url = discover_local_url(category, city, tavily_client)
-    if not local_url:
-        return []
-
-    try:
-        html = scrape.fetch_html(local_url, cache_dir=cache_dir)
-        cards = parse_local_cards(html)
-        # A datacenter IP occasionally gets a bot-challenge/empty page, which
-        # parses to zero cards and would wrongly read as "no comparable deals".
-        # Retry once before giving up — a fresh fetch usually gets through.
-        if not cards:
-            html = scrape.fetch_html(local_url, cache_dir=cache_dir, force=True)
+    # Extension path: the deal page's on-page "Similar deals" were already parsed
+    # from the HTML the content script sent — use them directly, no scrape.
+    if prefetched_cards is not None:
+        cards = prefetched_cards
+    else:
+        local_url = discover_local_url(category, city, tavily_client)
+        if not local_url:
+            return []
+        try:
+            html = scrape.fetch_html(local_url, cache_dir=cache_dir)
             cards = parse_local_cards(html)
-    except Exception as e:
-        print(f"  competitor page scrape failed ({local_url}): {e}")
-        return []
+            # A datacenter IP occasionally gets a bot-challenge/empty page, which
+            # parses to zero cards and would wrongly read as "no comparable deals".
+            # Retry once before giving up — a fresh fetch usually gets through.
+            if not cards:
+                html = scrape.fetch_html(local_url, cache_dir=cache_dir, force=True)
+                cards = parse_local_cards(html)
+        except Exception as e:
+            print(f"  competitor page scrape failed ({local_url}): {e}")
+            return []
 
     competitors: list[Competitor] = []
     for c in cards:

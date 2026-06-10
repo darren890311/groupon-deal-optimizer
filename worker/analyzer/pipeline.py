@@ -79,6 +79,7 @@ def analyze(
     # the headless-Chromium fetch entirely (no cold-start, no bot-challenge, no
     # datacenter-IP geography issue). The website posts only a URL, in which case
     # we fall back to Playwright — and retry once if the page came back empty.
+    from_extension = bool(html)
     if html:
         audit = parse.parse_audit(html, url)
     else:
@@ -92,6 +93,12 @@ def analyze(
     anthropic_client, tavily_client = _default_clients(anthropic_client, tavily_client)
 
     deal_price = min((t.deal for t in deal.prices if t.deal is not None), default=None)
+
+    # Extension path: competitors come from the deal page's own "Similar deals"
+    # cards (parsed from the HTML the content script sent) — no category-page
+    # scrape, no Playwright. If none rendered, fall back to the Tavily+Playwright
+    # discovery path below by leaving prefetched_cards as None.
+    prefetched_cards = (competitors.parse_similar_cards(html) or None) if from_extension else None
 
     # Competitors, reputation and direct-booking are independent (each derives only
     # from the deal), so run them concurrently — they are all I/O-bound (Tavily,
@@ -108,6 +115,7 @@ def analyze(
             tavily_client=tavily_client,
             anthropic_client=anthropic_client,
             cache_dir=competitor_cache_dir,
+            prefetched_cards=prefetched_cards,
         )
         f_rep = pool.submit(
             _timed, "reputation", reputation.research_reputation,

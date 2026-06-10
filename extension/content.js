@@ -187,7 +187,7 @@
     const rows = comps.map((c) => `
       <div class="comp">
         <div class="comp-top">
-          <a href="${escapeHtml(c.url || "#")}" target="_blank" rel="noopener">${escapeHtml(c.merchant || "—")}</a>
+          <a href="${escapeHtml(c.url || "#")}" target="_blank" rel="noopener">${escapeHtml(c.merchant || c.title || "—")}</a>
           <span class="rr">${money(c.price)}${c.cheaper ? ` <em class="bad">cheaper ↓</em>` : ""}</span>
         </div>
         <div class="comp-sub">
@@ -256,9 +256,14 @@
       renderError("Timed out after 100s. The deal may be new (cold start) — try again.");
     }, 100000);
 
-    // Send the already-rendered page so the worker can skip Playwright entirely.
-    const html = document.documentElement.outerHTML;
-    chrome.runtime.sendMessage({ type: "ANALYZE", url: location.href, html }, (resp) => {
+    // The on-page "Similar deals" cards (a[data-bhd]) are lazy-loaded; wait for
+    // them so the rendered HTML we send carries the competitors too. Then send
+    // the whole page so the worker can skip Playwright entirely.
+    waitForCards().then(() => sendForAnalysis());
+
+    function sendForAnalysis() {
+      const html = document.documentElement.outerHTML;
+      chrome.runtime.sendMessage({ type: "ANALYZE", url: location.href, html }, (resp) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
@@ -277,6 +282,22 @@
         return;
       }
       renderVerdict(resp.data);
+      });
+    }
+  }
+
+  // Recommendations lazy-load after hydration; resolve once a card is in the DOM
+  // (or after a short cap, so a deal with genuinely no similar deals still runs).
+  function waitForCards(timeout = 4000) {
+    return new Promise((resolve) => {
+      if (document.querySelector("a[data-bhd]")) return resolve();
+      const t0 = Date.now();
+      const iv = setInterval(() => {
+        if (document.querySelector("a[data-bhd]") || Date.now() - t0 > timeout) {
+          clearInterval(iv);
+          resolve();
+        }
+      }, 200);
     });
   }
 
