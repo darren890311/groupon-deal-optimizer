@@ -158,9 +158,17 @@
     );
   }
 
+  const GAP = {
+    consistent: { cls: "ok", text: "consistent" },
+    external_higher: { cls: "ok", text: "external higher" },
+    external_lower: { cls: "bad", text: "external lower" },
+    divergent: { cls: "warn", text: "ratings disagree" },
+    insufficient: { cls: "warn", text: "limited data" },
+  };
+
   function reputationSection(rep) {
     if (!rep) return "";
-    const gap = { consistent: "ok", lower_elsewhere: "warn", higher_elsewhere: "warn" }[rep.gap_verdict] || "warn";
+    const g = GAP[rep.gap_verdict] || { cls: "warn", text: rep.gap_verdict || "—" };
     const star = (r, n) => r != null
       ? `<span class="star">${Number(r).toFixed(1)}★<small>${n != null ? ` (${Number(n).toLocaleString()})` : ""}</small></span>`
       : `<span class="star muted">—</span>`;
@@ -170,10 +178,11 @@
         <div><b>Google</b>${star(rep.google_rating, rep.google_reviews)}</div>
         <div><b>Yelp</b>${star(rep.yelp_rating, rep.yelp_reviews)}</div>
       </div>`;
-    const takeaway = rep.chain ? "varies by location" : (rep.gap_verdict || "").replace(/_/g, " ") || "—";
+    const cls = rep.chain ? "warn" : g.cls;
+    const takeaway = rep.chain ? "varies by location" : g.text;
     return section(
       `Reputation`,
-      `<span class="pill ${rep.chain ? "warn" : gap}">${takeaway}</span>`,
+      `<span class="pill ${cls}">${takeaway}</span>`,
       `${stats}${rep.summary ? `<p class="note">${escapeHtml(rep.summary)}</p>` : ""}`,
     );
   }

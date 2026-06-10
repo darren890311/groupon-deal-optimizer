@@ -10,7 +10,7 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 DiscountVerdict = Literal["honest", "exaggerated", "none"]
-GapVerdict = Literal["external_higher", "external_lower", "consistent", "insufficient"]
+GapVerdict = Literal["external_higher", "external_lower", "consistent", "divergent", "insufficient"]
 WorthBuying = Literal["yes", "caution", "no"]
 BadgeStatus = Literal["ok", "warn", "bad"]
 

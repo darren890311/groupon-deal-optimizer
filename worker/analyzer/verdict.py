@@ -74,15 +74,19 @@ def compute_badges(deal: Deal, competitors: list[Competitor], reputation: Reputa
     # --- reputation (external vs Groupon) ---------------------------------
     gv = reputation.gap_verdict
     src = "Google" if reputation.google_rating is not None else ("Yelp" if reputation.yelp_rating is not None else "other platforms")
+    primary_rating = reputation.google_rating if reputation.google_rating is not None else reputation.yelp_rating
     if reputation.chain:
         badges.append(Badge(type="reputation", status="warn",
                             label="National chain — reviews vary by location"))
+    elif gv == "divergent":
+        badges.append(Badge(type="reputation", status="warn",
+                            label=f"Groupon ({reputation.groupon_rating:.1f}★) and {src} ({primary_rating:.1f}★) disagree sharply"))
     elif gv == "external_lower":
         badges.append(Badge(type="reputation", status="bad",
                             label=f"Rated lower on {src} than on Groupon"))
     elif gv == "external_higher":
         badges.append(Badge(type="reputation", status="ok",
-                            label=f"Rated higher on {src} (small Groupon sample)"))
+                            label=f"Rated higher on {src} than on Groupon"))
     elif gv == "consistent":
         badges.append(Badge(type="reputation", status="ok",
                             label="Ratings consistent across platforms"))

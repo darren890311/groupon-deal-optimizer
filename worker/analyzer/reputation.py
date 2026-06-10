@@ -162,16 +162,33 @@ Snippets:
 
 # --- gap verdict (deterministic) -------------------------------------------
 
-def _compute_gap(groupon: float | None, google: float | None, yelp: float | None) -> GapVerdict:
+# A full-star gap on a 5-point scale is a real inconsistency, not cross-platform
+# noise — but only trust it to flag a deal when Groupon has enough reviews to
+# rule out a handful of harsh outliers.
+LARGE_GAP = 1.0
+TRUSTWORTHY_SAMPLE = 100
+
+
+def _compute_gap(
+    groupon: float | None,
+    google: float | None,
+    yelp: float | None,
+    groupon_reviews: int | None = None,
+) -> GapVerdict:
     """Compare Groupon against the most authoritative external (Google preferred)."""
     primary = google if google is not None else yelp
     if groupon is None or primary is None:
         return "insufficient"
     diff = primary - groupon
+    big_sample = groupon_reviews is None or groupon_reviews >= TRUSTWORTHY_SAMPLE
+    # External rated MUCH higher yet a large, trustworthy pool of Groupon buyers
+    # disagrees → the Groupon experience genuinely differs → caution (not "good").
+    if diff >= LARGE_GAP and big_sample:
+        return "divergent"
     if diff >= 0.3:
         return "external_higher"
     if diff <= -0.3:
-        return "external_lower"
+        return "external_lower"  # Groupon inflated vs reality → stays a red flag
     return "consistent"
 
 
@@ -272,7 +289,7 @@ def research_reputation(
             rep.yelp_rating, rep.yelp_reviews = ext.yelp_rating, ext.yelp_reviews
             summary = ext.summary
 
-    rep.gap_verdict = _compute_gap(groupon_rating, rep.google_rating, rep.yelp_rating)
+    rep.gap_verdict = _compute_gap(groupon_rating, rep.google_rating, rep.yelp_rating, groupon_reviews)
     rep.summary = summary or _template_summary(
         groupon_rating, groupon_reviews, rep.google_rating, rep.google_reviews,
         rep.yelp_rating, rep.yelp_reviews,
