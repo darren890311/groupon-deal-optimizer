@@ -10,17 +10,17 @@ const API_BASE = "https://groupon-api-xklyudhzbq-uc.a.run.app";
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg?.type !== "ANALYZE") return;
-  analyze(msg.url)
+  analyze(msg.url, msg.html)
     .then((data) => sendResponse({ ok: true, data }))
     .catch((err) => sendResponse({ ok: false, error: err.message || "Request failed" }));
   return true; // keep the channel open for the async sendResponse
 });
 
-async function analyze(url) {
+async function analyze(url, html) {
   const res = await fetch(`${API_BASE}/analyze`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url }),
+    body: JSON.stringify(html ? { url, html } : { url }),
   });
 
   let data = null;

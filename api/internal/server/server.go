@@ -31,7 +31,8 @@ func New(cache store.Cache, w *worker.Client, ttl time.Duration, log *slog.Logge
 }
 
 type analyzeRequest struct {
-	URL string `json:"url"`
+	URL  string `json:"url"`
+	HTML string `json:"html"` // optional: extension-supplied rendered page (worker skips Playwright)
 }
 
 func (s *Server) Router(allowedOrigin string) *gin.Engine {
@@ -75,7 +76,7 @@ func (s *Server) analyze(c *gin.Context) {
 	// Miss → ask the worker, bounded by a timeout.
 	workerCtx, cancel := context.WithTimeout(ctx, workerTimeout)
 	defer cancel()
-	raw, status, err := s.worker.Analyze(workerCtx, req.URL)
+	raw, status, err := s.worker.Analyze(workerCtx, req.URL, req.HTML)
 	if err != nil {
 		s.log.Error("worker call failed", "err", err)
 		c.JSON(http.StatusBadGateway, gin.H{"error": "worker unreachable: " + err.Error()})

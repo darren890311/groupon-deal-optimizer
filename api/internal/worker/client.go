@@ -33,10 +33,15 @@ func New(baseURL string) *Client {
 	return &Client{baseURL: base, http: httpClient}
 }
 
-// Analyze posts the deal URL to the worker and returns the raw response body and
-// status code. The caller owns the deadline via ctx (the worker can take ~12s).
-func (c *Client) Analyze(ctx context.Context, dealURL string) ([]byte, int, error) {
-	body, _ := json.Marshal(map[string]string{"url": dealURL})
+// Analyze posts the deal URL (and, when the extension supplies it, the rendered
+// page HTML) to the worker and returns the raw response body and status code.
+// An empty html falls back to the worker's own Playwright fetch. The caller owns
+// the deadline via ctx.
+func (c *Client) Analyze(ctx context.Context, dealURL, html string) ([]byte, int, error) {
+	body, _ := json.Marshal(struct {
+		URL  string `json:"url"`
+		HTML string `json:"html,omitempty"`
+	}{URL: dealURL, HTML: html})
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.baseURL+"/analyze", bytes.NewReader(body))
 	if err != nil {
 		return nil, 0, err

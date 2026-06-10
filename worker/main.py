@@ -37,6 +37,7 @@ _tavily = TavilyClient(api_key=TAVILY_API_KEY) if TAVILY_API_KEY else None
 
 class AnalyzeRequest(BaseModel):
     url: str
+    html: str | None = None  # extension supplies the rendered page; None → Playwright
 
 
 @app.get("/healthz")
@@ -55,7 +56,7 @@ def analyze_deal(req: AnalyzeRequest) -> DealAnalysis:
         raise HTTPException(status_code=422, detail="Not a Groupon deal URL (expected groupon.com/deals/<slug>).")
 
     try:
-        result = analyze(url, anthropic_client=_anthropic, tavily_client=_tavily)
+        result = analyze(url, html=req.html, anthropic_client=_anthropic, tavily_client=_tavily)
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Analysis failed while fetching/parsing the deal: {e}")
 

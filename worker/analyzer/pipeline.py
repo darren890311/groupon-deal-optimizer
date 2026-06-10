@@ -57,6 +57,7 @@ def _default_clients(anthropic_client, tavily_client):
 def analyze(
     url: str,
     *,
+    html: str | None = None,
     cache_dir: str | Path | None = None,
     competitor_cache_dir: str | Path | None = None,
     anthropic_client: anthropic.Anthropic | None = None,
@@ -74,14 +75,18 @@ def analyze(
 
     t_total = time.perf_counter()
 
-    html = _timed("scrape", scrape.fetch_html, url, cache_dir=cache_dir)
-    audit = parse.parse_audit(html, url)
-
-    # Datacenter IPs occasionally get a bot-challenge/empty page. If nothing real
-    # came through, scrape once more before giving up — a retry usually succeeds.
-    if not audit.get("title") or (not audit.get("prices") and audit.get("rating") is None):
-        html = _timed("scrape_retry", scrape.fetch_html, url, cache_dir=cache_dir, force=True)
+    # The browser extension supplies the already-rendered page HTML, so we skip
+    # the headless-Chromium fetch entirely (no cold-start, no bot-challenge, no
+    # datacenter-IP geography issue). The website posts only a URL, in which case
+    # we fall back to Playwright — and retry once if the page came back empty.
+    if html:
         audit = parse.parse_audit(html, url)
+    else:
+        html = _timed("scrape", scrape.fetch_html, url, cache_dir=cache_dir)
+        audit = parse.parse_audit(html, url)
+        if not audit.get("title") or (not audit.get("prices") and audit.get("rating") is None):
+            html = _timed("scrape_retry", scrape.fetch_html, url, cache_dir=cache_dir, force=True)
+            audit = parse.parse_audit(html, url)
 
     deal = _build_deal(url, audit)
     anthropic_client, tavily_client = _default_clients(anthropic_client, tavily_client)

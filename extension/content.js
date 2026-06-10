@@ -256,7 +256,9 @@
       renderError("Timed out after 100s. The deal may be new (cold start) — try again.");
     }, 100000);
 
-    chrome.runtime.sendMessage({ type: "ANALYZE", url: location.href }, (resp) => {
+    // Send the already-rendered page so the worker can skip Playwright entirely.
+    const html = document.documentElement.outerHTML;
+    chrome.runtime.sendMessage({ type: "ANALYZE", url: location.href, html }, (resp) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
