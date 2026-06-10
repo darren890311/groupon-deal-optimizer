@@ -271,8 +271,14 @@
     waitForCards().then(() => sendForAnalysis());
 
     function sendForAnalysis() {
-      const html = document.documentElement.outerHTML;
-      chrome.runtime.sendMessage({ type: "ANALYZE", url: location.href, html }, (resp) => {
+      // Only send the page when its embedded __NEXT_DATA__ actually belongs to
+      // THIS deal. On a Groupon SPA navigation (deal→deal, or from search) the
+      // server-rendered __NEXT_DATA__ stays stale on the first-loaded deal even
+      // though the visible DOM updates — sending it would mix one deal's prices
+      // with another's. When stale, send only the URL and let the worker fetch
+      // the correct deal fresh.
+      const html = pageHtmlIfFresh();
+      chrome.runtime.sendMessage({ type: "ANALYZE", url: location.href, html: html || undefined }, (resp) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
@@ -292,6 +298,29 @@
       }
       renderVerdict(resp.data);
       });
+    }
+  }
+
+  // The current deal's slug from the URL path, e.g. /deals/<slug>?... → <slug>.
+  function urlSlug() {
+    return (location.pathname.split("/deals/")[1] || "").split(/[/?#]/)[0];
+  }
+
+  // Return the page HTML only if its server-rendered __NEXT_DATA__ describes the
+  // deal currently in the URL. On a SPA navigation that blob is stale (it still
+  // holds the first-loaded deal), so we return null and fall back to a URL-only
+  // request, which the worker fetches fresh.
+  function pageHtmlIfFresh() {
+    try {
+      const nd = document.getElementById("__NEXT_DATA__");
+      if (!nd) return null;
+      const root = JSON.parse(nd.textContent)?.props?.pageProps?.__APOLLO_STATE__?.ROOT_QUERY || {};
+      const key = Object.keys(root).find((k) => k.startsWith("getDeal("));
+      const m = key && key.match(/"id":"([^"]+)"/);
+      const ndSlug = m && m[1];
+      return ndSlug && ndSlug === urlSlug() ? document.documentElement.outerHTML : null;
+    } catch {
+      return null;
     }
   }
 
