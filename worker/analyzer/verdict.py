@@ -154,7 +154,9 @@ def synthesize_verdict(
         price_basis = "no comparable deals found"
 
     comp_lines = "\n".join(
-        f"  - [{c.match}] {c.merchant}: ${c.price:.0f} ({c.discount_pct:.0f}% off)"
+        f"  - [{c.match}] {c.merchant or c.title}: "
+        + (f"${c.price:.0f}" if c.price is not None else "price n/a")
+        + (f" ({c.discount_pct:.0f}% off)" if c.discount_pct is not None else "")
         + (f" — {c.difference_note}" if c.difference_note else "")
         + (f" {c.url}" if c.cheaper else "")
         for c in competitors[:5]
