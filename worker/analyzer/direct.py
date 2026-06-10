@@ -64,11 +64,11 @@ def check_direct_booking(
 
 Below are web search snippets that may include the merchant's official website or direct-booking prices.
 
-1. If a snippet states a price to book this service DIRECTLY with the merchant (official site, phone, or walk-in), extract it as direct_price with its source_url. Use only prices explicitly stated for THIS merchant; otherwise leave both null.
-2. cheaper_than_groupon: true if a direct/official price is clearly lower than the Groupon price; false if clearly higher or equal; null if no direct price was found.
-3. note: one or two sentences in English advising the shopper — e.g. "No public direct price; the Groupon voucher is likely the cheapest listed option — call to confirm" or "The merchant's site lists $X, cheaper than Groupon."
+1. Extract a direct_price ONLY if a snippet states a price to book the SAME product/tier/scope DIRECTLY with the merchant (official site, phone, or walk-in) — same number of attractions/sessions/visits/days/coverage as the shopper's deal. A price for a smaller or different package (e.g. a 3-attraction pass when this deal is a 5-attraction pass, or a single session when this is a 6-pack) is NOT a valid comparison — leave direct_price and cheaper_than_groupon null. Use only prices explicitly stated for THIS merchant.
+2. cheaper_than_groupon: true only if a SAME-scope direct/official price is clearly lower than the Groupon price; false if clearly higher or equal; null if no same-scope direct price was found.
+3. note: one or two sentences in English advising the shopper — e.g. "No public direct price for the same package; the Groupon voucher is likely the cheapest listed option — call to confirm", "The merchant's site lists $X for the same pass, cheaper than Groupon", or "The only direct price found ($X) is for a smaller package, so it isn't directly comparable."
 
-Do not invent prices.
+Do not invent prices, and never compare across different package scopes.
 
 Snippets:
 {snippet_block}"""
