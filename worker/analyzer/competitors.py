@@ -216,13 +216,14 @@ def classify_comparability(
 - Service options: {options_str}
 
 Below are competing deals in the same city and category. For each, classify how comparable its service is to the shopper's deal:
-- "same": an equivalent substitute — the same service tier/spec the shopper would accept instead.
-- "similar": the SAME kind of service/experience, with a meaningful spec or scope difference (e.g. conventional/blend vs full synthetic oil, missing tire rotation, partial vs full highlights, 50-min vs 60-min massage).
+- "same": an equivalent substitute — the same service tier/spec/scope the shopper would accept with no trade-off.
+- "similar": the SAME kind of service/experience, with a meaningful spec or scope difference (e.g. conventional/blend vs full synthetic oil, missing tire rotation, partial vs full highlights, 50-min vs 60-min massage, a 3-attraction pass vs a 5-attraction pass, 3 sessions vs 6 sessions).
 - "different": a different kind of service, venue, or experience — NOT a real substitute, even if it sits in the same Groupon category.
 
-Be strict on two things:
+Be strict on three things:
 1. full synthetic vs conventional/blend is at most "similar", never "same".
 2. A different kind of venue/experience is "different", not "similar" — e.g. a waterpark vs a county fair, a museum vs a zoo, a massage vs a facial. Only mark "similar" when a shopper who wants THIS deal would seriously consider it as a near-substitute.
+3. A different QUANTITY, COUNT, COVERAGE or package scope (number of attractions/sessions/visits/days, duration, area covered, items included) is a meaningful difference → at most "similar", never "same" — EVEN when the brand or product name matches. E.g. a "CityPASS C3 / choice of 3 attractions" is only "similar" to a "CityPASS / 5 attractions"; a 6-session package is only "similar" to a 3-session one. Compare what is actually included, not the brand.
 
 For "similar"/"different", give a difference_note of <=12 words naming the key difference. For "same", leave difference_note empty.
 
