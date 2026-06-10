@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Revelio — Is This Groupon Deal Worth It?",
+  "version": "0.1.0",
+  "description": "On a Groupon deal page, reveal whether it's actually a good buy: the real discount, like-for-like prices, and cross-platform ratings.",
+  "icons": { "16": "icon.png", "48": "icon.png", "128": "icon.png" },
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://groupon-api-xklyudhzbq-uc.a.run.app/*",
+    "http://127.0.0.1:8080/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://www.groupon.com/deals/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icon.png"],
+      "matches": ["https://www.groupon.com/*"]
+    }
+  ]
+}
