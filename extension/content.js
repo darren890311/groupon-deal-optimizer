@@ -312,7 +312,10 @@
       width: 340px; background: #1a1a1a; color: #f4f4f5;
       border: 1px solid #2e2e32; border-radius: 16px; padding: 16px 18px;
       box-shadow: 0 12px 40px rgba(0,0,0,.45);
+      max-height: calc(100vh - 32px); overflow-y: auto; overscroll-behavior: contain;
     }
+    .card::-webkit-scrollbar { width: 8px; }
+    .card::-webkit-scrollbar-thumb { background: #3a3a40; border-radius: 4px; }
     .hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
     .brand img { width: 20px; height: 20px; border-radius: 5px; }
