@@ -214,10 +214,15 @@
 
   function directSection(db) {
     if (!db) return "";
-    const cheaper = db.cheaper_than_groupon;
+    // Three states: cheaper elsewhere (warn) / Groupon wins (ok) / unknown or
+    // too-close-to-call (muted → "verify").
+    const c = db.cheaper_than_groupon;
+    const tag = c === true ? { cls: "warn", text: "may be cheaper" }
+      : c === false ? { cls: "ok", text: "Groupon wins" }
+      : { cls: "muted", text: "verify price" };
     return section(
       `Direct booking`,
-      `<span class="pill ${cheaper ? "warn" : "ok"}">${cheaper ? "may be cheaper" : "Groupon wins"}</span>`,
+      `<span class="pill ${tag.cls}">${tag.text}</span>`,
       `${db.note ? `<p class="note">${escapeHtml(db.note)}</p>` : ""}${db.source_url ? `<a class="src" href="${escapeHtml(db.source_url)}" target="_blank" rel="noopener">source ↗</a>` : ""}`,
     );
   }
