@@ -16,13 +16,6 @@
 
   const isDealPage = () => location.pathname.startsWith("/deals/");
 
-  // Centralized so swapping the raw deal URL for a Groupon affiliate deep link
-  // later is a one-line change (mirrors web/src/api.js bookingUrl).
-  function bookingUrl(dealUrl) {
-    // TODO: wrap with the affiliate deep-link / params once enrolled.
-    return dealUrl;
-  }
-
   // ---- shadow host -------------------------------------------------------
 
   function shadow() {
@@ -123,10 +116,6 @@
           ${competitorsSection(data.competitors)}
           ${directSection(data.direct_booking)}
         </div>
-
-        <a class="cta book" href="${bookingUrl(deal.url || location.href)}" target="_blank" rel="noopener">
-          ${v.worth_buying === "yes" ? "Buy on Groupon →" : "Buy anyway on Groupon →"}
-        </a>
       </div>`;
     wireHeader(w);
   }
@@ -396,8 +385,6 @@
     }
     .reveal { background: #53a318; color: #fff; }
     .reveal:hover { background: #478c14; }
-    .book { background: #53a318; color: #fff; margin-top: 14px; }
-    .book:hover { background: #478c14; }
     .loading { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 0 2px; }
     .spin { width: 44px; height: 44px; border-radius: 10px; animation: spin 1.4s linear infinite; }
     @keyframes spin { to { transform: rotateY(360deg); } }
