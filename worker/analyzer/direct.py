@@ -33,10 +33,21 @@ def _gather_snippets(tavily_client, merchant: str, city: str | None, category_le
 
 
 class _DirectExtract(BaseModel):
-    direct_price: float | None = Field(default=None, description="Price to book directly/officially, only if explicitly stated for this merchant")
-    cheaper_than_groupon: bool | None = Field(default=None, description="true/false vs the Groupon price; null if no direct price found")
+    direct_price: float | None = Field(default=None, description="Live/sale price to book the SAME-scope ticket directly or via an official reseller, only if explicitly stated; prefer the discounted price over a struck-through one")
     source_url: str | None = Field(default=None, description="URL of the official site / source of the direct price")
     note: str = Field(description="One or two sentences in English advising the shopper")
+
+
+def _decide_cheaper(direct: float | None, groupon: float | None) -> bool | None:
+    """Whether booking direct clearly beats Groupon — decided in code, not by the
+    LLM. A small gap (within ~10% or ~$3) is within fee/promo noise → None
+    ("too close to call"), so the panel says 'verify' rather than declaring a
+    winner on a couple of dollars."""
+    if direct is None or groupon is None:
+        return None
+    if abs(direct - groupon) <= max(0.10 * groupon, 3.0):
+        return None
+    return direct < groupon
 
 
 def check_direct_booking(
@@ -64,12 +75,11 @@ def check_direct_booking(
 
 Below are web search snippets that may include the merchant's official website or direct-booking prices.
 
-1. Extract a direct_price ONLY if a snippet states a price to book the SAME product/tier/scope DIRECTLY with the merchant or an official reseller (official site, Klook/GetYourGuide, phone, walk-in) — same number of attractions/sessions/visits/days/coverage as the shopper's deal. A price for a smaller or different package (e.g. a 3-attraction pass when this deal is a 5-attraction pass, or a single session when this is a 6-pack) is NOT a valid comparison — leave direct_price and cheaper_than_groupon null.
-   - Snippet prices are often a LIST / "was" / struck-through / "from" anchor, NOT the live checkout price. If a snippet shows both an original and a discounted/sale price (e.g. "$45.75 $41.15" or "was $45.75, now $41.15"), use the LOWER, current price. Treat any extracted price as approximate.
-2. cheaper_than_groupon: true only if a SAME-scope direct price is CLEARLY lower than Groupon (more than ~10%, or several dollars); false if clearly higher; **null if the prices are close (within ~10%) or you're unsure** — a small gap is within the noise of fees/promos and shouldn't be called a winner.
-3. note: one or two sentences in English advising the shopper. When the gap is small, say so and tell them to verify the live checkout price — e.g. "Klook lists about $X for the same ticket, within a dollar or two of Groupon — check the live price at checkout", "No public direct price for the same package; the Groupon voucher is likely cheapest — call to confirm", or "The only direct price found is for a smaller package, so it isn't directly comparable."
+1. Extract a direct_price ONLY if a snippet states a price to book the SAME product/tier/scope DIRECTLY with the merchant or an official reseller (official site, Klook/GetYourGuide, phone, walk-in) — same number of attractions/sessions/visits/days/coverage as the shopper's deal. A price for a smaller or different package (e.g. a 3-attraction pass when this deal is a 5-attraction pass, or a single session when this is a 6-pack) is NOT a valid comparison — leave direct_price null.
+   - Snippet prices are often a LIST / "was" / struck-through / "from" anchor, NOT the live checkout price. If a snippet shows both an original and a discounted/sale price (e.g. "$45.75 $41.15" or "was $45.75, now $41.15"), use the LOWER, current price. Treat any extracted price as approximate. (Whether it counts as cheaper is decided downstream, not by you.)
+2. note: one or two sentences in English advising the shopper. If the direct price is within a couple of dollars of Groupon, say it's close and tell them to verify the live checkout price; if clearly lower or higher, say so; if none found, say the Groupon voucher is likely cheapest and to call to confirm. E.g. "Klook lists about $X for the same ticket, within a dollar or two of Groupon — check the live price at checkout", or "The only direct price found is for a smaller package, so it isn't directly comparable."
 
-Do not invent prices, never compare across different package scopes, and never declare a winner on a small or uncertain price difference.
+Do not invent prices, and never compare across different package scopes.
 
 Snippets:
 {snippet_block}"""
@@ -87,7 +97,7 @@ Snippets:
         return DirectBooking(note="Direct-booking comparison failed.")
 
     return DirectBooking(
-        cheaper_than_groupon=ext.cheaper_than_groupon,
+        cheaper_than_groupon=_decide_cheaper(ext.direct_price, deal_price),
         note=ext.note,
         source_url=ext.source_url,
     )
