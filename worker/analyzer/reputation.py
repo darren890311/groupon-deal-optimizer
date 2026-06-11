@@ -163,10 +163,11 @@ Snippets:
 # --- gap verdict (deterministic) -------------------------------------------
 
 # A full-star gap on a 5-point scale is a real inconsistency, not cross-platform
-# noise — but only trust it to flag a deal when Groupon has enough reviews to
-# rule out a handful of harsh outliers.
+# noise. We compare ALL trustworthy platforms (Groupon + Google + Yelp), not just
+# one external — a deal can look fine on Groupon and Google yet have a 1.3 on Yelp.
 LARGE_GAP = 1.0
-TRUSTWORTHY_SAMPLE = 100
+TRUSTWORTHY_SAMPLE = 100   # Groupon reviews needed to trust a Groupon-vs-external gap
+MIN_EXTERNAL_SAMPLE = 30   # external reviews needed before its rating counts
 
 
 def _compute_gap(
@@ -174,17 +175,28 @@ def _compute_gap(
     google: float | None,
     yelp: float | None,
     groupon_reviews: int | None = None,
+    google_reviews: int | None = None,
+    yelp_reviews: int | None = None,
 ) -> GapVerdict:
-    """Compare Groupon against the most authoritative external (Google preferred)."""
-    primary = google if google is not None else yelp
-    if groupon is None or primary is None:
+    """Flag when ratings disagree across platforms. Considers every well-sampled
+    source, so a wildly different Yelp isn't ignored just because Google agrees."""
+    exts: list[float] = []
+    if google is not None and (google_reviews is None or google_reviews >= MIN_EXTERNAL_SAMPLE):
+        exts.append(google)
+    if yelp is not None and (yelp_reviews is None or yelp_reviews >= MIN_EXTERNAL_SAMPLE):
+        exts.append(yelp)
+    if groupon is None or not exts:
         return "insufficient"
-    diff = primary - groupon
-    big_sample = groupon_reviews is None or groupon_reviews >= TRUSTWORTHY_SAMPLE
-    # External rated MUCH higher yet a large, trustworthy pool of Groupon buyers
-    # disagrees → the Groupon experience genuinely differs → caution (not "good").
-    if diff >= LARGE_GAP and big_sample:
+
+    groupon_trust = groupon_reviews is None or groupon_reviews >= TRUSTWORTHY_SAMPLE
+    ext_spread = max(exts) - min(exts)                  # do the externals disagree with each other?
+    groupon_gap = max(abs(e - groupon) for e in exts)   # does Groupon disagree with an external?
+    # Divergent if the externals contradict each other, or Groupon contradicts an
+    # external while having a trustworthy sample.
+    if ext_spread >= LARGE_GAP or (groupon_trust and groupon_gap >= LARGE_GAP):
         return "divergent"
+
+    diff = sum(exts) / len(exts) - groupon
     if diff >= 0.3:
         return "external_higher"
     if diff <= -0.3:
@@ -289,7 +301,10 @@ def research_reputation(
             rep.yelp_rating, rep.yelp_reviews = ext.yelp_rating, ext.yelp_reviews
             summary = ext.summary
 
-    rep.gap_verdict = _compute_gap(groupon_rating, rep.google_rating, rep.yelp_rating, groupon_reviews)
+    rep.gap_verdict = _compute_gap(
+        groupon_rating, rep.google_rating, rep.yelp_rating,
+        groupon_reviews, rep.google_reviews, rep.yelp_reviews,
+    )
     rep.summary = summary or _template_summary(
         groupon_rating, groupon_reviews, rep.google_rating, rep.google_reviews,
         rep.yelp_rating, rep.yelp_reviews,
