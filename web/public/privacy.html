@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revelio — Privacy Policy</title>
+    <meta name="robots" content="all" />
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+        font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #1a1a1a;
+        background: #fff;
+      }
+      h1 { font-size: 1.7rem; margin-bottom: 4px; }
+      h2 { font-size: 1.15rem; margin-top: 32px; }
+      .muted { color: #6b7280; font-size: 0.9rem; }
+      ul { padding-left: 1.2em; }
+      li { margin: 6px 0; }
+      code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+      a { color: #2563eb; }
+      @media (prefers-color-scheme: dark) {
+        body { color: #e5e7eb; background: #111; }
+        code { background: #1f2937; }
+        a { color: #93c5fd; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Revelio — Privacy Policy</h1>
+    <p class="muted">Last updated: June 11, 2026</p>
+
+    <p>
+      Revelio is a tool that tells you whether a Groupon deal is actually a good buy. It is available as a
+      website and as a Chrome extension. This policy explains what data Revelio handles and why. Revelio is an
+      <strong>independent tool and is not affiliated with, endorsed by, or sponsored by Groupon</strong>.
+    </p>
+
+    <h2>What we collect, and only when you ask</h2>
+    <p>
+      The extension does nothing until you open a Groupon deal page (<code>groupon.com/deals/…</code>) and click
+      <strong>“Reveal this deal.”</strong> When you click Reveal, it sends to our analysis server:
+    </p>
+    <ul>
+      <li>the <strong>deal page’s URL</strong>, and</li>
+      <li>the <strong>rendered content of that deal page</strong> (so we can read the real prices, discounts and ratings).</li>
+    </ul>
+    <p>
+      That’s it. We do <strong>not</strong> collect your name, email, Groupon account, payment details, browsing
+      history, or activity on other sites. The extension runs only on Groupon deal pages and only acts on your click.
+    </p>
+
+    <h2>Why we use it</h2>
+    <p>
+      The data is used solely to analyze the specific deal you asked about and return a verdict (real discount,
+      comparison with similar same-city deals, and cross-platform ratings). To produce that analysis, derived
+      details about the deal — such as the merchant name, deal title and prices — may be processed by the
+      third-party services we rely on: Anthropic (Claude), the Google Places API, the Yelp Fusion API, and Tavily.
+      We do not send your identity to these services.
+    </p>
+
+    <h2>Storage and retention</h2>
+    <p>
+      To make repeat lookups fast, the analysis result for a deal is cached on our server, keyed by the deal’s URL,
+      for up to 24 hours. We do not build user profiles, and we do not link analyses to any individual.
+    </p>
+
+    <h2>What we don’t do</h2>
+    <ul>
+      <li>We do not sell, rent, or share your data with advertisers.</li>
+      <li>We do not track you across websites or serve ads.</li>
+      <li>We do not run analytics that identify you personally.</li>
+    </ul>
+
+    <h2>Permissions the extension requests</h2>
+    <ul>
+      <li><strong>Access to <code>groupon.com</code> deal pages</strong> — to read the deal you choose to analyze, on your click.</li>
+      <li><strong>Access to our analysis API</strong> (<code>groupon-api-…run.app</code>) — to send that page and receive the verdict.</li>
+    </ul>
+
+    <h2>Changes</h2>
+    <p>
+      We may update this policy; the “Last updated” date above will change accordingly. Continued use after an
+      update constitutes acceptance of the revised policy.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy? Contact us at <strong>[your-contact-email]</strong>.
+    </p>
+  </body>
+</html>

@@ -7,9 +7,9 @@ export default defineConfig({
   modules: ['@wxt-dev/module-vue'],
   manifest: {
     name: 'Revelio — Is This Deal Actually A Deal?',
+    // Kept under Chrome's 132-char limit; includes the not-affiliated disclaimer.
     description:
-      "On a Groupon deal page, reveal whether it's actually a good buy: the real discount, like-for-like prices, and cross-platform ratings.",
-    permissions: ['storage'],
+      'Independent deal checker for Groupon — real discount, same-city prices, cross-platform ratings. Not affiliated with Groupon.',
     host_permissions: [
       'https://groupon-api-xklyudhzbq-uc.a.run.app/*',
       'http://127.0.0.1:8080/*',
