@@ -1,0 +1,19 @@
+{
+  "name": "revelio-extension",
+  "description": "Revelio — is this Groupon deal worth it? (Chrome MV3 extension)",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "@wxt-dev/module-vue": "^1.0.3",
+    "typescript": "^6.0.3",
+    "vue": "^3.5.37",
+    "wxt": "^0.20.26"
+  }
+}
