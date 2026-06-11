@@ -1,13 +1,5 @@
 <script setup>
-import { computed } from 'vue'
-import { bookingUrl } from '../api'
-
-const props = defineProps({ verdict: Object, deal: Object })
-
-// "anyway" only reads right when we cautioned against the deal.
-const bookLabel = computed(() =>
-  props.verdict.worth_buying === 'yes' ? 'Buy on Groupon →' : 'Buy anyway on Groupon →',
-)
+defineProps({ verdict: Object, deal: Object })
 
 const TONE = {
   yes: { cls: 'ok', label: 'Worth buying', icon: '✓' },
@@ -36,14 +28,6 @@ function tone(w) {
     <p v-if="verdict.recommended_action" class="action">
       <strong>What to do:</strong> {{ verdict.recommended_action }}
     </p>
-
-    <a
-      v-if="deal && deal.url"
-      class="book"
-      :href="bookingUrl(deal.url)"
-      target="_blank"
-      rel="noopener"
-    >{{ bookLabel }}</a>
   </div>
 </template>
 
@@ -108,17 +92,4 @@ function tone(w) {
 .badge.bad .dot  { background: var(--bad-fg); }
 
 .action { margin: 18px 0 0; font-size: 0.95rem; }
-
-.book {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 10px 18px;
-  border-radius: 10px;
-  background: #53a318; /* Groupon green */
-  border: 1px solid #53a318;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.92rem;
-}
-.book:hover { text-decoration: none; background: #478c14; border-color: #478c14; }
 </style>

@@ -79,11 +79,28 @@ on the critical path.**
   *nice-to-have* for price-percentile stats.
 - **Analyze on click, never on page load.** Auto-running on every deal view would
   blow up LLM/API cost; the prompt is free, the analysis is opt-in.
-- **Affiliate = panel CTA via a deep-link** (method A: the user's last click goes
-  through our link → attribution works, ToS-compliant). Never silently drop a
-  cookie (cookie stuffing) and avoid intercepting Groupon's own buy button
-  (the Honey-style last-click hijack). Affiliate application pending approval; the
-  CTA currently links to the raw deal URL via a centralized `bookingUrl()` seam.
+- **No Groupon affiliate — Revelio stays a neutral advisor.** We explored the
+  Groupon (CJ) affiliate program but decided against it: its terms forbid
+  disparaging Groupon, making your own advertising claims, statistical analysis
+  of Groupon content, and diverting customers — all core to what Revelio does
+  (it says "not worth it", analyzes deals, and recommends booking direct). An
+  honest watchdog can't be funded by the thing it critiques, and the commission
+  is tiny (1%). So the buy CTA was removed from both the extension panel and the
+  web app — Revelio gives the verdict; the user buys (or not) on the page itself.
+  Future monetization, if any, should stay aligned: freemium (Pro features) or
+  affiliate-linking the *recommended alternatives* (Klook / GetYourGuide /
+  merchant), never Groupon.
+
+## Stack note: vanilla JS → WXT + Vue
+
+The first cut of the extension was a single vanilla-JS content script (zero build,
+load-unpacked directly) — the right call for a tiny injected widget. As the panel
+grew (prompt / loading / verdict + four sections / error), it was rebuilt with
+**WXT + Vue 3**: the panel is Vue components mounted in a shadow root, TypeScript
+entrypoints, auto-generated manifest. This matches how non-trivial extensions are
+built (framework + bundler), gives Vue a second home alongside the web app, and —
+because there's now a bundler transpiling everything — TypeScript is "free" (it
+needed a build step the vanilla version deliberately avoided).
 
 ## Issues found in testing & how they were fixed
 
