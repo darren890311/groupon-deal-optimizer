@@ -75,11 +75,11 @@ def check_direct_booking(
 
 Below are web search snippets that may include the merchant's official website or direct-booking prices.
 
-1. Extract a direct_price ONLY if a snippet states a price to book the SAME product/tier/scope DIRECTLY with the merchant or an official reseller (official site, Klook/GetYourGuide, phone, walk-in) — same number of attractions/sessions/visits/days/coverage as the shopper's deal. A price for a smaller or different package (e.g. a 3-attraction pass when this deal is a 5-attraction pass, or a single session when this is a 6-pack) is NOT a valid comparison — leave direct_price null.
+1. First, the snippet MUST be about THIS EXACT business — the same merchant name AND the same city/area as the deal ("{merchant}"{f' in {city}' if city else ''}). A different business name, or the same kind of service in a different city/state, is NOT this merchant — ignore it completely, even if it sells the same service. If no snippet is clearly this exact business, leave direct_price null and say no direct price was found. THEN, only for a matching snippet, extract a direct_price for the SAME product/tier/scope (official site, Klook/GetYourGuide, phone, walk-in) — same number of attractions/sessions/visits/days/coverage. A smaller or different package (e.g. a 3-attraction pass when this deal is a 5-attraction pass, or a single session when this is a 6-pack) is NOT a valid comparison — leave direct_price null.
    - Snippet prices are often a LIST / "was" / struck-through / "from" anchor, NOT the live checkout price. If a snippet shows both an original and a discounted/sale price (e.g. "$45.75 $41.15" or "was $45.75, now $41.15"), use the LOWER, current price. Treat any extracted price as approximate. (Whether it counts as cheaper is decided downstream, not by you.)
 2. note: one or two sentences in English advising the shopper. If the direct price is within a couple of dollars of Groupon, say it's close and tell them to verify the live checkout price; if clearly lower or higher, say so; if none found, say the Groupon voucher is likely cheapest and to call to confirm. E.g. "Klook lists about $X for the same ticket, within a dollar or two of Groupon — check the live price at checkout", or "The only direct price found is for a smaller package, so it isn't directly comparable."
 
-Do not invent prices, and never compare across different package scopes.
+Do not invent prices, never compare across different businesses or cities, and never compare across different package scopes.
 
 Snippets:
 {snippet_block}"""
