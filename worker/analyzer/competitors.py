@@ -298,7 +298,11 @@ def find_competitors(
     for c in cards:
         if exclude_slug and c.get("slug") == exclude_slug:
             continue
-        if c.get("deal_price") is None:
+        # A missing or non-positive price means a coupon / "online sale" card with
+        # no real Groupon price (e.g. a Sam's Club membership offer that links to a
+        # retailer coupon page), not a priced deal we can compare. Skip it so it
+        # can't surface as a bogus "$0 cheaper" entry.
+        if c.get("deal_price") is None or c["deal_price"] <= 0:
             continue
         competitors.append(Competitor(
             merchant=c.get("merchant"),
