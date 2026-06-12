@@ -32,9 +32,24 @@ const db = computed(() => props.data.direct_booking);
 
 const tone = computed(() => TONE[v.value.worth_buying] || TONE.caution);
 
-const dv = computed(() => DISCOUNT[deal.value.discount_verdict] || { cls: 'warn', word: deal.value.discount_verdict || '—' });
+// Pill must reflect the actual discount BADGE (which includes the fake-anchor
+// override: "direct is cheaper" flips discount to bad even when Groupon's own
+// strike-through math is honest). Reading deal.discount_verdict alone makes the
+// section say "genuine" while the headline badge says "Not a real deal".
+const discountBadge = computed<any>(() => (v.value.badges || []).find((b: any) => b.type === 'discount'));
+const dv = computed(() => {
+  const b = discountBadge.value;
+  if (!b) return DISCOUNT[deal.value.discount_verdict] || { cls: 'warn', word: deal.value.discount_verdict || '—' };
+  if (b.status === 'ok') return { cls: 'ok', word: 'genuine' };
+  if (b.status === 'bad') return { cls: 'bad', word: deal.value.discount_verdict === 'exaggerated' ? 'exaggerated' : 'no real discount' };
+  return { cls: 'warn', word: 'no real discount' };
+});
+// "up to X%" only means something when the discount is genuine; on a fake-anchor
+// deal the on-Groupon % is real but meaningless, so don't show it.
 const maxText = computed(() =>
-  deal.value.actual_max_discount_pct != null ? `up to ${Math.round(deal.value.actual_max_discount_pct)}%` : '',
+  dv.value.cls === 'ok' && deal.value.actual_max_discount_pct != null
+    ? `up to ${Math.round(deal.value.actual_max_discount_pct)}%`
+    : '',
 );
 const claimText = computed(() =>
   deal.value.advertised_discount_pct != null
