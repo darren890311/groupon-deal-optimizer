@@ -65,6 +65,7 @@ class Competitor(BaseModel):
 
 class DirectBooking(BaseModel):
     cheaper_than_groupon: bool | None = None
+    direct_price: float | None = None
     note: str = ""
     source_url: str | None = None
 

@@ -28,12 +28,25 @@ def _fmt_range(lo: float, hi: float) -> str:
     return f"${lo:.0f}" if lo == hi else f"${lo:.0f}-${hi:.0f}"
 
 
-def compute_badges(deal: Deal, competitors: list[Competitor], reputation: Reputation) -> list[Badge]:
+def compute_badges(
+    deal: Deal,
+    competitors: list[Competitor],
+    reputation: Reputation,
+    direct_booking: DirectBooking | None = None,
+) -> list[Badge]:
     badges: list[Badge] = []
 
     # --- discount ---------------------------------------------------------
+    # Fake anchor: if a confirmed direct price is the same or cheaper than the
+    # Groupon price, the headline discount gives no real saving — the "original"
+    # is an inflated anchor. This overrides Groupon's internally-honest math.
+    entry = _min_deal_price(deal)
+    direct_price = direct_booking.direct_price if direct_booking else None
     dv = deal.discount_verdict
-    if dv == "exaggerated":
+    if direct_price is not None and entry is not None and direct_price <= entry:
+        badges.append(Badge(type="discount", status="bad",
+                            label=f"Not a real deal — direct is ${direct_price:.0f}, same or less"))
+    elif dv == "exaggerated":
         adv = deal.advertised_discount_pct
         act = deal.actual_max_discount_pct or 0
         label = f"Discount exaggerated — {adv:.0f}% claimed, {act:.0f}% real" if adv else "Discount exaggerated"
@@ -140,7 +153,7 @@ def synthesize_verdict(
     direct_booking: DirectBooking | None = None,
     model: str = HAIKU_MODEL,  # flip to SONNET_MODEL for a slightly richer verdict
 ) -> Verdict:
-    badges = compute_badges(deal, competitors, reputation)
+    badges = compute_badges(deal, competitors, reputation, direct_booking)
     worth = derive_worth_buying(badges)
     if client is None:
         return Verdict(badges=badges, worth_buying=worth)

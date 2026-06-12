@@ -100,6 +100,7 @@ Snippets:
 
     return DirectBooking(
         cheaper_than_groupon=_decide_cheaper(ext.direct_price, deal_price),
+        direct_price=ext.direct_price,
         note=ext.note,
         source_url=ext.source_url,
     )
