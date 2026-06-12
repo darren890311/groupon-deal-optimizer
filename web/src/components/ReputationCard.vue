@@ -27,7 +27,7 @@ function caption(p) {
     <div class="row">
       <div v-for="p in platforms" :key="p.name" class="plat">
         <div class="score" :class="{ none: p.rating == null }">
-          {{ p.rating == null ? '—' : p.rating }}<span v-if="p.rating != null" class="star">★</span>
+          {{ p.rating == null ? ' - ' : p.rating }}<span v-if="p.rating != null" class="star">★</span>
         </div>
         <div class="name">{{ p.name }}</div>
         <div class="rev">{{ caption(p) }}</div>

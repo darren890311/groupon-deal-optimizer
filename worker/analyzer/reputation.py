@@ -1,9 +1,9 @@
-"""Cross-platform reputation — Groupon vs Google vs Yelp.
+"""Cross-platform reputation - Groupon vs Google vs Yelp.
 
 Groupon's on-page rating is often a thin, self-selected sample. We pull two
 external ratings to put it in context:
-  - **Google** via the Places API (reliable, structured rating + review count).
-  - **Yelp** via Tavily web search + Claude extraction (Yelp exposes its rating
+ - **Google** via the Places API (reliable, structured rating + review count).
+ - **Yelp** via Tavily web search + Claude extraction (Yelp exposes its rating
     in search snippets; Google's lives in Maps and isn't reliably searchable).
 
 The gap verdict compares Groupon against the most authoritative external rating
@@ -26,7 +26,7 @@ from .models import GapVerdict, Reputation
 def _is_chain(merchant: str, places: list[dict]) -> bool:
     """A multi-location chain: several of the top results share the merchant's
     brand name but sit at different addresses (e.g. AMC, Massage Envy). For those
-    there is no single 'merchant' rating — picking places[0] would be one random
+    there is no single 'merchant' rating - picking places[0] would be one random
     branch, so we don't trust it.
     """
     brand = merchant.split()[0].lower() if merchant else ""
@@ -40,14 +40,14 @@ def _is_chain(merchant: str, places: list[dict]) -> bool:
 
 def _google_places_rating(merchant: str, city: str | None, api_key: str) -> tuple[float | None, int | None, bool]:
     """Return (rating, review_count, is_chain). For a chain, rating/count are
-    None — the rating varies by location, so there's no honest single number."""
+    None - the rating varies by location, so there's no honest single number."""
     if not api_key or not merchant:
         return None, None, False
     query = f"{merchant} {city}".strip() if city else merchant
     req = urllib.request.Request(
         "https://places.googleapis.com/v1/places:searchText",
         # regionCode anchors the search to the US so results don't depend on the
-        # caller's IP — without it, a no-city chain name returns nothing from a
+        # caller's IP - without it, a no-city chain name returns nothing from a
         # datacenter IP (Cloud Run) while resolving fine from a US laptop.
         data=json.dumps({"textQuery": query, "regionCode": "US"}).encode(),
         method="POST",
@@ -79,7 +79,7 @@ def _yelp_fusion_rating(merchant: str, city: str | None, api_key: str) -> tuple[
     """Best-match Yelp business for (merchant, city) → (rating, review_count).
 
     Yelp renders its stars as images, so web snippets carry the review count but
-    not the score — the Fusion API is the only reliable source of the number.
+    not the score - the Fusion API is the only reliable source of the number.
     """
     if not api_key or not merchant:
         return None, None
@@ -143,11 +143,11 @@ Ratings already known:
 - {chr(10).join('- ' + k for k in known)}
 
 Below are web search snippets, used to find this merchant's YELP rating.
-1. Extract the merchant's YELP rating and review count — ONLY if explicitly stated for THIS merchant; otherwise leave both null. Do not invent numbers.
+1. Extract the merchant's YELP rating and review count - ONLY if explicitly stated for THIS merchant; otherwise leave both null. Do not invent numbers.
 2. Write a one-to-two sentence English summary a shopper can act on, comparing the platforms: note small samples (e.g. few Groupon reviews) and whether the more-reviewed Google/Yelp ratings agree or disagree with Groupon.
 
 Snippets:
-{chr(10).join('———' + chr(10) + s for s in snippets[:8]) or '(none)'}"""
+{chr(10).join('---' + chr(10) + s for s in snippets[:8]) or '(none)'}"""
     try:
         resp = client.messages.parse(
             model=HAIKU_MODEL, max_tokens=1000,
@@ -164,7 +164,7 @@ Snippets:
 
 # A full-star gap on a 5-point scale is a real inconsistency, not cross-platform
 # noise. We compare ALL trustworthy platforms (Groupon + Google + Yelp), not just
-# one external — a deal can look fine on Groupon and Google yet have a 1.3 on Yelp.
+# one external - a deal can look fine on Groupon and Google yet have a 1.3 on Yelp.
 LARGE_GAP = 1.0
 TRUSTWORTHY_SAMPLE = 100   # Groupon reviews needed to trust a Groupon-vs-external gap
 MIN_EXTERNAL_SAMPLE = 30   # external reviews needed before its rating counts
@@ -224,7 +224,7 @@ class _Summary(BaseModel):
 
 def _write_summary(client, merchant, city, gr, grv, gg, ggv, yr, yrv) -> str:
     """LLM comparison summary when all ratings are already structured (Google +
-    Yelp from their APIs) — no extraction, just a shopper-facing read."""
+    Yelp from their APIs) - no extraction, just a shopper-facing read."""
     lines = [f"Groupon: {gr}★ from {grv} reviews"]
     if gg is not None:
         lines.append(f"Google: {gg}★ from {ggv} reviews")
@@ -263,23 +263,23 @@ def research_reputation(
     if not merchant:
         return rep
 
-    # Google (Places API) — independent of the LLM.
+    # Google (Places API) - independent of the LLM.
     rep.google_rating, rep.google_reviews, rep.chain = _google_places_rating(merchant, city, places_api_key)
 
     # National deal (no city) with no single Google location is effectively the
-    # same case — ratings vary by branch. Treat it as a chain rather than a bare
+    # same case - ratings vary by branch. Treat it as a chain rather than a bare
     # "no rating found".
     if not rep.chain and rep.google_rating is None and not city:
         rep.chain = True
 
     # Multi-location / national: no single external rating is meaningful. Don't
-    # pull a per-branch Yelp number either — just say so.
+    # pull a per-branch Yelp number either - just say so.
     if rep.chain:
         rep.gap_verdict = "insufficient"
         gr = f"{groupon_rating}★ from {groupon_reviews} reviews" if groupon_rating is not None else "the Groupon score above"
         rep.summary = (
             f"{merchant} operates across many locations, so Google and Yelp ratings vary by individual "
-            f"branch — there's no single brand-wide score to compare. {gr.capitalize()} reflects this "
+            f"branch - there's no single brand-wide score to compare. {gr.capitalize()} reflects this "
             "specific deal; check the rating of the exact location you'd visit before buying."
         )
         return rep

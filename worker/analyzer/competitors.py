@@ -1,15 +1,15 @@
-"""Competitor discovery — same city, on Groupon, with service comparability.
+"""Competitor discovery - same city, on Groupon, with service comparability.
 
 Strategy (hybrid):
   1. Tavily, constrained to groupon.com, to discover the Groupon *local category*
-     page URL for this deal's (category, city) — e.g. /local/chicago/oil-change.
+     page URL for this deal's (category, city) - e.g. /local/chicago/oil-change.
   2. Playwright-scrape that page. It is already city-scoped, so every deal on it
      is a same-city competitor by construction.
   3. BeautifulSoup locates the page's embedded Apollo state
      (__NEXT_DATA__ → __APOLLO_STATE__.ROOT_QUERY.browseDealFeed(...).cards),
      which carries real prices + discounts (no fragile DOM scraping).
   4. Claude (Sonnet) judges how comparable each competitor's *service* is to the
-     analyzed deal — "same" / "similar" / "different" + a one-line difference —
+     analyzed deal - "same" / "similar" / "different" + a one-line difference - 
      so a full-synthetic oil change is not blindly compared to a conventional one.
 
 The deal under analysis is excluded by slug; remaining competitors are labelled,
@@ -216,14 +216,14 @@ def classify_comparability(
 - Service options: {options_str}
 
 Below are competing deals in the same city and category. For each, classify how comparable its service is to the shopper's deal:
-- "same": an equivalent substitute — the same service tier/spec/scope the shopper would accept with no trade-off.
+- "same": an equivalent substitute - the same service tier/spec/scope the shopper would accept with no trade-off.
 - "similar": the SAME kind of service/experience, with a meaningful spec or scope difference (e.g. conventional/blend vs full synthetic oil, missing tire rotation, partial vs full highlights, 50-min vs 60-min massage, a 3-attraction pass vs a 5-attraction pass, 3 sessions vs 6 sessions).
-- "different": a different kind of service, venue, or experience — NOT a real substitute, even if it sits in the same Groupon category.
+- "different": a different kind of service, venue, or experience - NOT a real substitute, even if it sits in the same Groupon category.
 
 Be strict on three things:
 1. full synthetic vs conventional/blend is at most "similar", never "same".
-2. A different kind of venue/experience is "different", not "similar" — e.g. a waterpark vs a county fair, a museum vs a zoo, a massage vs a facial. Only mark "similar" when a shopper who wants THIS deal would seriously consider it as a near-substitute.
-3. A different QUANTITY, COUNT, COVERAGE or package scope (number of attractions/sessions/visits/days, duration, area covered, items included) is a meaningful difference → at most "similar", never "same" — EVEN when the brand or product name matches. E.g. a "CityPASS C3 / choice of 3 attractions" is only "similar" to a "CityPASS / 5 attractions"; a 6-session package is only "similar" to a 3-session one. Compare what is actually included, not the brand.
+2. A different kind of venue/experience is "different", not "similar" - e.g. a waterpark vs a county fair, a museum vs a zoo, a massage vs a facial. Only mark "similar" when a shopper who wants THIS deal would seriously consider it as a near-substitute.
+3. A different QUANTITY, COUNT, COVERAGE or package scope (number of attractions/sessions/visits/days, duration, area covered, items included) is a meaningful difference → at most "similar", never "same" - EVEN when the brand or product name matches. E.g. a "CityPASS C3 / choice of 3 attractions" is only "similar" to a "CityPASS / 5 attractions"; a 6-session package is only "similar" to a 3-session one. Compare what is actually included, not the brand.
 
 For "similar"/"different", give a difference_note of <=12 words naming the key difference. For "same", leave difference_note empty.
 
@@ -250,7 +250,7 @@ Competitors:
 
 
 def like_for_like_range(competitors: list[Competitor]) -> tuple[float, float] | None:
-    """Min/max deal price across "same"-service competitors — the fair benchmark."""
+    """Min/max deal price across "same"-service competitors - the fair benchmark."""
     prices = [c.price for c in competitors if c.match == "same" and c.price is not None]
     if not prices:
         return None
@@ -274,7 +274,7 @@ def find_competitors(
     prefetched_cards: list[dict[str, Any]] | None = None,
 ) -> list[Competitor]:
     # Extension path: the deal page's on-page "Similar deals" were already parsed
-    # from the HTML the content script sent — use them directly, no scrape.
+    # from the HTML the content script sent - use them directly, no scrape.
     if prefetched_cards is not None:
         cards = prefetched_cards
     else:
@@ -286,7 +286,7 @@ def find_competitors(
             cards = parse_local_cards(html)
             # A datacenter IP occasionally gets a bot-challenge/empty page, which
             # parses to zero cards and would wrongly read as "no comparable deals".
-            # Retry once before giving up — a fresh fetch usually gets through.
+            # Retry once before giving up - a fresh fetch usually gets through.
             if not cards:
                 html = scrape.fetch_html(local_url, cache_dir=cache_dir, force=True)
                 cards = parse_local_cards(html)
@@ -314,7 +314,7 @@ def find_competitors(
     classify_comparability(anthropic_client, deal_title, deal_options, competitors)
 
     # Drop deals that are a different service entirely (e.g. a brake job vs an oil
-    # change) — they aren't real alternatives, just same-category noise. Keep None
+    # change) - they aren't real alternatives, just same-category noise. Keep None
     # (unclassified) so the degraded no-LLM path still returns something.
     competitors = [c for c in competitors if c.match != "different"]
 

@@ -1,4 +1,4 @@
-# Python analyzer worker — needs Chromium for Playwright, so it must be a
+# Python analyzer worker - needs Chromium for Playwright, so it must be a
 # container (this is the one service that genuinely requires Docker).
 FROM python:3.13-slim
 

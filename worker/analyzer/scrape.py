@@ -43,7 +43,7 @@ def _fetch(url: str, *, timeout_ms: int) -> str:
         try:
             page.goto(url, wait_until="domcontentloaded", timeout=timeout_ms)
             # Groupon server-renders the data we extract (JSON-LD + __NEXT_DATA__)
-            # into the initial HTML, so domcontentloaded already has it — a short
+            # into the initial HTML, so domcontentloaded already has it - a short
             # settle wait covers late hydration. A/B tested ~7x faster than waiting
             # on networkidle + lazy-load scrolls, with identical extracted data.
             page.wait_for_timeout(600)

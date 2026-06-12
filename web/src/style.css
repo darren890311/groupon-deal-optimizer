@@ -1,7 +1,7 @@
 :root {
-  --bg: #1a1a1a;       /* page background — LeetCode-style dark */
-  --card: #2a2a2a;     /* cards — one step lighter than the page for contrast */
-  --ink: #f0f0f0;      /* primary text — near white */
+  --bg: #1a1a1a;       /* page background - LeetCode-style dark */
+  --card: #2a2a2a;     /* cards - one step lighter than the page for contrast */
+  --ink: #f0f0f0;      /* primary text - near white */
   --muted: #9aa1ac;    /* secondary text */
   --line: #3a3a3a;     /* borders */
   --brand: #5cb82e;    /* green CTA */

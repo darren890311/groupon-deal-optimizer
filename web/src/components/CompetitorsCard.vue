@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 const props = defineProps({ competitors: Array, worthBuying: String })
 
-// Only genuine alternatives: same-service deals (any price — they show whether
+// Only genuine alternatives: same-service deals (any price - they show whether
 // you're paying a fair rate) plus cheaper "similar" ones. A pricier, non-identical
 // option is not an alternative, so it's hidden rather than shown as "comparable".
 const visible = computed(() =>
@@ -12,7 +12,7 @@ const visible = computed(() =>
     .sort((a, b) => (b.cheaper ? 1 : 0) - (a.cheaper ? 1 : 0)),
 )
 
-function price(n) { return n == null ? '—' : `$${n}` }
+function price(n) { return n == null ? ' - ' : `$${n}` }
 </script>
 
 <template>

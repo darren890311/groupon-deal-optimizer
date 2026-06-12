@@ -30,7 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Shared clients (None if the key is missing — the pipeline degrades gracefully).
+# Shared clients (None if the key is missing - the pipeline degrades gracefully).
 _anthropic = anthropic.Anthropic() if ANTHROPIC_API_KEY else None
 _tavily = TavilyClient(api_key=TAVILY_API_KEY) if TAVILY_API_KEY else None
 
@@ -62,12 +62,12 @@ def analyze_deal(req: AnalyzeRequest) -> DealAnalysis:
 
     # A real deal page always yields a title plus at least prices or a rating.
     # If none of that came through, the scrape was almost certainly blocked or
-    # served an empty/challenge page — surface an error so the gateway returns it
+    # served an empty/challenge page - surface an error so the gateway returns it
     # (and does NOT cache a "no data" result for 24h). A retry usually succeeds.
     no_signal = not result.deal.prices and result.reputation.groupon_rating is None
     if not result.deal.title or no_signal:
         raise HTTPException(
             status_code=502,
-            detail="Could not read the deal page — it may be temporarily blocked. Please try again in a moment.",
+            detail="Could not read the deal page - it may be temporarily blocked. Please try again in a moment.",
         )
     return result

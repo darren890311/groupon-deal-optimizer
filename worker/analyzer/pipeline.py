@@ -78,7 +78,7 @@ def analyze(
     # The browser extension supplies the already-rendered page HTML, so we skip
     # the headless-Chromium fetch entirely (no cold-start, no bot-challenge, no
     # datacenter-IP geography issue). The website posts only a URL, in which case
-    # we fall back to Playwright — and retry once if the page came back empty.
+    # we fall back to Playwright - and retry once if the page came back empty.
     from_extension = bool(html)
     if html:
         audit = parse.parse_audit(html, url)
@@ -95,13 +95,13 @@ def analyze(
     deal_price = min((t.deal for t in deal.prices if t.deal is not None), default=None)
 
     # Extension path: competitors come from the deal page's own "Similar deals"
-    # cards (parsed from the HTML the content script sent) — no category-page
+    # cards (parsed from the HTML the content script sent) - no category-page
     # scrape, no Playwright. If none rendered, fall back to the Tavily+Playwright
     # discovery path below by leaving prefetched_cards as None.
     prefetched_cards = (competitors.parse_similar_cards(html) or None) if from_extension else None
 
     # Competitors, reputation and direct-booking are independent (each derives only
-    # from the deal), so run them concurrently — they are all I/O-bound (Tavily,
+    # from the deal), so run them concurrently - they are all I/O-bound (Tavily,
     # Anthropic, Playwright), which releases the GIL. Only the verdict waits on all.
     t_parallel = time.perf_counter()
     with ThreadPoolExecutor(max_workers=3) as pool:

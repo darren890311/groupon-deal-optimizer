@@ -22,7 +22,7 @@ type Cache interface {
 const keyPrefix = "analysis:"
 
 // Redis implements Cache over a go-redis client. Each analysis is a single key
-// with a native TTL, so expiry is handled by Redis itself — no cleanup job.
+// with a native TTL, so expiry is handled by Redis itself - no cleanup job.
 type Redis struct {
 	client *redis.Client
 }

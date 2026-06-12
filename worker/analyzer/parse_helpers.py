@@ -1,4 +1,4 @@
-"""Pure helper functions for parse.py — JSON-LD extraction, pricing, address,
+"""Pure helper functions for parse.py - JSON-LD extraction, pricing, address,
 highlights/fine-print heuristics, image alt text, script counts, schema catalog.
 
 Kept separate from parse.py so the orchestrator (parse_audit) stays readable.
@@ -203,7 +203,7 @@ def extract_prices_from_next_data(soup: BeautifulSoup) -> list[dict[str, Any]]:
     """Authoritative deal-page pricing from the embedded Next.js state.
 
     Each `DealOption` carries `unformattedStrikeThroughPrice` (the real anchor)
-    and `unformattedPrice` (the deal price) — what the page actually renders.
+    and `unformattedPrice` (the deal price) - what the page actually renders.
     The JSON-LD `offers`, by contrast, on promo-code deals encode the deal price
     as `price` and the promo price as `SalePrice`, hiding the true anchor and
     yielding a wrong discount (e.g. 25% instead of the real 50%).

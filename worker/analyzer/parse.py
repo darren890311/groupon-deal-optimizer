@@ -1,7 +1,7 @@
 """Turn a Groupon deal HTML page into a structured audit dict.
 
 Field-level extractors live in parse_helpers. This module is the orchestrator.
-(The v1 mobile-vs-desktop comparator was dropped — v2 is single-deal, desktop only.)
+(The v1 mobile-vs-desktop comparator was dropped - v2 is single-deal, desktop only.)
 """
 
 import re

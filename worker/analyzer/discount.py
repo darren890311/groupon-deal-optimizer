@@ -1,4 +1,4 @@
-"""Advertised-vs-actual discount logic — the headline signal of the product.
+"""Advertised-vs-actual discount logic - the headline signal of the product.
 
 Groupon titles routinely claim "Up to X% Off" while the displayed price tiers
 discount far less (or not at all). We parse the claim, compute the real max
@@ -47,7 +47,7 @@ def actual_max_discount(prices: list[dict[str, Any]]) -> float | None:
 
 def classify(advertised: float | None, actual: float | None) -> DiscountVerdict:
     actual_v = actual or 0.0
-    # An "Up to X%" claim that materially overshoots reality is the worst case —
+    # An "Up to X%" claim that materially overshoots reality is the worst case - 
     # check it before "none" so a 30%-claim-on-0%-actual reads as exaggerated.
     if advertised is not None and advertised - actual_v >= EXAGGERATION_THRESHOLD_PP:
         return "exaggerated"

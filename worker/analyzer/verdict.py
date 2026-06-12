@@ -1,10 +1,10 @@
-"""Final verdict — the one screen the shopper acts on.
+"""Final verdict - the one screen the shopper acts on.
 
 Two halves, by design:
-  - Badges are computed deterministically from the data (price / discount /
+ - Badges are computed deterministically from the data (price / discount /
     reputation), so the visual signal never drifts with LLM phrasing.
-  - The narrative (worth_buying, one-liner, recommended action) is written by
-    Claude (Sonnet) from those same signals, so it can be nuanced — e.g. "price
+ - The narrative (worth_buying, one-liner, recommended action) is written by
+    Claude (Sonnet) from those same signals, so it can be nuanced - e.g. "price
     is fair but the discount is fake, book direct" rather than a rigid template.
 All output is English.
 """
@@ -38,18 +38,18 @@ def compute_badges(
 
     # --- discount ---------------------------------------------------------
     # Fake anchor: if a confirmed direct price is the same or cheaper than the
-    # Groupon price, the headline discount gives no real saving — the "original"
+    # Groupon price, the headline discount gives no real saving - the "original"
     # is an inflated anchor. This overrides Groupon's internally-honest math.
     entry = _min_deal_price(deal)
     direct_price = direct_booking.direct_price if direct_booking else None
     dv = deal.discount_verdict
     if direct_price is not None and entry is not None and direct_price <= entry:
         badges.append(Badge(type="discount", status="bad",
-                            label=f"Not a real deal — direct is ${direct_price:.0f}, same or less"))
+                            label=f"Not a real deal - direct is ${direct_price:.0f}, same or less"))
     elif dv == "exaggerated":
         adv = deal.advertised_discount_pct
         act = deal.actual_max_discount_pct or 0
-        label = f"Discount exaggerated — {adv:.0f}% claimed, {act:.0f}% real" if adv else "Discount exaggerated"
+        label = f"Discount exaggerated - {adv:.0f}% claimed, {act:.0f}% real" if adv else "Discount exaggerated"
         badges.append(Badge(type="discount", status="bad", label=label))
     elif dv == "honest":
         badges.append(Badge(type="discount", status="ok", label="Discount is genuine"))
@@ -70,7 +70,7 @@ def compute_badges(
             badges.append(Badge(type="price", status="bad",
                                 label=f"Above comparable deals ({rng_str} for the same service)"))
     elif price is not None and similar_prices:
-        # No exact match — benchmark against similar (not identical) deals, and
+        # No exact match - benchmark against similar (not identical) deals, and
         # say so, so a premium for extra features doesn't read as "overpriced".
         lo, hi = min(similar_prices), max(similar_prices)
         rng_str = _fmt_range(lo, hi)
@@ -79,7 +79,7 @@ def compute_badges(
                                 label=f"In line with comparable (not identical) deals ({rng_str})"))
         else:
             badges.append(Badge(type="price", status="warn",
-                                label=f"Pricier than comparable (not identical) deals ({rng_str}) — check the extras are worth it"))
+                                label=f"Pricier than comparable (not identical) deals ({rng_str}) - check the extras are worth it"))
     else:
         badges.append(Badge(type="price", status="warn",
                             label="Couldn't verify price against comparable deals"))
@@ -89,7 +89,7 @@ def compute_badges(
     src = "Google" if reputation.google_rating is not None else ("Yelp" if reputation.yelp_rating is not None else "other platforms")
     if reputation.chain:
         badges.append(Badge(type="reputation", status="warn",
-                            label="National chain — reviews vary by location"))
+                            label="National chain - reviews vary by location"))
     elif gv == "divergent":
         badges.append(Badge(type="reputation", status="warn",
                             label="Ratings disagree sharply across platforms"))
@@ -109,19 +109,19 @@ def compute_badges(
     return badges
 
 
-SYSTEM_PROMPT = """You write the final buy/skip verdict for a consumer tool that analyzes a single Groupon deal. A shopper pasted a deal URL; you are given three pre-computed signals about it — discount honesty, price vs like-for-like competitors, and cross-platform reputation — plus the badges already derived from them.
+SYSTEM_PROMPT = """You write the final buy/skip verdict for a consumer tool that analyzes a single Groupon deal. A shopper pasted a deal URL; you are given three pre-computed signals about it - discount honesty, price vs like-for-like competitors, and cross-platform reputation - plus the badges already derived from them.
 
 Your job: write the short narrative the shopper acts on. Be direct, honest, plain English. No marketing fluff.
 
-The overall verdict (`worth_buying`) is ALREADY DECIDED for you and given in the input below — do not re-decide it. It is "yes" only when all three signals (discount, price, reputation) are good, "no" only when all three are bad, and "caution" otherwise (a single weak signal is caution, not "no"). Your one-liner and action must match the given verdict.
+The overall verdict (`worth_buying`) is ALREADY DECIDED for you and given in the input below - do not re-decide it. It is "yes" only when all three signals (discount, price, reputation) are good, "no" only when all three are bad, and "caution" otherwise (a single weak signal is caution, not "no"). Your one-liner and action must match the given verdict.
 
-On price: only describe a deal as "overpriced" when it loses to an equivalent ("same") service. If the only similar deals are "similar" (related but a spec difference), do NOT call it overpriced — note that comparable deals run $X-Y and that the higher price may reflect extras this deal includes. Never compare a richer bundle to a barer service as if equal.
+On price: only describe a deal as "overpriced" when it loses to an equivalent ("same") service. If the only similar deals are "similar" (related but a spec difference), do NOT call it overpriced - note that comparable deals run $X-Y and that the higher price may reflect extras this deal includes. Never compare a richer bundle to a barer service as if equal.
 
-`one_liner`: ONE sentence capturing the punchline, in the spirit of "Price is OK but the advertised discount is misleading — consider booking directly via Yelp." Name the specific catch.
+`one_liner`: ONE sentence capturing the punchline, in the spirit of "Price is OK but the advertised discount is misleading - consider booking directly via Yelp." Name the specific catch.
 
-`recommended_action`: one concrete next step — e.g. "Buy it — genuine discount and strong reviews", "Book directly via Yelp instead", or "Skip — a comparable full-synthetic change nearby is $40-55".
+`recommended_action`: one concrete next step - e.g. "Buy it - genuine discount and strong reviews", "Book directly via Yelp instead", or "Skip - a comparable full-synthetic change nearby is $40-55".
 
-Wording: this is a consumer tool. In your output, refer to other deals/shops as "similar deals" or "nearby options" — never "competitor" or "competitors".
+Wording: this is a consumer tool. In your output, refer to other deals/shops as "similar deals" or "nearby options" - never "competitor" or "competitors".
 
 Ground everything in the numbers given. Never invent prices or ratings. Do not contradict the badges."""
 
@@ -165,15 +165,15 @@ def synthesize_verdict(
     elif any(c.match == "similar" for c in competitors):
         sims = [c.price for c in competitors if c.match == "similar" and c.price is not None]
         price_basis = (f"no exact match found; SIMILAR (not identical) deals range {_fmt_range(min(sims), max(sims))} "
-                       "— a higher price here may be justified by extras this deal includes")
+                       "(a higher price here may be justified by extras this deal includes)")
     else:
         price_basis = "no comparable deals found"
 
     comp_lines = "\n".join(
-        f"  - [{c.match}] {c.merchant or c.title}: "
+        f" - [{c.match}] {c.merchant or c.title}: "
         + (f"${c.price:.0f}" if c.price is not None else "price n/a")
         + (f" ({c.discount_pct:.0f}% off)" if c.discount_pct is not None else "")
-        + (f" — {c.difference_note}" if c.difference_note else "")
+        + (f" - {c.difference_note}" if c.difference_note else "")
         + (f" {c.url}" if c.cheaper else "")
         for c in competitors[:5]
     ) or "  (no comparable deals found)"
@@ -192,9 +192,9 @@ Reputation: Groupon {reputation.groupon_rating}★/{reputation.groupon_reviews} 
 Direct booking: {direct_booking.note if direct_booking else 'not checked'}
 
 Pre-computed badges:
-{chr(10).join(f'  - [{b.status}] {b.type}: {b.label}' for b in badges)}
+{chr(10).join(f' - [{b.status}] {b.type}: {b.label}' for b in badges)}
 
-Overall verdict (ALREADY DECIDED — write a one-liner and action consistent with this, do not contradict it): {worth}
+Overall verdict (ALREADY DECIDED - write a one-liner and action consistent with this, do not contradict it): {worth}
 
 Write the verdict narrative."""
 

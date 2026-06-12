@@ -1,4 +1,4 @@
-"""The DealAnalysis contract — shared shape across Python worker → Go → Vue.
+"""The DealAnalysis contract - shared shape across Python worker → Go → Vue.
 
 All free-text fields are produced in English (user-facing).
 Sections beyond `deal` default to empty so early milestones can emit a valid

@@ -7,7 +7,7 @@ const VERDICT = {
   none: { cls: 'warn', text: 'No real discount' },
 }
 function v() { return VERDICT[props.deal.discount_verdict] || VERDICT.none }
-function pct(n) { return n == null ? '—' : `${Math.round(n)}%` }
+function pct(n) { return n == null ? ' - ' : `${Math.round(n)}%` }
 </script>
 
 <template>
