@@ -180,23 +180,26 @@ def _compute_gap(
 ) -> GapVerdict:
     """Flag when ratings disagree across platforms. Considers every well-sampled
     source, so a wildly different Yelp isn't ignored just because Google agrees."""
-    exts: list[float] = []
+    exts: list[tuple[float, int]] = []  # (rating, review_count)
     if google is not None and (google_reviews is None or google_reviews >= MIN_EXTERNAL_SAMPLE):
-        exts.append(google)
+        exts.append((google, google_reviews or MIN_EXTERNAL_SAMPLE))
     if yelp is not None and (yelp_reviews is None or yelp_reviews >= MIN_EXTERNAL_SAMPLE):
-        exts.append(yelp)
+        exts.append((yelp, yelp_reviews or MIN_EXTERNAL_SAMPLE))
     if groupon is None or not exts:
         return "insufficient"
 
+    ratings = [r for r, _ in exts]
     groupon_trust = groupon_reviews is None or groupon_reviews >= TRUSTWORTHY_SAMPLE
-    ext_spread = max(exts) - min(exts)                  # do the externals disagree with each other?
-    groupon_gap = max(abs(e - groupon) for e in exts)   # does Groupon disagree with an external?
+    ext_spread = max(ratings) - min(ratings)               # do the externals disagree with each other?
+    groupon_gap = max(abs(r - groupon) for r in ratings)   # does Groupon disagree with an external?
     # Divergent if the externals contradict each other, or Groupon contradicts an
     # external while having a trustworthy sample.
     if ext_spread >= LARGE_GAP or (groupon_trust and groupon_gap >= LARGE_GAP):
         return "divergent"
 
-    diff = sum(exts) / len(exts) - groupon
+    # Otherwise weight externals by review count, so a 39k-review Google dominates
+    # a 1k-review Yelp instead of being dragged down by a small low outlier.
+    diff = sum(r * n for r, n in exts) / sum(n for _, n in exts) - groupon
     if diff >= 0.3:
         return "external_higher"
     if diff <= -0.3:
