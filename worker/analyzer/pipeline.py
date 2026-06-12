@@ -93,6 +93,10 @@ def analyze(
     anthropic_client, tavily_client = _default_clients(anthropic_client, tavily_client)
 
     deal_price = min((t.deal for t in deal.prices if t.deal is not None), default=None)
+    # The label of the option we're pricing carries its scope/inclusions, so the
+    # direct-booking check can match a same-scope official price (not a cheaper,
+    # lesser option that happens to share the price).
+    deal_option = next((t.label for t in deal.prices if t.deal == deal_price and t.label), None)
 
     # Extension path: competitors come from the deal page's own "Similar deals"
     # cards (parsed from the HTML the content script sent) - no category-page
@@ -132,6 +136,7 @@ def analyze(
             merchant=deal.merchant, city=deal.city,
             category_leaf=competitors._category_leaf(deal.category),
             service=deal.title, deal_price=deal_price,
+            option_label=deal_option,
         )
         comps = f_comps.result()
         rep = f_rep.result()
