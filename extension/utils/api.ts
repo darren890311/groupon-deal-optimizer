@@ -1,4 +1,4 @@
-import { pageHtmlIfFresh, waitForCards } from './page';
+import { freshDealHtml, waitForCards } from './page';
 
 // Run an analysis for the current deal: wait for the on-page Similar deals to
 // render, send the page (when fresh) to the background worker, and resolve with
