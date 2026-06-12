@@ -17,6 +17,7 @@ marked `cheaper`, and returned with like-for-like ("same") matches first.
 """
 
 import json
+import re
 from pathlib import Path
 from typing import Any, Literal
 from urllib.parse import urlparse
@@ -40,6 +41,22 @@ def _amount(price_obj: Any) -> int | None:
         amt = price_obj.get("amount")
         return amt if isinstance(amt, (int, float)) else None
     return None
+
+
+def _norm_merchant(s: str | None) -> str:
+    """Strip decoration/punctuation/case so 'JCPenney Portraits by Lifetouch' and
+    '- * JCPenney Portraits by Lifetouch * -' compare equal."""
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def _same_merchant(a: str | None, b: str | None) -> bool:
+    """Whether two cards are the SAME business. A merchant's *other* deal isn't a
+    competitor - comparing a studio's full-package deal to its own one-pose deal
+    and calling it 'pricier than comparable' is nonsense."""
+    na, nb = _norm_merchant(a), _norm_merchant(b)
+    if not na or not nb:
+        return False
+    return na == nb or (len(na) >= 5 and len(nb) >= 5 and (na in nb or nb in na))
 
 
 def parse_local_cards(html: str) -> list[dict[str, Any]]:
@@ -266,6 +283,7 @@ def find_competitors(
     exclude_slug: str | None,
     deal_price: float | None,
     deal_title: str | None = None,
+    deal_merchant: str | None = None,
     deal_options: list[str] | None = None,
     tavily_client,
     anthropic_client: anthropic.Anthropic | None = None,
@@ -297,6 +315,11 @@ def find_competitors(
     competitors: list[Competitor] = []
     for c in cards:
         if exclude_slug and c.get("slug") == exclude_slug:
+            continue
+        # The same merchant's other deal is not a competitor - skip it so a
+        # studio's own one-pose package can't make its full-shoot deal look
+        # "pricier than comparable."
+        if _same_merchant(c.get("merchant"), deal_merchant):
             continue
         # A missing or non-positive price means a coupon / "online sale" card with
         # no real Groupon price (e.g. a Sam's Club membership offer that links to a

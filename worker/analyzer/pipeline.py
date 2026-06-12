@@ -115,6 +115,7 @@ def analyze(
             exclude_slug=scrape.slug_from_url(url),
             deal_price=deal_price,
             deal_title=deal.title,
+            deal_merchant=deal.merchant,
             deal_options=[t.label for t in deal.prices if t.label],
             tavily_client=tavily_client,
             anthropic_client=anthropic_client,
