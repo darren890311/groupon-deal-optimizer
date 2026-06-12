@@ -15,8 +15,8 @@ export function analyze(): Promise<any> {
       reject(new Error('Timed out after 100s. The deal may be new (cold start). Try again.'));
     }, 100000);
 
-    waitForCards().then(() => {
-      const html = pageHtmlIfFresh();
+    waitForCards().then(async () => {
+      const html = await freshDealHtml();
       chrome.runtime.sendMessage(
         { type: 'ANALYZE', url: location.href, html: html || undefined },
         (resp) => {
