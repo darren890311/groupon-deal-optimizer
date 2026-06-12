@@ -18,9 +18,11 @@ from .models import DirectBooking
 def _gather_snippets(tavily_client, merchant: str, city: str | None, category_leaf: str) -> list[str]:
     if tavily_client is None:
         return []
-    query = " ".join(p for p in (merchant, city, category_leaf, "official website price book appointment") if p)
+    query = " ".join(p for p in (merchant, city, category_leaf, "official website ticket price book") if p)
     try:
-        res = tavily_client.search(query=query, max_results=5, search_depth="basic")
+        # "advanced" depth pulls richer page content, so a price sitting in the
+        # merchant's pricing/booking section is more likely to land in a snippet.
+        res = tavily_client.search(query=query, max_results=8, search_depth="advanced")
     except Exception as e:
         print(f"  Tavily direct-booking error: {e}")
         return []
@@ -70,7 +72,7 @@ def check_direct_booking(
         )
 
     price_str = f"${deal_price}" if deal_price is not None else "an unknown amount"
-    snippet_block = "\n\n---\n\n".join(snippets[:6])
+    snippet_block = "\n\n---\n\n".join(snippets[:8])
     prompt = f"""The shopper is considering buying this service on Groupon: "{service}" from "{merchant}"{f' in {city}' if city else ''}, where the Groupon price starts at {price_str}.
 
 Below are web search snippets that may include the merchant's official website or direct-booking prices.
