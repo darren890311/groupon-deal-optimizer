@@ -72,7 +72,7 @@ onUnmounted(() => clearInterval(timer));
 
       <div v-else-if="view === 'loading'" class="loading">
         <img :src="logo" class="spin" alt="" />
-        <p class="lede">Reading the deal, finding similar ones, checking ratings — usually ~10s.</p>
+        <p class="lede">Reading the deal, finding similar ones, checking ratings, usually ~10s.</p>
       </div>
 
       <template v-else-if="view === 'error'">

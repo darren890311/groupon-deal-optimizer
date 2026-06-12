@@ -39,7 +39,7 @@ const tone = computed(() => TONE[v.value.worth_buying] || TONE.caution);
 const discountBadge = computed<any>(() => (v.value.badges || []).find((b: any) => b.type === 'discount'));
 const dv = computed(() => {
   const b = discountBadge.value;
-  if (!b) return DISCOUNT[deal.value.discount_verdict] || { cls: 'warn', word: deal.value.discount_verdict || '—' };
+  if (!b) return DISCOUNT[deal.value.discount_verdict] || { cls: 'warn', word: deal.value.discount_verdict || '-' };
   if (b.status === 'ok') return { cls: 'ok', word: 'genuine' };
   if (b.status === 'bad') return { cls: 'bad', word: deal.value.discount_verdict === 'exaggerated' ? 'exaggerated' : 'no real discount' };
   return { cls: 'warn', word: 'no real discount' };
@@ -58,9 +58,9 @@ const claimText = computed(() =>
 );
 
 const repTag = computed(() => {
-  if (!rep.value) return { cls: 'warn', text: '—' };
+  if (!rep.value) return { cls: 'warn', text: '-' };
   if (rep.value.chain) return { cls: 'warn', text: 'varies by location' };
-  return GAP[rep.value.gap_verdict] || { cls: 'warn', text: rep.value.gap_verdict || '—' };
+  return GAP[rep.value.gap_verdict] || { cls: 'warn', text: rep.value.gap_verdict || '-' };
 });
 const platforms = computed(() =>
   rep.value
@@ -119,7 +119,7 @@ const fmtRating = (r: number) => Number(r).toFixed(1);
         <div v-for="p in platforms" :key="p.name">
           <b>{{ p.name }}</b>
           <span v-if="p.r != null" class="star">{{ fmtRating(p.r) }}★<small v-if="p.n != null"> ({{ fmtCount(p.n) }})</small></span>
-          <span v-else class="star muted">—</span>
+          <span v-else class="star muted">-</span>
         </div>
       </div>
       <p v-if="rep.summary" class="note">{{ rep.summary }}</p>
@@ -134,11 +134,11 @@ const fmtRating = (r: number) => Number(r).toFixed(1);
       <p v-if="!comps.length" class="note">No comparable same-city deals found.</p>
       <div v-for="(c, i) in comps" :key="i" class="comp">
         <div class="comp-top">
-          <a :href="c.url || '#'" target="_blank" rel="noopener">{{ c.merchant || c.title || '—' }}</a>
+          <a :href="c.url || '#'" target="_blank" rel="noopener">{{ c.merchant || c.title || '-' }}</a>
           <span class="rr">{{ money(c.price) }}<em v-if="c.cheaper" class="bad"> cheaper ↓</em></span>
         </div>
         <div class="comp-sub">
-          <span class="pill" :class="MATCH[c.match] || 'muted'">{{ c.match || '—' }}</span>
+          <span class="pill" :class="MATCH[c.match] || 'muted'">{{ c.match || '-' }}</span>
           <span v-if="c.difference_note" class="diff">{{ c.difference_note }}</span>
         </div>
       </div>

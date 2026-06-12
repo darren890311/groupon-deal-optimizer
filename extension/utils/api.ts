@@ -12,7 +12,7 @@ export function analyze(): Promise<any> {
     const timer = setTimeout(() => {
       if (settled) return;
       settled = true;
-      reject(new Error('Timed out after 100s. The deal may be new (cold start) — try again.'));
+      reject(new Error('Timed out after 100s. The deal may be new (cold start). Try again.'));
     }, 100000);
 
     waitForCards().then(() => {

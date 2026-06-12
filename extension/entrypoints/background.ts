@@ -26,7 +26,7 @@ async function analyze(url: string, html?: string) {
   try {
     data = await res.json();
   } catch {
-    // non-JSON error body — fall through to the status-based message
+    // non-JSON error body, fall through to the status-based message
   }
 
   if (!res.ok) throw new Error(data?.error || data?.detail || `Request failed (${res.status})`);
