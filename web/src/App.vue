@@ -47,9 +47,6 @@ const steps = [
     <!-- product demo -->
     <section class="demo">
       <div class="frame">
-        <div class="bar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-        </div>
         <img src="/hero-demo.png" alt="Revelio panel open on a Groupon deal page" />
       </div>
     </section>
@@ -117,14 +114,6 @@ const steps = [
   border-radius: 14px; overflow: hidden;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
 }
-.frame .bar {
-  display: flex; gap: 8px; padding: 12px 16px;
-  background: #202020; border-bottom: 1px solid var(--line);
-}
-.dot { width: 11px; height: 11px; border-radius: 50%; }
-.dot.r { background: #ff5f57; }
-.dot.y { background: #febc2e; }
-.dot.g { background: #28c840; }
 .frame img { display: block; width: 100%; }
 
 /* how it works */
