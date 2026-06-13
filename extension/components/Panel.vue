@@ -23,8 +23,33 @@ const headerTitle = computed(
     })[view.value],
 );
 
+// The backend runs the deal read, price comparison, reputation and direct-price
+// stages and returns once — the panel can't see which stage is live (and several
+// run in parallel). So we narrate by elapsed time: the messages track the typical
+// order so a longer wait feels informed rather than stuck.
+const loadingMsg = ref('Reading the deal…');
+const LOADING_STEPS: [number, string][] = [
+  [0, 'Reading the deal…'],
+  [4, 'Comparing nearby prices and reviews…'],
+  [10, 'Checking the direct booking price…'],
+  [18, 'Almost there, this one is taking a little longer…'],
+];
+let loadTimer: ReturnType<typeof setInterval> | undefined;
+
 function reveal() {
   view.value = 'loading';
+  const startedAt = Date.now();
+  loadingMsg.value = LOADING_STEPS[0][1];
+  clearInterval(loadTimer);
+  loadTimer = setInterval(() => {
+    const secs = (Date.now() - startedAt) / 1000;
+    for (let i = LOADING_STEPS.length - 1; i >= 0; i--) {
+      if (secs >= LOADING_STEPS[i][0]) {
+        loadingMsg.value = LOADING_STEPS[i][1];
+        break;
+      }
+    }
+  }, 1000);
   analyze()
     .then((data) => {
       result.value = data;
@@ -33,7 +58,8 @@ function reveal() {
     .catch((e) => {
       errorMsg.value = e?.message || 'Something went wrong.';
       view.value = 'error';
-    });
+    })
+    .finally(() => clearInterval(loadTimer));
 }
 
 // Groupon is a single-page app: a deal→deal navigation doesn't reload the
@@ -50,7 +76,10 @@ onMounted(() => {
     }
   }, 1000);
 });
-onUnmounted(() => clearInterval(timer));
+onUnmounted(() => {
+  clearInterval(timer);
+  clearInterval(loadTimer);
+});
 </script>
 
 <template>
@@ -72,7 +101,7 @@ onUnmounted(() => clearInterval(timer));
 
       <div v-else-if="view === 'loading'" class="loading">
         <img :src="logo" class="spin" alt="" />
-        <p class="lede">Reading the deal, finding similar ones, checking ratings, usually ~10s.</p>
+        <p class="lede">{{ loadingMsg }}</p>
       </div>
 
       <template v-else-if="view === 'error'">
