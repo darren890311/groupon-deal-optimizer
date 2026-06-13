@@ -11,6 +11,7 @@ from typing import Literal
 import anthropic
 from pydantic import BaseModel, Field
 
+from . import cache
 from .config import HAIKU_MODEL
 from .models import DirectBooking
 
@@ -66,6 +67,20 @@ def check_direct_booking(
     if not merchant or anthropic_client is None:
         return DirectBooking(note="Direct-booking comparison unavailable.")
 
+    # The official-price lookup (Tavily + LLM) depends only on the merchant /
+    # service, not on this deal's price, so cache it and reuse it across the
+    # merchant's other deals. The cheaper-than-Groupon call is recomputed below
+    # from the live deal_price, so the verdict is always current.
+    ckey = f"direct:{cache.norm(merchant)}|{cache.norm(city)}|{cache.norm(service)}|{cache.norm(option_label)}"
+    hit = cache.get(ckey)
+    if hit is not None:
+        return DirectBooking(
+            cheaper_than_groupon=_decide_cheaper(hit.get("direct_price"), deal_price),
+            direct_price=hit.get("direct_price"),
+            note=hit.get("note", ""),
+            source_url=hit.get("source_url"),
+        )
+
     snippets = _gather_snippets(tavily_client, merchant, city, category_leaf)
     if not snippets:
         return DirectBooking(
@@ -112,6 +127,7 @@ Snippets:
         print(f"  direct-booking extraction failed: {e}")
         return DirectBooking(note="Direct-booking comparison failed.")
 
+    cache.put(ckey, {"direct_price": ext.direct_price, "note": ext.note, "source_url": ext.source_url}, ttl=21600)
     return DirectBooking(
         cheaper_than_groupon=_decide_cheaper(ext.direct_price, deal_price),
         direct_price=ext.direct_price,

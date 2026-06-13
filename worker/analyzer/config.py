@@ -10,6 +10,9 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 TAVILY_API_KEY = os.environ.get("TAVILY_API_KEY", "")
 GOOGLE_PLACES_API_KEY = os.environ.get("GOOGLE_PLACES_API_KEY", "")
 YELP_API_KEY = os.environ.get("YELP_API_KEY", "")
+# Optional: same Upstash instance as the gateway, used by analyzer.cache for the
+# sub-result cache (direct-booking, competitor discovery). Unset = cache disabled.
+REDIS_URL = os.environ.get("REDIS_URL", "")
 
 # Model split: Sonnet for the final verdict (the core product output); Haiku for
 # the lighter judgments (competitor comparability, reputation summary) - it's much

@@ -19,6 +19,8 @@ marked `cheaper`, and returned with like-for-like ("same") matches first.
 import json
 import re
 from pathlib import Path
+
+from . import cache
 from typing import Any, Literal
 from urllib.parse import urlparse
 
@@ -296,21 +298,30 @@ def find_competitors(
     if prefetched_cards is not None:
         cards = prefetched_cards
     else:
-        local_url = discover_local_url(category, city, tavily_client)
-        if not local_url:
-            return []
-        try:
-            html = scrape.fetch_html(local_url, cache_dir=cache_dir)
-            cards = parse_local_cards(html)
-            # A datacenter IP occasionally gets a bot-challenge/empty page, which
-            # parses to zero cards and would wrongly read as "no comparable deals".
-            # Retry once before giving up - a fresh fetch usually gets through.
-            if not cards:
-                html = scrape.fetch_html(local_url, cache_dir=cache_dir, force=True)
+        # The slow fallback (Tavily discovery + Playwright scrape of the category
+        # page) depends only on category + city, not the specific deal, so cache
+        # the raw cards and let every deal in that category reuse them. Per-deal
+        # comparability/filtering still runs fresh below.
+        ckey = f"compcards:{cache.norm(category)}|{cache.norm(city)}"
+        cards = cache.get(ckey)
+        if cards is None:
+            local_url = discover_local_url(category, city, tavily_client)
+            if not local_url:
+                return []
+            try:
+                html = scrape.fetch_html(local_url, cache_dir=cache_dir)
                 cards = parse_local_cards(html)
-        except Exception as e:
-            print(f"  competitor page scrape failed ({local_url}): {e}")
-            return []
+                # A datacenter IP occasionally gets a bot-challenge/empty page, which
+                # parses to zero cards and would wrongly read as "no comparable deals".
+                # Retry once before giving up - a fresh fetch usually gets through.
+                if not cards:
+                    html = scrape.fetch_html(local_url, cache_dir=cache_dir, force=True)
+                    cards = parse_local_cards(html)
+            except Exception as e:
+                print(f"  competitor page scrape failed ({local_url}): {e}")
+                return []
+            if cards:  # don't cache an empty/bot-challenged result
+                cache.put(ckey, cards, ttl=21600)
 
     competitors: list[Competitor] = []
     for c in cards:
