@@ -284,25 +284,19 @@ def research_reputation(
         )
         return rep
 
-    # Yelp + a comparison summary. Prefer the Fusion API (structured stars);
-    # fall back to Tavily + LLM extraction only when no Fusion key is set.
+    # Yelp via the Fusion API (structured stars) when a key is set. Yelp moved its
+    # API to a paid plan, so the default is now Google-only; the Fusion path stays
+    # and re-enables the moment a key is present. The old Tavily+LLM Yelp fallback
+    # was dropped: Yelp renders its stars as images, so web search almost never got
+    # the number, and it wasn't worth the extra search + LLM call.
     summary = ""
     if yelp_api_key:
         rep.yelp_rating, rep.yelp_reviews = _yelp_fusion_rating(merchant, city, yelp_api_key)
-        if anthropic_client is not None:
-            summary = _write_summary(
-                anthropic_client, merchant, city, groupon_rating, groupon_reviews,
-                rep.google_rating, rep.google_reviews, rep.yelp_rating, rep.yelp_reviews,
-            )
-    elif anthropic_client is not None:
-        snippets = _gather_yelp_snippets(tavily_client, merchant, city)
-        ext = _extract_yelp_and_summary(
+    if anthropic_client is not None:
+        summary = _write_summary(
             anthropic_client, merchant, city, groupon_rating, groupon_reviews,
-            rep.google_rating, rep.google_reviews, snippets,
+            rep.google_rating, rep.google_reviews, rep.yelp_rating, rep.yelp_reviews,
         )
-        if ext:
-            rep.yelp_rating, rep.yelp_reviews = ext.yelp_rating, ext.yelp_reviews
-            summary = ext.summary
 
     rep.gap_verdict = _compute_gap(
         groupon_rating, rep.google_rating, rep.yelp_rating,
