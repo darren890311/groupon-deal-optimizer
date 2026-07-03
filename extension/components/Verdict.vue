@@ -67,8 +67,7 @@ const platforms = computed(() =>
     ? [
         { name: 'Groupon', r: rep.value.groupon_rating, n: rep.value.groupon_reviews },
         { name: 'Google', r: rep.value.google_rating, n: rep.value.google_reviews },
-        { name: 'Yelp', r: rep.value.yelp_rating, n: rep.value.yelp_reviews },
-      ]
+      ].filter((p) => p.r != null)
     : [],
 );
 

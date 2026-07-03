@@ -95,7 +95,7 @@ onUnmounted(() => {
       </div>
 
       <template v-if="view === 'prompt'">
-        <p class="lede">Revelio checks the <b>real</b> discount, compares same-city prices, and cross-references Yelp/Google ratings.</p>
+        <p class="lede">Revelio checks the <b>real</b> discount, compares same-city prices, and cross-references Google ratings.</p>
         <button class="cta reveal" @click="reveal">✨ Reveal this deal</button>
       </template>
 
