@@ -37,15 +37,19 @@ def compute_badges(
     badges: list[Badge] = []
 
     # --- discount ---------------------------------------------------------
-    # Fake anchor: if a confirmed direct price is the same or cheaper than the
-    # Groupon price, the headline discount gives no real saving - the "original"
-    # is an inflated anchor. This overrides Groupon's internally-honest math.
+    # Fake anchor: if booking direct is MEANINGFULLY cheaper than Groupon, the
+    # headline discount gives no real saving - the "original" is an inflated
+    # anchor - so override Groupon's internally-honest math. We gate on
+    # cheaper_than_groupon (decided in code with a noise threshold), NOT a raw
+    # price compare, so this badge and the direct-booking pill never contradict:
+    # a dollar-or-two gap reads as "verify price", not "not a real deal".
     entry = _min_deal_price(deal)
     direct_price = direct_booking.direct_price if direct_booking else None
+    cheaper_direct = direct_booking.cheaper_than_groupon if direct_booking else None
     dv = deal.discount_verdict
-    if direct_price is not None and entry is not None and direct_price <= entry:
+    if cheaper_direct is True and direct_price is not None:
         badges.append(Badge(type="discount", status="bad",
-                            label=f"Not a real deal - direct is ${direct_price:.0f}, same or less"))
+                            label=f"Not a real deal - direct is ${direct_price:.0f} or less"))
     elif dv == "exaggerated":
         adv = deal.advertised_discount_pct
         act = deal.actual_max_discount_pct or 0

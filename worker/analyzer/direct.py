@@ -43,12 +43,12 @@ class _DirectExtract(BaseModel):
 
 def _decide_cheaper(direct: float | None, groupon: float | None) -> bool | None:
     """Whether booking direct clearly beats Groupon - decided in code, not by the
-    LLM. A small gap (within ~10% or ~$3) is within fee/promo noise → None
-    ("too close to call"), so the panel says 'verify' rather than declaring a
-    winner on a couple of dollars."""
+    LLM. A small gap (within ~5% or ~$2) is within fee/promo/flex-pricing noise →
+    None ("too close to call"), so the panel says 'verify' rather than declaring a
+    winner on a dollar or two."""
     if direct is None or groupon is None:
         return None
-    if abs(direct - groupon) <= max(0.10 * groupon, 3.0):
+    if abs(direct - groupon) <= max(0.05 * groupon, 2.0):
         return None
     return direct < groupon
 
