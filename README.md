@@ -1,15 +1,15 @@
 # Revelio - Is This Deal Actually A Deal?
 
-Revelio tells you whether a Groupon deal is actually a good buy. It comes as a **Chrome
-extension** that pops up on any Groupon deal page, and a **web app** where you paste a
-deal link. Either way it reads the live page, checks the **real** discount against the
-advertised one, compares prices to similar same-city deals, cross-references the
-merchant's rating on Google/Yelp, and returns a clear **buy / caution / skip** verdict - 
-every claim grounded in real data, not vibes.
+Revelio tells you whether a Groupon deal is actually a good buy. It's a **Chrome
+extension** that pops up on any Groupon deal page, reads the live page, checks the
+**real** discount against the advertised one, compares prices to similar same-city deals,
+cross-references the merchant's **Google** rating, and checks whether booking direct is
+cheaper - returning a clear **buy / caution / skip** verdict, every claim grounded in
+real data, not vibes.
 
 Revelio is an **independent tool - not affiliated with or endorsed by Groupon.**
 
-**▶︎ Live web app: https://getrevelio.web.app** · [Privacy policy](https://getrevelio.web.app/privacy.html)
+**▶︎ Live site: https://getrevelio.web.app** · [Privacy policy](https://getrevelio.web.app/privacy.html)
 
 ---
 
@@ -26,35 +26,36 @@ shopper can't do at scale and gives a straight answer.
 | --- | --- |
 | **Discount truth** | Parses the advertised claim from the title and compares it to the real strike-through discount on each price tier. Flags `genuine` / `exaggerated` / `none`. |
 | **Like-for-like price** | Finds same-city deals on Groupon and uses an LLM to judge which are the *same* service vs merely *similar* - refusing to compare across scope (a 3-attraction pass is not "the same" as a 5-attraction one, even under the same brand). |
-| **Cross-platform reputation** | Pulls the merchant's structured rating from the **Google Places** and **Yelp Fusion** APIs and compares both to the Groupon score. A large, well-sampled gap is flagged as *ratings disagree*; multi-location chains are flagged as *varies by location* rather than guessed. |
+| **Reputation** | Pulls the merchant's structured rating from the **Google Places** API and compares it to the Groupon score. A large, well-sampled gap is flagged as *ratings disagree*; multi-location chains are flagged as *varies by location* rather than guessed. |
 | **Direct booking** | Checks whether booking the merchant directly (or via an official reseller) beats the Groupon price - comparing only same-scope prices, and staying silent when it's too close to call. |
 | **Verdict** | Combines the above into deterministic badges + an LLM-written one-liner and recommended action. Revelio is neutral: it has no buy button and earns nothing on a purchase. |
 
 ## Architecture
 
-Two front-ends, one backend:
+One analyzer (the extension) plus a marketing landing page, one backend:
 
 ```
-┌─ Chrome extension (WXT + Vue 3) ─┐        ┌─ Web app (Vue 3) ────┐
-│ reads the deal page in-browser,  │        │ paste a deal link    │
-│ POST /analyze { url, html }      │        │ POST /analyze { url } │
-└───────────────┬──────────────────┘        └──────────┬───────────┘
-                ▼                                        ▼
+┌─ Chrome extension (WXT + Vue 3) ─┐     ┌─ Landing page (Vue 3) ─┐
+│ reads the deal page in-browser,  │     │ marketing only,        │
+│ POST /analyze { url, html }      │     │ links to the extension │
+└───────────────┬──────────────────┘     └────────────────────────┘
+                ▼
             Go / Gin gateway  ──────────►  Upstash Redis  (cache by URL, 24h TTL)
                 │  identity-token auth
                 ▼
             Python worker (FastAPI, private, Cloud Run)
               parse (BeautifulSoup + Groupon's embedded __NEXT_DATA__ / __APOLLO_STATE__)
-              → discount math → competitors (Claude) → reputation (Google Places + Yelp Fusion)
+              → discount math → competitors (Claude) → reputation (Google Places)
               → direct booking (Tavily + Claude) → verdict (Claude)
-              ↑ headless-Chromium scrape (Playwright) ONLY when no page HTML was supplied
+              ↑ headless-Chromium scrape (Playwright) ONLY when the extension can't supply page HTML
 ```
 
 - **The extension reads the page client-side.** It sends the rendered HTML (and reads
-  the on-page *Similar deals* for competitors), so the worker **skips Playwright
-  entirely** - no cold-start, no bot-challenge, no datacenter-IP geography issue.
-  Playwright remains the **web app's path and a fallback** for when the page can't be
-  trusted (see notes).
+  the on-page *Similar deals* for competitors), so the worker normally **skips Playwright
+  entirely** - no headless-browser launch, no bot-challenge, no datacenter-IP geography
+  issue. Playwright is only a fallback for the rare case where the extension can't supply
+  trusted HTML (see notes). The landing page is Vue 3 too, but it's marketing only - it
+  doesn't call the backend.
 - **Stateless Python worker** does the analysis (LLM calls, and scraping only on the
   fallback path). It's **private** on Cloud Run - only the Go gateway can reach it via a
   Google-signed identity token.
@@ -65,13 +66,13 @@ Two front-ends, one backend:
 
 ## Tech stack
 
-- **Front-ends:** **Vue 3** + Vite - a web app on **Firebase Hosting**, and a **Chrome
-  MV3 extension** built with **WXT** (panel mounted in a Shadow DOM)
+- **Front-ends:** **Vue 3** + Vite - a **Chrome MV3 extension** built with **WXT** (panel
+  mounted in a Shadow DOM), plus a marketing landing page on **Firebase Hosting**
 - **API gateway:** **Go** (Gin, go-redis), multi-stage Dockerfile, on **Cloud Run**
 - **Worker:** **Python** (FastAPI, Playwright, BeautifulSoup), Dockerized, on **Cloud Run** (private)
 - **Data:** **Upstash** (serverless Redis) for the analysis cache - URL key → result with a native TTL
 - **AI/search:** **Claude** (Anthropic) for judgment + structured output, **Tavily** for web search
-- **External APIs:** **Google Places** + **Yelp Fusion** for structured cross-platform ratings
+- **External APIs:** **Google Places** for the merchant's structured rating
 - **Infra:** GCP (Cloud Run, Cloud Build, Artifact Registry, IAM), Docker, service-to-service auth
 
 ## Engineering notes
@@ -98,15 +99,15 @@ A few decisions worth calling out:
   authenticates with an OIDC identity token (`google.golang.org/api/idtoken`).
 - **Failures aren't cached.** A datacenter IP occasionally gets a bot-challenge page; the
   worker retries once and, if still empty, returns an error instead of caching "no data".
-- **Yelp ratings come from the Fusion API, not web search** (Yelp renders stars as
-  images), and no-city chains are anchored with `regionCode=US`.
+- **No-city chains are anchored with `regionCode=US`** so a location-less query (e.g.
+  "AMC Theatres") still resolves a US result from a datacenter IP.
 - **No affiliate, by design.** Revelio gives the verdict and has no buy button - an
   honest advisor shouldn't be paid by the platform it critiques.
 
 ## Local development
 
 Prereqs: Docker, Go 1.26+, Python 3.13+, Node 22+. Copy `.env.example` to `.env` and
-fill in `ANTHROPIC_API_KEY`, `TAVILY_API_KEY`, `GOOGLE_PLACES_API_KEY`, and `YELP_API_KEY`
+fill in `ANTHROPIC_API_KEY`, `TAVILY_API_KEY`, and `GOOGLE_PLACES_API_KEY`
 (each stage degrades gracefully if its key is missing).
 
 ```bash
@@ -121,7 +122,7 @@ python -m uvicorn main:app --port 8000
 cd api && REDIS_URL="redis://127.0.0.1:6379" \
           WORKER_URL="http://127.0.0.1:8000" go run .
 
-# 4a. Web app       →  http://127.0.0.1:5173
+# 4a. Landing page  →  http://127.0.0.1:5173
 cd web && npm install && npm run dev
 
 # 4b. Extension     →  build, then load .output/chrome-mv3 unpacked
@@ -138,7 +139,7 @@ cd worker && python -m analyzer "https://www.groupon.com/deals/<slug>"
 
 - **Worker & gateway** → Cloud Run via `gcloud run deploy --source` (GitHub Actions on
   push to `api/**` and `worker/**`). The worker is `--no-allow-unauthenticated`.
-- **Web app** → Firebase Hosting (GitHub Actions on push to `web/**`).
+- **Landing page** → Firebase Hosting (GitHub Actions on push to `web/**`).
 - **Cache** → Upstash Redis free tier; connection string set as the gateway's `REDIS_URL`.
 - **Extension** → `cd extension && npm run build` (or `npm run zip` to package for the
   Chrome Web Store); loaded/published manually, not via CI.
@@ -146,7 +147,7 @@ cd worker && python -m analyzer "https://www.groupon.com/deals/<slug>"
 ## Repo layout
 
 ```
-web/         Vue 3 web app (+ public/privacy.html)
+web/         Vue 3 landing page (+ public/privacy.html)
 extension/   WXT + Vue 3 Chrome MV3 extension - entrypoints/, components/, utils/
 api/         Go (Gin) gateway - internal/{config,store,server,worker}
 worker/      Python FastAPI worker - analyzer/{scrape,parse,discount,competitors,reputation,direct,verdict}
